@@ -136,14 +136,14 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h4"><a href="#Use-GMAPPING-Library">Use GMAPPING Library </a></li>
 </ul>
 </li>
+<li class="toc-entry toc-h3"><a href="#Edit-CONFIG-files-to-use-the-map">Edit CONFIG files to use the map </a></li>
 </ul>
 </li>
-<li class="toc-entry toc-h2"><a href="#Edit-CONFIG-files-to-use-the-map">Edit CONFIG files to use the map </a></li>
-</ul>
-</li>
-<li class="toc-entry toc-h1"><a href="#Battery">Battery </a>
+<li class="toc-entry toc-h2"><a href="#Battery">Battery </a>
 <ul>
-<li class="toc-entry toc-h2"><a href="#FAQs">FAQs </a></li>
+<li class="toc-entry toc-h3"><a href="#FAQs">FAQs </a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-entry toc-h1"><a href="#References">References </a></li>
@@ -254,9 +254,9 @@ scp robot@<span class="s">&lt;&lt;CAR IP&gt;&gt;:~/real-floor0.pgm ~/Desktop/</s
 <span class="s">#upload from local desktop to car</span>
 <span class="s">scp  ~/Desktop/real-floor0.pgm robot@&lt;&lt;CAR</span> IP&gt;&gt;:~
 </pre></div>
-<h2 id="Edit-CONFIG-files-to-use-the-map">
+<h3 id="Edit-CONFIG-files-to-use-the-map">
 <a class="anchor" href="#Edit-CONFIG-files-to-use-the-map" aria-hidden="true"><span class="octicon octicon-link"></span></a>Edit CONFIG files to use the map<a class="anchor-link" href="#Edit-CONFIG-files-to-use-the-map"> </a>
-</h2>
+</h3>
 <p>Navigate to MUSHR BASE maps directory and place your maps. Note that you need both the PGM and YAML file. 
 </p>
 <div class="flash">
@@ -281,18 +281,18 @@ cp <span class="s2">"pgm files from whichever directory you have them"</span> .
 nano map_server.launch
 </pre></div>
 <p><img src="https://abhisheksreesaila.github.io/blog/images/mushr-build-pics/map_server_launch_change.png" alt="" title="Map Server Launch File"></p>
-<h1 id="Battery">
+<h2 id="Battery">
 <a class="anchor" href="#Battery" aria-hidden="true"><span class="octicon octicon-link"></span></a>Battery<a class="anchor-link" href="#Battery"> </a>
-</h1>
+</h2>
 <p>Battery is one of the most important elements in a self driving car. If the JETSON NANO is not powered long enough, you cannot TEST, DEBUG the car. I tried the NIiMH batteries suggested by the MUSHR team, but due to lmited battery knowledge ended up draining them and hence making it unusable!! So after thorough research, I ended buying LIPO BATTERY pack <a href="https://www.amazon.com/Zeee-Batteries-Dean-Style-Connector-Vehicles/dp/B076Z778MJ/ref=sr_1_2?dchild=1&amp;keywords=zee+lipos&amp;qid=1599709339&amp;sr=8-2">here</a> and battery charger <a href="https://www.amazon.com/Tenergy-Balance-Charger-Discharger-Connectors/dp/B00466PKE0/ref=sr_1_4?crid=9WRKZ0HRFW1L&amp;dchild=1&amp;keywords=tenergy+battery+charger&amp;qid=1599709438&amp;sprefix=tenergy+batte%2Caps%2C172&amp;sr=8-4">here</a>
 </p>
 <div class="flash flash-error">
     <svg class="octicon octicon-alert octicon octicon-alert" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 000 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 00.01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg>
     <strong>Warning: </strong>DO NOT IGNORE THIS SECTION. Having a good battery and taking good care of will save you ton of time downstream when you are stuck in code debugging or testing on track. 
 </div>
-<h2 id="FAQs">
+<h3 id="FAQs">
 <a class="anchor" href="#FAQs" aria-hidden="true"><span class="octicon octicon-link"></span></a>FAQs<a class="anchor-link" href="#FAQs"> </a>
-</h2>
+</h3>
 <p><strong>Why LIPOS Battery (instead of NiMH)?</strong></p>
 <p>The advantages of lithium batteries compared to NiMH batteries are undeniable. The weight/power ratio in LiPo batteries is significantly better. LiPo batteries are noticeably lighter and they can store the same amount or more energy relative to their capacity than NiMH batteries. Also,</p>
 <ul>
