@@ -126,7 +126,13 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h3"><a href="#Solution-2">Solution 2 </a>
 <ul>
 <li class="toc-entry toc-h4"><a href="#STEP-1:-SSH">STEP 1: SSH </a></li>
-<li class="toc-entry toc-h4"><a href="#STEP-2:-GPARTED,-BLDC,-BLUETOOTH,-IP-ADDRESS-FIX">STEP 2: GPARTED, BLDC, BLUETOOTH, IP ADDRESS FIX </a></li>
+<li class="toc-entry toc-h4"><a href="#STEP-2:-GPARTED,-BLUETOOTH,-IP-ADDRESS-FIX">STEP 2: GPARTED, BLUETOOTH, IP ADDRESS FIX </a></li>
+<li class="toc-entry toc-h4"><a href="#BLDC-Tool">BLDC Tool </a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#Version-Problem">Version Problem </a></li>
+<li class="toc-entry toc-h5"><a href="#Solution">Solution </a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -165,7 +171,7 @@ window.onload = wrap_img;
 <a class="anchor" href="#Monitor-not-booting-up,-after-MUSHR-image-is-installed." aria-hidden="true"><span class="octicon octicon-link"></span></a>Monitor not booting up, after MUSHR image is installed.<a class="anchor-link" href="#Monitor-not-booting-up,-after-MUSHR-image-is-installed."> </a>
 </h2>
 <p><strong>Issue</strong></p>
-<p>When you install the stock image of JETSON NANO using <a href="https://www.balena.io/etcher">BelenaEtcher</a>, connect JETSON NANO using HDMI, NAno boots and you can see the Linux GUI. But, if you do the same exact same thing using <a href="https://drive.google.com/file/d/17Xn63ZWA_e3DVxt_ajhzu-uKW0hUG4iX/view?usp=sharing">MUSHR IMAGE</a>, it does not show the GUI. without the GUI, software config is almost impossible (<em>well, I am not referring to LINUX gurus here, everything possible from a GUI is also possible with command line in LINUX</em>). In other words, we need the GUI working.</p>
+<p>When you install the stock image of JETSON NANO using <a href="https://www.balena.io/etcher">BelenaEtcher</a>, connect JETSON NANO using HDMI, NAno boots and you can see the Linux GUI. But, if you do the same exact same thing using <a href="https://drive.google.com/file/d/17Xn63ZWA_e3DVxt_ajhzu-uKW0hUG4iX/view?usp=sharing">MUSHR IMAGE</a>, it does not show the GUI. Without the GUI, software config is almost impossible. Well, almost. There is a "command line" solution provided as well for all the geeks out there.</p>
 <h3 id="Solution-1">
 <a class="anchor" href="#Solution-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Solution 1<a class="anchor-link" href="#Solution-1"> </a>
 </h3>
@@ -173,7 +179,7 @@ window.onload = wrap_img;
 </p>
 <div class="flash flash-warn">
     <svg class="octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap" viewbox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M10 7H6l3-7-9 9h4l-3 7 9-9z"></path></svg>
-    <strong>Important: </strong>If you have a monitor that supports DISPLAY PORT, use it!! Instant solution. (Time saving : 3-4 days)
+    <strong>Important: </strong>If you have a monitor that supports DISPLAY PORT, use it!! Instant solution. (Time saving : 3-4 days). You can buy the display port from the link below. 
 </div>
 <ul>
 <li><a href="https://www.amazon.com/gp/product/B01J8S6X2I/ref=ppx_od_dt_b_asin_title_s00?ie=UTF8&amp;psc=1">DISPLAY PORT to DISPLAY PORT cable</a></li>
@@ -301,8 +307,8 @@ ifconfig  <span class="c1">#GET the IP. Needed to connect to SSH. Uff, finally!<
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="STEP-2:-GPARTED,-BLDC,-BLUETOOTH,-IP-ADDRESS-FIX">
-<a class="anchor" href="#STEP-2:-GPARTED,-BLDC,-BLUETOOTH,-IP-ADDRESS-FIX" aria-hidden="true"><span class="octicon octicon-link"></span></a>STEP 2: GPARTED, BLDC, BLUETOOTH, IP ADDRESS FIX<a class="anchor-link" href="#STEP-2:-GPARTED,-BLDC,-BLUETOOTH,-IP-ADDRESS-FIX"> </a>
+<h4 id="STEP-2:-GPARTED,-BLUETOOTH,-IP-ADDRESS-FIX">
+<a class="anchor" href="#STEP-2:-GPARTED,-BLUETOOTH,-IP-ADDRESS-FIX" aria-hidden="true"><span class="octicon octicon-link"></span></a>STEP 2: GPARTED, BLUETOOTH, IP ADDRESS FIX<a class="anchor-link" href="#STEP-2:-GPARTED,-BLUETOOTH,-IP-ADDRESS-FIX"> </a>
 </h4>
 <p>Before installing anything, there seems to be some sort of lock on the "linux" installer to donwload. For eg.</p>
 <p><em>E: Could not get lock /var/lib/dpkg/lock – open (11: Resource temporarily unavailable) E: Unable to lock the administration directory (/var/lib/dpkg/), is another process using it?</em></p>
@@ -360,34 +366,47 @@ jstest-gtk    <span class="c1">#run this. It will open up GUI as follows</span>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>BLDC Tool</strong>
-</p>
+<h4 id="BLDC-Tool">
+<a class="anchor" href="#BLDC-Tool" aria-hidden="true"><span class="octicon octicon-link"></span></a>BLDC Tool<a class="anchor-link" href="#BLDC-Tool"> </a>
+</h4>
+<p></p>
 <div class="flash flash-warn">
     <svg class="octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap" viewbox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M10 7H6l3-7-9 9h4l-3 7 9-9z"></path></svg>
     <strong>Important: </strong>Now, this step can only be done when you finish the Hardware configuration since you need the VESC connected to JETSON NANO + MOTOR to test it properly. 
 </div>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="o">&amp;&amp;</span> ./bldc-tool/BLDC_Tool
 </pre></div>
-<p>If you have ordered <strong>Flipsky VESC</strong>, chances are that you will have 3.X firmware installed (<em>The hardware version is 410/411/412, but the firmware version is different</em>). The problem is that BLDC tool can only support 2.18 (and hence MUSHR car too!). This wil throw an SERIAL PORT ERROR and will not connect to BLDC TOOL GUI. BLDC is old tool and is replaced by <a href="https://vesc-project.com"><strong>VESC TOOL</strong></a></p>
-<ul>
+<h5 id="Version-Problem">
+<a class="anchor" href="#Version-Problem" aria-hidden="true"><span class="octicon octicon-link"></span></a>Version Problem<a class="anchor-link" href="#Version-Problem"> </a>
+</h5>
+<p>If you have ordered <strong>Flipsky VESC</strong>, chances are that you will have 3.X firmware installed (The hardware version is 410/411/412, but the firmware version is different). 
+</p>
+<div class="flash flash-error">
+    <svg class="octicon octicon-alert" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 000 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 00.01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg>
+    <strong>Warning: </strong>BLDC tool can only support 2.18 (and hence MUSHR car). 
+</div>
+This wil throw an <strong>SERIAL PORT ERROR</strong> and will NOT connect to BLDC TOOL GUI. BLDC is old tool and is replaced by <a href="https://vesc-project.com"><strong>VESC TOOL</strong></a>
+<h5 id="Solution">
+<a class="anchor" href="#Solution" aria-hidden="true"><span class="octicon octicon-link"></span></a>Solution<a class="anchor-link" href="#Solution"> </a>
+</h5>
+<ol>
 <li>Download the VESC TOOL from the website and it will let you connect easily.</li>
 <li>It will ask you to install the latest software.<strong>DO NOT</strong> install latest.</li>
 <li>Use "custom" firmware (follow this <a href="https://vesc-project.com/node/269">link</a>). The custom firmware is nothing but the BLDC servoout.bin file that is installed via BLDC tool. (also available <a href="https://github.com/vedderb/bldc-tool/tree/master/firmwares/hw_410_411_412">here</a>) </li>
-</ul>
-<p><img src="https://abhisheksreesaila.github.io/blog/images/software-config/bldc-firmware-to-install.png" alt="" title="VESC TOOL CUSTOM FIRMWARE TO BE USED"></p>
-<p><img src="https://abhisheksreesaila.github.io/blog/images/software-config/vesc-tool.png" alt="" title="VESC TOOL"></p>
-<ul>
-<li>
-<p>Now, open the BLDC tool and hit "connect" and it will be successful. Now IF VESC tool is a newer version of the BLDC tool, why is heck do we need BLDC tool? MUSHR parameters has been set to BLDC tool  and works only when you use it. After your gain mastery over the MUSHR software you can try VESC tool.</p>
-</li>
-<li>
-<p>Follow the instructions from the MUSHR.IO website i.e load the sensorless xml config file and "write" it back to VESC</p>
-</li>
-<li>
-<p>Push the "top" arrow key and the wheels should move forward, and vice versa, if its moves in the reverse direction, it means the "wires" from the VESC to the motor has been criss crossed. reverse the wire connection and you should be good. See below for visual.</p>
-</li>
-</ul>
-<p><img src="https://abhisheksreesaila.github.io/blog/images/software-config/vesctomotor_connection.png" alt="" title="VESC TO MOTOR CONNECTION"></p>
+<li>Now, open the BLDC tool and hit "connect" and it will be successful. </li>
+<li>Follow the instructions from the <a href="https://mushr.io/hardware/build_instructions/#software-setup">MUSHR Software Setup</a> i.e load the sensorless xml config file and "write" it back to VESC</li>
+</ol>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/software-config/downgrade_firmware.png" alt="" title="VESC TOOL CUSTOM FIRMWARE TO BE USED">
+</p>
+<div class="flash">
+    <svg class="octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
+    <strong>Note: </strong><strong>If VESC tool is a newer version of the BLDC tool, why is heck do we need BLDC tool?</strong> MUSHR parameters has been set to BLDC tool and works only when you use it. 
+</div>
+<div class="flash">
+    <svg class="octicon octicon-info octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
+    <strong>Note: </strong><strong>Everything spinning in the right direction??</strong> In the BLDC tool, Push the "top" arrow key and the wheels should move forward, and vice versa, if it moves in the reverse direction, it means the "wires" from the <strong>VESC to the motor has been criss crossed.</strong> Reverse the wire connection and you should be good. See below for visual. I personally used VESC tool to check it.
+</div>
+<img src="https://abhisheksreesaila.github.io/blog/images/software-config/motor_spin.png" alt="" title="VESC TO MOTOR CONNECTION">
 
 </div>
 </div>
