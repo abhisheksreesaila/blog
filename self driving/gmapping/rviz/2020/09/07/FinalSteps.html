@@ -93,7 +93,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      4 min read
+      5 min read
     
 </span></p>
 
@@ -136,6 +136,7 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h4"><a href="#Use-GMAPPING-Library">Use GMAPPING Library </a></li>
 </ul>
 </li>
+<li class="toc-entry toc-h3"><a href="#CROP-Map">CROP Map </a></li>
 <li class="toc-entry toc-h3"><a href="#Edit-CONFIG-files-to-use-the-map">Edit CONFIG files to use the map </a></li>
 </ul>
 </li>
@@ -261,16 +262,21 @@ scp robot@&lt;&lt;CAR IP&gt;&gt;:~/real-floor0.pgm ~/Desktop/
 <span class="c1">#upload from local desktop to car</span>
 scp  ~/Desktop/real-floor0.pgm robot@&lt;&lt;CAR IP&gt;&gt;:~
 </pre></div>
+<h3 id="CROP-Map">
+<a class="anchor" href="#CROP-Map" aria-hidden="true"><span class="octicon octicon-link"></span></a>CROP Map<a class="anchor-link" href="#CROP-Map"> </a>
+</h3>
+<p><strong>By default the map contains an abundance of blank space around the area of detected surfaces</strong> By default the file will be 16MB, which will slow down the HALTON SAMPLER when you load the maps and run your car. So we need to crop unnecessary part of the image. But care has to be taken not to <em>blindly crop</em> and lose the origin. For this purpose there is an undocumented utility <img src="'https://github.com/abhisheksreesaila/blog/tree/master/assets/softwares'" alt="CROP_MAP"> to crop the map, removing the blank spaces around the map.In my case, it reduced by 20x.</p>
+<p><a href="https://abhisheksreesaila.github.io/blog/images/mushr-build-pics/map_size_reduce.png" title="Map Dimensions Reduce"></a></p>
 <h3 id="Edit-CONFIG-files-to-use-the-map">
 <a class="anchor" href="#Edit-CONFIG-files-to-use-the-map" aria-hidden="true"><span class="octicon octicon-link"></span></a>Edit CONFIG files to use the map<a class="anchor-link" href="#Edit-CONFIG-files-to-use-the-map"> </a>
 </h3>
-<p>Navigate to MUSHR BASE maps directory and place your maps. Note that you need both the PGM and YAML file. 
+<p>Navigate to MUSHR RHC maps directory and place your maps. Note that you need both the PGM and YAML file. 
 </p>
 <div class="flash">
     <svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
     <strong>Note: </strong>Make sure the YAML file is referring the correct PGM file
 </div>
-<div class="highlight"><pre><span></span>roscd mushr_base
+<div class="highlight"><pre><span></span>roscd mushr_rhc_ros
 <span class="nb">cd</span> maps
 
 <span class="c1">#copy pgm files to the current directory (mushr_base/maps)</span>
@@ -281,8 +287,6 @@ cp <span class="s2">"pgm files from whichever directory you have them"</span> .
 <span class="nb">cd</span> ..
 
 <span class="nb">cd</span> launch
-
-<span class="nb">cd</span> includes
 
 <span class="c1">#edit launch files. see screenshot</span>
 nano map_server.launch
