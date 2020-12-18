@@ -16,7 +16,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-09-07T00:00:00-05:00" />
 <script type="application/ld+json">
-{"description":"Final config steps before we get the car moving…","@type":"BlogPosting","headline":"On your mark…","dateModified":"2020-09-07T00:00:00-05:00","datePublished":"2020-09-07T00:00:00-05:00","image":"https://abhisheksreesaila.github.io/blog/images/post-thumbnails/Final_Steps.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://abhisheksreesaila.github.io/blog/self%20driving/gmapping/rviz/2020/09/07/FinalSteps.html"},"url":"https://abhisheksreesaila.github.io/blog/self%20driving/gmapping/rviz/2020/09/07/FinalSteps.html","@context":"https://schema.org"}</script>
+{"datePublished":"2020-09-07T00:00:00-05:00","dateModified":"2020-09-07T00:00:00-05:00","image":"https://abhisheksreesaila.github.io/blog/images/post-thumbnails/Final_Steps.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://abhisheksreesaila.github.io/blog/self%20driving/gmapping/rviz/2020/09/07/FinalSteps.html"},"description":"Final config steps before we get the car moving…","@type":"BlogPosting","url":"https://abhisheksreesaila.github.io/blog/self%20driving/gmapping/rviz/2020/09/07/FinalSteps.html","headline":"On your mark…","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://abhisheksreesaila.github.io/blog/feed.xml" title="ABLearn" /><link rel="shortcut icon" type="image/x-icon" href="/blog/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>On your mark… | ABLearn</title>
@@ -32,7 +32,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-09-07T00:00:00-05:00" />
 <script type="application/ld+json">
-{"description":"Final config steps before we get the car moving…","@type":"BlogPosting","headline":"On your mark…","dateModified":"2020-09-07T00:00:00-05:00","datePublished":"2020-09-07T00:00:00-05:00","image":"https://abhisheksreesaila.github.io/blog/images/post-thumbnails/Final_Steps.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://abhisheksreesaila.github.io/blog/self%20driving/gmapping/rviz/2020/09/07/FinalSteps.html"},"url":"https://abhisheksreesaila.github.io/blog/self%20driving/gmapping/rviz/2020/09/07/FinalSteps.html","@context":"https://schema.org"}</script>
+{"datePublished":"2020-09-07T00:00:00-05:00","dateModified":"2020-09-07T00:00:00-05:00","image":"https://abhisheksreesaila.github.io/blog/images/post-thumbnails/Final_Steps.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://abhisheksreesaila.github.io/blog/self%20driving/gmapping/rviz/2020/09/07/FinalSteps.html"},"description":"Final config steps before we get the car moving…","@type":"BlogPosting","url":"https://abhisheksreesaila.github.io/blog/self%20driving/gmapping/rviz/2020/09/07/FinalSteps.html","headline":"On your mark…","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
@@ -197,13 +197,19 @@ Download the virtual machine image that already has the MuSHR stack and follow i
 <div class="highlight"><pre><span></span>sudo nano ~/.bashrc
 </pre></div>
 <p>Go to the last line of the script and add the following lines. Depending on whether you are setting the variables in the car or your laptop, set the <strong>IP ADDRESS</strong> accordingly.</p>
-<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">ROS_IP</span><span class="o">=</span> <span class="s">&lt;&lt;IP ADDRESS&gt;&gt;</span>
-<span class="s">export ROS_MASTER_URI=http://&lt;&lt;IP</span> ADDRESS&gt;&gt;:11311
+<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">ROS_IP</span><span class="o">=</span> &lt;&lt;LAPTOP_IP_ADDRESS&gt;&gt;
+<span class="nb">export</span> <span class="nv">ROS_MASTER_URI</span><span class="o">=</span>http://&lt;&lt;CAR_IP_ADDRESS&gt;&gt;:11311
 </pre></div>
 <p>For those wondering how to get the IP ADDRESS</p>
 <div class="highlight"><pre><span></span><span class="c1"># To get the ip address</span>
 ifconfig
 </pre></div>
+<p>LAPTOP IP Address will be dynamic by default and might be pain to enter each time you login. You can use the following script to extract "IP Address" from the configuration.</p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/software-config/laptop-ip-address.png" alt="" title="laptop ip address"></p>
+<p><strong>enp0s17 = wireless interface that shows the IP address</strong></p>
+<p>laptop-ip-address</p>
+
+<pre><code>ifconfig enp0s17 | grep "inet" | awk 'NR==1{print $2}'</code></pre>
 <p></p>
 <div class="flash flash-warn">
     <svg class="octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap" viewbox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M10 7H6l3-7-9 9h4l-3 7 9-9z"></path></svg>
