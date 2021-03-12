@@ -153,17 +153,30 @@ window.onload = wrap_img;
                      <span class="c1"># sequential(sequential()) # neural networks stacked on top of each other</span>
 </pre></div>
 <p><strong>einsum</strong></p>
-<div class="highlight"><pre><span></span>
+<p>einsum or Enstein summation is basically short end notation to express actions on tensors (or typically matrices) like transpose, multiplication, sum, dot product etc.</p>
+<div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">einsum</span> <span class="p">(</span><span class="s1">'ab,bc -&gt; ac'</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+
+<span class="s1">'ab,bc -&gt; ac'</span>  <span class="o">==&gt;</span> <span class="n">notation</span><span class="o">.</span>  <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">d</span> <span class="n">are</span> <span class="n">dimensions</span><span class="o">.</span> <span class="s2">","</span> <span class="n">means</span> <span class="n">multiply</span> 
+
+<span class="n">You</span> <span class="n">are</span> <span class="n">telling</span> <span class="n">that</span> <span class="n">take</span> <span class="mi">2</span> <span class="n">inputs</span> <span class="n">of</span> <span class="n">dimensions</span> <span class="n">ab</span> <span class="ow">and</span> <span class="n">bc</span> <span class="ow">and</span> <span class="n">generate</span> <span class="n">an</span> <span class="n">output</span> <span class="n">that</span> <span class="n">gives</span> <span class="n">ac</span><span class="o">.</span> 
+
+<span class="n">A</span><span class="p">,</span><span class="n">B</span> <span class="o">==&gt;</span> <span class="n">matrices</span>
 </pre></div>
 <p><strong>Class Activation Map</strong></p>
+<p><strong>Areas used to determine class = activations of the last layer of conv * weights of the fully connected layer</strong></p>
 <ul>
 <li>Last layer of activation (before the fully connected layer) shows where the model is focusing.  </li>
-<li>Needs a global average pooling layer in the network (such as RESNET)</li>
+<li>
+<p>Needs a global average pooling layer in the network (such as RESNET)</p>
+</li>
+<li>
+<p>Why before global max pooling layer? The max pooling layer before the fully connected layer will squash all local activations, normalize them and feed them to FC. Until then you will have localized features that model is looking at. In other words, you will have location of the image where the model is focused on.</p>
+</li>
 </ul>
-<p><strong>TBD</strong>
---why before average pooling layer?
---how does dot product help?
---areas used to determine class = activations of the last layer of conv * weights of the fully connected layer</p>
+<p>Example :   the activation shape is [512, 7, 7]. Think of this as 512 images of 7x7 size</p>
+<ul>
+<li>How does dot product help? the weights in the fully connected layer shows the classifer preference. </li>
+</ul>
 
 </div>
 </div>
