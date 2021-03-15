@@ -11,7 +11,17 @@
 // If you want to turn off dark background for syntax highlighting, comment or delete the below line.
 //@import "minima/fastpages-dracula-highlight"; 
 
+//post images - rounded 
+.post img {
+    display: block;
+    // border:1px solid #021a40;
+    vertical-align: top;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 1px;
+    border-radius: 5%;
 
+}
 
 
 // Typography
