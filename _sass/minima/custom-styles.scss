@@ -6,12 +6,13 @@
 
 /*-----------------------------------*/
 /*----- ADD YOUR STYLES BELOW -------*/
+@import "minima/dark-mode";
 
 // If you want to turn off dark background for syntax highlighting, comment or delete the below line.
-@import "minima/fastpages-dracula-highlight"; 
+//@import "minima/fastpages-dracula-highlight"; 
 
 
 
 
 // Typography
-$font-size-base: 14px; // this changes the font-size throughout bootstrap
+$font-size-base: 12px; // this changes the font-size throughout bootstrap
