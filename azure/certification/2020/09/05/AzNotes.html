@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>My Notes For AZ-300 &amp; AZ-301 | ABLearn</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="My Notes For AZ-300 &amp; AZ-301" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Pass Az-300 and Az-301 with these mindmap notes" />
+<meta property="og:description" content="Pass Az-300 and Az-301 with these mindmap notes" />
+<link rel="canonical" href="https://abhisheksreesaila.github.io/blog/azure/certification/2020/09/05/AzNotes.html" />
+<meta property="og:url" content="https://abhisheksreesaila.github.io/blog/azure/certification/2020/09/05/AzNotes.html" />
+<meta property="og:site_name" content="ABLearn" />
+<meta property="og:image" content="https://abhisheksreesaila.github.io/blog/images/post-thumbnails/AzNotes.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-09-05T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"Pass Az-300 and Az-301 with these mindmap notes","mainEntityOfPage":{"@type":"WebPage","@id":"https://abhisheksreesaila.github.io/blog/azure/certification/2020/09/05/AzNotes.html"},"@type":"BlogPosting","url":"https://abhisheksreesaila.github.io/blog/azure/certification/2020/09/05/AzNotes.html","headline":"My Notes For AZ-300 &amp; AZ-301","dateModified":"2020-09-05T00:00:00-05:00","datePublished":"2020-09-05T00:00:00-05:00","image":"https://abhisheksreesaila.github.io/blog/images/post-thumbnails/AzNotes.png","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://abhisheksreesaila.github.io/blog/feed.xml" title="ABLearn" /><link rel="shortcut icon" type="image/x-icon" href="/blog/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>My Notes For AZ-300 &amp; AZ-301 | ABLearn</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="My Notes For AZ-300 &amp; AZ-301" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Pass Az-300 and Az-301 with these mindmap notes" />
+<meta property="og:description" content="Pass Az-300 and Az-301 with these mindmap notes" />
+<link rel="canonical" href="https://abhisheksreesaila.github.io/blog/azure/certification/2020/09/05/AzNotes.html" />
+<meta property="og:url" content="https://abhisheksreesaila.github.io/blog/azure/certification/2020/09/05/AzNotes.html" />
+<meta property="og:site_name" content="ABLearn" />
+<meta property="og:image" content="https://abhisheksreesaila.github.io/blog/images/post-thumbnails/AzNotes.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-09-05T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"Pass Az-300 and Az-301 with these mindmap notes","mainEntityOfPage":{"@type":"WebPage","@id":"https://abhisheksreesaila.github.io/blog/azure/certification/2020/09/05/AzNotes.html"},"@type":"BlogPosting","url":"https://abhisheksreesaila.github.io/blog/azure/certification/2020/09/05/AzNotes.html","headline":"My Notes For AZ-300 &amp; AZ-301","dateModified":"2020-09-05T00:00:00-05:00","datePublished":"2020-09-05T00:00:00-05:00","image":"https://abhisheksreesaila.github.io/blog/images/post-thumbnails/AzNotes.png","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://abhisheksreesaila.github.io/blog/feed.xml" title="ABLearn" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">ABLearn</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">About Me</a><a class="page-link" href="/blog/search/">Search</a><a class="page-link" href="/blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">My Notes For AZ-300 &amp; AZ-301</h1><p class="page-description">Pass Az-300 and Az-301 with these mindmap notes</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-09-05T00:00:00-05:00" itemprop="datePublished">
+        Sep 5, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      1 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/blog/categories/#azure">azure</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/blog/categories/#certification">certification</a>
+        
+      
+      </p>
+    
+
+    
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#Purpose">Purpose </a></li>
+<li class="toc-entry toc-h1"><a href="#Why-MindMap?">Why MindMap? </a></li>
+<li class="toc-entry toc-h1"><a href="#How-to-use-this?">How to use this? </a></li>
+<li class="toc-entry toc-h1"><a href="#NOTES">NOTES </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Azure-STORAGE">Azure STORAGE </a></li>
+<li class="toc-entry toc-h2"><a href="#Azure-VIRTUAL-MACHINES">Azure VIRTUAL MACHINES </a></li>
+<li class="toc-entry toc-h2"><a href="#Azure-ACTIVE-DIRECTORY">Azure ACTIVE DIRECTORY </a></li>
+<li class="toc-entry toc-h2"><a href="#Azure-APIs">Azure APIs </a></li>
+<li class="toc-entry toc-h2"><a href="#Azure-DB-and-WEB-APPS">Azure DB and WEB APPS </a></li>
+<li class="toc-entry toc-h2"><a href="#Azure-LOAD-BALANCERS">Azure LOAD BALANCERS </a></li>
+<li class="toc-entry toc-h2"><a href="#Azure-Virtual-Networks">Azure Virtual Networks </a></li>
+<li class="toc-entry toc-h2"><a href="#Azure-Misc">Azure Misc </a></li>
+</ul>
+</li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-09-05-AzNotes.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Purpose">
+<a class="anchor" href="#Purpose" aria-hidden="true"><span class="octicon octicon-link"></span></a>Purpose<a class="anchor-link" href="#Purpose"> </a>
+</h1>
+<p>These are the notes that I took when studying for AZ300, AZ301 certification. These are neither in the tradtional list format nor just a bunch of links pointing to Microsoft documentation. These are meant to be a quick cheatsheet or reference before the exam. This can also serve as a reference for general Azure questions as well (not necessarily for exam). I have provided them in image and PDF.  Choose which ever suits your need.</p>
+<h1 id="Why-MindMap?">
+<a class="anchor" href="#Why-MindMap?" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why MindMap?<a class="anchor-link" href="#Why-MindMap?"> </a>
+</h1>
+<p>While traditional list-based note taking works, mind map takes this to the next level by adding color, images and free flow format that is absent in lists. This has helped me refer the material easily since i can glance all-at-once quickly, or go to a section without hunting and pecking. Colors and images aids recall and presents the materials in a fun and entertaining way and makes the whole note-taking experience "playful" rather than work.</p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/general/mindmap_adv.png" alt=""></p>
+<h1 id="How-to-use-this?">
+<a class="anchor" href="#How-to-use-this?" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to use this?<a class="anchor-link" href="#How-to-use-this?"> </a>
+</h1>
+<p>For pass the certification one needs to have Azure experience for about 2-3 years and solved myriad of problems at their work place and there is not substitute for that. As mentioned before, it acts as a good cheatsheet or reference materials for the exam.
+</p>
+<div class="flash flash-warn">
+    <svg class="octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap" viewbox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M10 7H6l3-7-9 9h4l-3 7 9-9z"></path></svg>
+    <strong>Important: </strong>Tips to navigate the mind map
+</div>
+<ol>
+<li>Start at the center.</li>
+<li>Pick a topic represented by a branch. </li>
+<li>Follow along the branch and its sub-branches (representing sub-topics)</li>
+<li>Come back to center and pick a different topic and repeat steps 2 and 3</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="NOTES">
+<a class="anchor" href="#NOTES" aria-hidden="true"><span class="octicon octicon-link"></span></a>NOTES<a class="anchor-link" href="#NOTES"> </a>
+</h1>
+<h2 id="Azure-STORAGE">
+<a class="anchor" href="#Azure-STORAGE" aria-hidden="true"><span class="octicon octicon-link"></span></a>Azure STORAGE<a class="anchor-link" href="#Azure-STORAGE"> </a>
+</h2>
+<p><a href="https://github.com/abhisheksreesaila/blog/blob/master/assets/PDFs/Az_StorageAccount.pdf">PDF Link</a></p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/AzNotes/Az_StorageAccount.png" alt=""></p>
+<hr>
+
+<h2 id="Azure-VIRTUAL-MACHINES">
+<a class="anchor" href="#Azure-VIRTUAL-MACHINES" aria-hidden="true"><span class="octicon octicon-link"></span></a>Azure VIRTUAL MACHINES<a class="anchor-link" href="#Azure-VIRTUAL-MACHINES"> </a>
+</h2>
+<p><a href="https://github.com/abhisheksreesaila/blog/blob/master/assets/PDFs/Az_VirtualMachines.pdf">PDF Link</a></p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/AzNotes/Az_VirtualMachines.png" alt=""></p>
+<hr>
+
+<h2 id="Azure-ACTIVE-DIRECTORY">
+<a class="anchor" href="#Azure-ACTIVE-DIRECTORY" aria-hidden="true"><span class="octicon octicon-link"></span></a>Azure ACTIVE DIRECTORY<a class="anchor-link" href="#Azure-ACTIVE-DIRECTORY"> </a>
+</h2>
+<p><a href="https://github.com/abhisheksreesaila/blog/blob/master/assets/PDFs/Az_ActiveDirectory.pdf">PDF Link</a></p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/AzNotes/Az_ActiveDirectory.png" alt=""></p>
+<hr>
+
+<h2 id="Azure-APIs">
+<a class="anchor" href="#Azure-APIs" aria-hidden="true"><span class="octicon octicon-link"></span></a>Azure APIs<a class="anchor-link" href="#Azure-APIs"> </a>
+</h2>
+<p><a href="https://github.com/abhisheksreesaila/blog/blob/master/assets/PDFs/Az_AzureAPIs.pdf">PDF Link</a></p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/AzNotes/Az_AzureAPIs.png" alt=""></p>
+<hr>
+
+
+<h2 id="Azure-DB-and-WEB-APPS">
+<a class="anchor" href="#Azure-DB-and-WEB-APPS" aria-hidden="true"><span class="octicon octicon-link"></span></a>Azure DB and WEB APPS<a class="anchor-link" href="#Azure-DB-and-WEB-APPS"> </a>
+</h2>
+<p><a href="https://github.com/abhisheksreesaila/blog/blob/master/assets/PDFs/Az_DBWebApps.pdf">PDF Link</a></p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/AzNotes/Az_DBWebApps.png" alt=""></p>
+<hr>
+
+<h2 id="Azure-LOAD-BALANCERS">
+<a class="anchor" href="#Azure-LOAD-BALANCERS" aria-hidden="true"><span class="octicon octicon-link"></span></a>Azure LOAD BALANCERS<a class="anchor-link" href="#Azure-LOAD-BALANCERS"> </a>
+</h2>
+<p><a href="https://github.com/abhisheksreesaila/blog/blob/master/assets/PDFs/Az_LoadBalancers.pdf">PDF Link</a></p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/AzNotes/Az_LoadBalancers.png" alt=""></p>
+<hr>
+
+
+<h2 id="Azure-Virtual-Networks">
+<a class="anchor" href="#Azure-Virtual-Networks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Azure Virtual Networks<a class="anchor-link" href="#Azure-Virtual-Networks"> </a>
+</h2>
+<p><a href="https://github.com/abhisheksreesaila/blog/blob/master/assets/PDFs/Az_VirtualNetworks.pdf">PDF Link</a></p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/AzNotes/Az_VirtualNetworks.png" alt=""></p>
+<hr>
+
+<h2 id="Azure-Misc">
+<a class="anchor" href="#Azure-Misc" aria-hidden="true"><span class="octicon octicon-link"></span></a>Azure Misc<a class="anchor-link" href="#Azure-Misc"> </a>
+</h2>
+<p><a href="https://github.com/abhisheksreesaila/blog/blob/master/assets/PDFs/Az_Misc.pdf">PDF Link</a></p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/AzNotes/Az_Misc.png" alt=""></p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="abhisheksreesaila/blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/blog/azure/certification/2020/09/05/AzNotes.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Casual Programmer</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/abhisheksreesaila" title="abhisheksreesaila"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/asreesaila" title="asreesaila"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

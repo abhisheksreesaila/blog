@@ -461,4 +461,6 @@ canvas { filter: invert(100%); }
 
 li .post-meta-description { color: rgba(255, 255, 255, 0.69) !important; }
 
+.post img { display: block; vertical-align: top; margin-left: auto; margin-right: auto; min-height: 1px; border-radius: 5%; }
+
 /*# sourceMappingURL=style.css.map */
