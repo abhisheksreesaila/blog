@@ -93,7 +93,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      1 min read
+      2 min read
     
 </span></p>
 
@@ -113,7 +113,12 @@ window.onload = wrap_img;
     <ul class="section-nav">
 <li class="toc-entry toc-h1"><a href="#Pytorch">Pytorch </a>
 <ul>
-<li class="toc-entry toc-h2"><a href="#Drawbacks">Drawbacks </a></li>
+<li class="toc-entry toc-h2"><a href="#Drawbacks">Drawbacks </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Pros">Pros </a></li>
+<li class="toc-entry toc-h3"><a href="#Cons">Cons </a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul><!--
@@ -197,6 +202,28 @@ The max pooling layer before the fully connected layer will squash all local act
 <li>The architecture needs to have global max pooling layer. Only then can we take the layer before that.</li>
 <li>The method can only look at the final layer of the CNN and show why the model predicted what it did.  It cannot show any later prior.</li>
 <li>These drawbacks are addressed by the GRAD GAM described below</li>
+</ul>
+<ul>
+<li>Calculate the gradients by running .backward() function. (Pytorch does not store them, hence need to calc again during inference)</li>
+<li>Average the GRADIENTS of the feature maps of the last conv layer (= weights)</li>
+<li>Multiply WEIGHTS vs ACTICATIONS (as in CAM) to get the CAM Map to display.</li>
+</ul>
+<h3 id="Pros">
+<a class="anchor" href="#Pros" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pros<a class="anchor-link" href="#Pros"> </a>
+</h3>
+<ul>
+<li>over comes all the issues of vanilla CAM</li>
+</ul>
+<h3 id="Cons">
+<a class="anchor" href="#Cons" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cons<a class="anchor-link" href="#Cons"> </a>
+</h3>
+<ul>
+<li>cannot locate mulitple objects within the images.</li>
+</ul>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/general/cnn3.png" alt="" title="CNN - GRAD CAM"></p>
+<ul>
+<li>Why gradients equal same size as activation maps? </li>
+<li>Why averaging gradients yields weights?</li>
 </ul>
 
 </div>
