@@ -93,7 +93,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      3 min read
+      4 min read
     
 </span></p>
 
@@ -124,6 +124,7 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h1"><a href="#References">References </a>
 <ul>
 <li class="toc-entry toc-h2"><a href="#Matplot-Lib-Basics">Matplot Lib Basics </a></li>
+<li class="toc-entry toc-h2"><a href="#Python-Decode-Function">Python Decode Function </a></li>
 </ul>
 </li>
 </ul><!--
@@ -268,7 +269,19 @@ The max pooling layer before the fully connected layer will squash all local act
 
 <span class="c1">#interpolation = use known data at unknown places (like extrapolate, interpolate)</span>
 </pre></div>
-<p>[Check out various types here of interpolation here] (<a href="https://matplotlib.org/stable/gallery/images_contours_and_fields/interpolation_methods.html">https://matplotlib.org/stable/gallery/images_contours_and_fields/interpolation_methods.html</a>)</p>
+<p><a href="https://matplotlib.org/stable/gallery/images_contours_and_fields/interpolation_methods.html">Check out various types here of interpolation here</a></p>
+<h2 id="Python-Decode-Function">
+<a class="anchor" href="#Python-Decode-Function" aria-hidden="true"><span class="octicon octicon-link"></span></a>Python Decode Function<a class="anchor-link" href="#Python-Decode-Function"> </a>
+</h2>
+<p>When you encode using a class (string class, data loader class etc.). you can use decode to undo it. Useful in bring back the image to its original form to display while "intrepreting" the test results.</p>
+<ul>
+<li>
+<p>IMAGE ==&gt; RESIZE ==&gt; ENCODE (normalize to image net stats or something similar) ==&gt; Output</p>
+</li>
+<li>
+<p>Output ===&gt; DECODE ==&gt; Original image (but still includes the resize)  ==&gt; Display (-able)</p>
+</li>
+</ul>
 
 </div>
 </div>
