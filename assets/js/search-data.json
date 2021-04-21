@@ -3,7 +3,7 @@
     
         "post0": {
             "title": "NVIDA GTC 2021 Summary",
-            "content": "Overall . Most of the current self driving problems seems to have been related to simulation-to-real deployment. Simulations have to get better, time for creating such scenarios have to be very small to be productive. . Future of Self Driving . Energy Based Learning . Zoosk - Car riding company . Symmetrical car design | Facilitates more effective spacing of sensors | Tested on SF urban roads | Highlighted that simulations are more effective and hence needs to become even better. | . Azure AI for Earth Planetary Compute .",
+            "content": "Overall . Most of the current self driving problems seems to have been related to simulation-to-real deployment. Simulations have to get better, time for creating such scenarios have to be very small to be productive. . Future of Self Driving . 4 issues currently. . virtual scenarios virtual worlds Virtual behaviors . Energy Based Learning . Based on self supervised learning . Zoosk - Car riding company . Symmetrical car design | Facilitates more effective spacing of sensors | Tested on SF urban roads | Highlighted that simulations are more effective and hence needs to become even better. | . Azure AI for Earth Planetary Compute .",
             "url": "https://abhisheksreesaila.github.io/blog/nvidia-gtc-21/2021/04/18/NVIDA-GTC-2021-Summary.html",
             "relUrl": "/nvidia-gtc-21/2021/04/18/NVIDA-GTC-2021-Summary.html",
             "date": " • Apr 18, 2021"
