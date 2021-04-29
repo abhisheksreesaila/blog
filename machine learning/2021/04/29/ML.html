@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Basic ML Topics | ABLearn</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Basic ML Topics" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Everyday Learnings about ML. Random topics" />
+<meta property="og:description" content="Everyday Learnings about ML. Random topics" />
+<link rel="canonical" href="https://abhisheksreesaila.github.io/blog/machine%20learning/2021/04/29/ML.html" />
+<meta property="og:url" content="https://abhisheksreesaila.github.io/blog/machine%20learning/2021/04/29/ML.html" />
+<meta property="og:site_name" content="ABLearn" />
+<meta property="og:image" content="https://abhisheksreesaila.github.io/blog/images/post-thumbnails/pytorch.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-04-29T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"Everyday Learnings about ML. Random topics","mainEntityOfPage":{"@type":"WebPage","@id":"https://abhisheksreesaila.github.io/blog/machine%20learning/2021/04/29/ML.html"},"@type":"BlogPosting","url":"https://abhisheksreesaila.github.io/blog/machine%20learning/2021/04/29/ML.html","headline":"Basic ML Topics","dateModified":"2021-04-29T00:00:00-05:00","datePublished":"2021-04-29T00:00:00-05:00","image":"https://abhisheksreesaila.github.io/blog/images/post-thumbnails/pytorch.png","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://abhisheksreesaila.github.io/blog/feed.xml" title="ABLearn" /><link rel="shortcut icon" type="image/x-icon" href="/blog/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Basic ML Topics | ABLearn</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Basic ML Topics" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Everyday Learnings about ML. Random topics" />
+<meta property="og:description" content="Everyday Learnings about ML. Random topics" />
+<link rel="canonical" href="https://abhisheksreesaila.github.io/blog/machine%20learning/2021/04/29/ML.html" />
+<meta property="og:url" content="https://abhisheksreesaila.github.io/blog/machine%20learning/2021/04/29/ML.html" />
+<meta property="og:site_name" content="ABLearn" />
+<meta property="og:image" content="https://abhisheksreesaila.github.io/blog/images/post-thumbnails/pytorch.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-04-29T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"Everyday Learnings about ML. Random topics","mainEntityOfPage":{"@type":"WebPage","@id":"https://abhisheksreesaila.github.io/blog/machine%20learning/2021/04/29/ML.html"},"@type":"BlogPosting","url":"https://abhisheksreesaila.github.io/blog/machine%20learning/2021/04/29/ML.html","headline":"Basic ML Topics","dateModified":"2021-04-29T00:00:00-05:00","datePublished":"2021-04-29T00:00:00-05:00","image":"https://abhisheksreesaila.github.io/blog/images/post-thumbnails/pytorch.png","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://abhisheksreesaila.github.io/blog/feed.xml" title="ABLearn" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">ABLearn</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">About Me</a><a class="page-link" href="/blog/search/">Search</a><a class="page-link" href="/blog/categories/">categories</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Basic ML Topics</h1><p class="page-description">Everyday Learnings about ML. Random topics</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-04-29T00:00:00-05:00" itemprop="datePublished">
+        Apr 29, 2021
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      3 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/blog/categories/#machine learning">machine learning</a>
+        
+      
+      </p>
+    
+
+    
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Padding-in-CNNs">Padding in CNNs </a></li>
+<li class="toc-entry toc-h2"><a href="#Linear-vs-Logistic-Regression">Linear vs Logistic Regression </a></li>
+<li class="toc-entry toc-h2"><a href="#What-is-data-augmentation?">What is data augmentation? </a></li>
+<li class="toc-entry toc-h2"><a href="#What-is-Momentum?">What is Momentum? </a></li>
+<li class="toc-entry toc-h2"><a href="#What-is-learning-rate?">What is learning rate? </a></li>
+<li class="toc-entry toc-h2"><a href="#What-are-auto-encoders?">What are auto-encoders? </a></li>
+<li class="toc-entry toc-h2"><a href="#Why-batches-in-training-ml-model?">Why batches in training ml model? </a></li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2021-04-29-ML.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Padding-in-CNNs">
+<a class="anchor" href="#Padding-in-CNNs" aria-hidden="true"><span class="octicon octicon-link"></span></a>Padding in CNNs<a class="anchor-link" href="#Padding-in-CNNs"> </a>
+</h2>
+<p>Why use padding? In addition to the aforementioned benefit of keeping the spatial sizes constant after CONV, doing <strong>this actually improves performance</strong>. If the CONV layers were to not zero-pad the inputs and only perform valid convolutions, then the size of the volumes would reduce by a small amount after each CONV, <strong>and the information at the borders would be “washed away” too quickly</strong></p>
+<p><a href="https://www.kaggle.com/c/data-science-bowl-2018/discussion/54426">Reference</a></p>
+<h2 id="Linear-vs-Logistic-Regression">
+<a class="anchor" href="#Linear-vs-Logistic-Regression" aria-hidden="true"><span class="octicon octicon-link"></span></a>Linear vs Logistic Regression<a class="anchor-link" href="#Linear-vs-Logistic-Regression"> </a>
+</h2>
+<ul>
+<li>In linear regression, <strong>the outcome (dependent variable) is continuous</strong>. It can have any one of an infinite number of possible values.</li>
+</ul>
+<p><em>If X contains the area in square feet of houses,  (200, 300, 3000) Y contains the corresponding sale price of those houses, ($1000, $2000, $200,000)linear regression to predict selling price as a function of house size Y = f(x)</em></p>
+<ul>
+<li>In logistic regression, the outcome (dependent variable) has only a <strong>limited number of possible values</strong>. Logistic Regression is used when response variable is <em>categorical</em> in nature</li>
+</ul>
+<p><em>If, instead, you wanted to predict, based on size, whether a house would sell for more than 200K, you would use logistic regression. The possible outputs are either Yes, the house will sell for more than 200K, or No, the house will not</em></p>
+<h2 id="What-is-data-augmentation?">
+<a class="anchor" href="#What-is-data-augmentation?" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is data augmentation?<a class="anchor-link" href="#What-is-data-augmentation?"> </a>
+</h2>
+<p>Overfitting is caused by having too few samples to learn from, rendering us unable to train a model able to generalize to new data. Given infinite data, our model would be exposed to every possible aspect of the data distribution at hand: we would never overfit. Data augmentation takes the approach of generating more training data from existing training samples, by "augmenting" the samples via a number of random transformations that yield believable-looking images. <strong>The goal is that at training time, our model would never see the exact same picture twice</strong>. This helps the model get exposed to more aspects of the data and generalize better.</p>
+<h2 id="What-is-Momentum?">
+<a class="anchor" href="#What-is-Momentum?" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is Momentum?<a class="anchor-link" href="#What-is-Momentum?"> </a>
+</h2>
+<p>Momentum helps to speed the optimization process toward the minimum of the loss and get out of saddle points by adding a running average of previous gradients and use that average instead of the current batch of data. It forces the gradient descent toward the correct direction to the loss by making the convergence faster and by reducing oscillations</p>
+<h2 id="What-is-learning-rate?">
+<a class="anchor" href="#What-is-learning-rate?" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is learning rate?<a class="anchor-link" href="#What-is-learning-rate?"> </a>
+</h2>
+<p>The learning rate is how quickly or how slowly a network updates old parameters for new ones. By default, the learning rate is held constant, however, this way may cause some issues such as:
+    • If the learning rate is too small, it will take a long time to reach the optimum, or maybe never reach it.
+    • If the learning rate is too big, it will keep bouncing around the optimum.
+The optimization method may get stuck in shallow valleys!</p>
+<h2 id="What-are-auto-encoders?">
+<a class="anchor" href="#What-are-auto-encoders?" aria-hidden="true"><span class="octicon octicon-link"></span></a>What are auto-encoders?<a class="anchor-link" href="#What-are-auto-encoders?"> </a>
+</h2>
+<p>Autoencoders are a specific type of feedforward neural networks where the input is the same as the output. They compress the input into a lower-dimensional code and then reconstruct the output from this representation. The code is a compact “summary” or “compression” of the input, also called the latent-space representation.
+An autoencoder consists of 3 components: encoder, code and decoder. The encoder compresses the input and produces the code, the decoder then reconstructs the input only using this code.</p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/general/autoencoder.png" alt="" title="Auto Encoder"></p>
+<p>To build an autoencoder we need 3 things: an encoding method, decoding method, and a loss function to compare the output with the target. Autoencoders are mainly a dimensionality reduction (or compression) algorithm with a couple of important properties</p>
+<ul>
+<li>Data specific</li>
+<li>Lossy</li>
+<li>Unsupervised</li>
+</ul>
+<h2 id="Why-batches-in-training-ml-model?">
+<a class="anchor" href="#Why-batches-in-training-ml-model?" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why batches in training ml model?<a class="anchor-link" href="#Why-batches-in-training-ml-model?"> </a>
+</h2>
+<p>Ideally, we'd like to use all our data for every step of training because that would give us a better sense of what we should be doing, but that's expensive. So, instead, we use a <strong>different subset every time</strong>. Doing this is cheap and has much of the same benefit</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="abhisheksreesaila/blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/blog/machine%20learning/2021/04/29/ML.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Casual Programmer</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/abhisheksreesaila" title="abhisheksreesaila"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/asreesaila" title="asreesaila"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
