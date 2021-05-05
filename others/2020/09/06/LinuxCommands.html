@@ -16,7 +16,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-09-06T00:00:00-05:00" />
 <script type="application/ld+json">
-{"description":"Linux command snippets for everyday things","mainEntityOfPage":{"@type":"WebPage","@id":"https://abhisheksreesaila.github.io/blog/others/2020/09/06/LinuxCommands.html"},"@type":"BlogPosting","url":"https://abhisheksreesaila.github.io/blog/others/2020/09/06/LinuxCommands.html","headline":"Useful Linux Commands","dateModified":"2020-09-06T00:00:00-05:00","datePublished":"2020-09-06T00:00:00-05:00","image":"https://abhisheksreesaila.github.io/blog/images/post-thumbnails/linux.png","@context":"https://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://abhisheksreesaila.github.io/blog/others/2020/09/06/LinuxCommands.html"},"description":"Linux command snippets for everyday things","@type":"BlogPosting","url":"https://abhisheksreesaila.github.io/blog/others/2020/09/06/LinuxCommands.html","headline":"Useful Linux Commands","dateModified":"2020-09-06T00:00:00-05:00","datePublished":"2020-09-06T00:00:00-05:00","image":"https://abhisheksreesaila.github.io/blog/images/post-thumbnails/linux.png","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://abhisheksreesaila.github.io/blog/feed.xml" title="ABLearn" /><link rel="shortcut icon" type="image/x-icon" href="/blog/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Useful Linux Commands | ABLearn</title>
@@ -32,7 +32,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-09-06T00:00:00-05:00" />
 <script type="application/ld+json">
-{"description":"Linux command snippets for everyday things","mainEntityOfPage":{"@type":"WebPage","@id":"https://abhisheksreesaila.github.io/blog/others/2020/09/06/LinuxCommands.html"},"@type":"BlogPosting","url":"https://abhisheksreesaila.github.io/blog/others/2020/09/06/LinuxCommands.html","headline":"Useful Linux Commands","dateModified":"2020-09-06T00:00:00-05:00","datePublished":"2020-09-06T00:00:00-05:00","image":"https://abhisheksreesaila.github.io/blog/images/post-thumbnails/linux.png","@context":"https://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://abhisheksreesaila.github.io/blog/others/2020/09/06/LinuxCommands.html"},"description":"Linux command snippets for everyday things","@type":"BlogPosting","url":"https://abhisheksreesaila.github.io/blog/others/2020/09/06/LinuxCommands.html","headline":"Useful Linux Commands","dateModified":"2020-09-06T00:00:00-05:00","datePublished":"2020-09-06T00:00:00-05:00","image":"https://abhisheksreesaila.github.io/blog/images/post-thumbnails/linux.png","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
@@ -120,6 +120,13 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h2"><a href="#Setup-Remote-Jupyter-Notebook">Setup Remote Jupyter Notebook </a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#Setup-SSH-on-a-different-port">Setup SSH on a different port </a></li>
+<li class="toc-entry toc-h3"><a href="#Setup-Remote-jupyter-notebook">Setup Remote jupyter notebook </a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#Setup-jupyter-service">Setup jupyter service </a></li>
+<li class="toc-entry toc-h4"><a href="#Configure-jupyter-notebook-to-allow-public-connections">Configure jupyter notebook to allow public connections </a></li>
+<li class="toc-entry toc-h4"><a href="#set-firewall-rules">set firewall rules </a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -221,7 +228,18 @@ jupyter notebook --no-browser --port<span class="o">=</span><span class="m">8080
 systemctl restart sshd
 sudo ufw allow <span class="m">63000</span>/tcp
 </pre></div>
-
+<h3 id="Setup-Remote-jupyter-notebook">
+<a class="anchor" href="#Setup-Remote-jupyter-notebook" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup Remote jupyter notebook<a class="anchor-link" href="#Setup-Remote-jupyter-notebook"> </a>
+</h3>
+<h4 id="Setup-jupyter-service">
+<a class="anchor" href="#Setup-jupyter-service" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup jupyter service<a class="anchor-link" href="#Setup-jupyter-service"> </a>
+</h4>
+<h4 id="Configure-jupyter-notebook-to-allow-public-connections">
+<a class="anchor" href="#Configure-jupyter-notebook-to-allow-public-connections" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configure jupyter notebook to allow public connections<a class="anchor-link" href="#Configure-jupyter-notebook-to-allow-public-connections"> </a>
+</h4>
+<h4 id="set-firewall-rules">
+<a class="anchor" href="#set-firewall-rules" aria-hidden="true"><span class="octicon octicon-link"></span></a>set firewall rules<a class="anchor-link" href="#set-firewall-rules"> </a>
+</h4>
 </div>
 </div>
 </div>
