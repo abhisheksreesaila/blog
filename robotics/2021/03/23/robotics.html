@@ -93,7 +93,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      2 min read
+      3 min read
     
 </span></p>
 
@@ -229,9 +229,40 @@ Does not suport multi-modal?</p>
 <h1 id="Working-of-A#-(subset-of-Djikistra)">
 <a class="anchor" href="#Working-of-A#-(subset-of-Djikistra)" aria-hidden="true"><span class="octicon octicon-link"></span></a>Working of A# (subset of Djikistra)<a class="anchor-link" href="#Working-of-A#-(subset-of-Djikistra)"> </a>
 </h1>
+<ul>
+<li>Uses the heuristic appraoch combined the elements of Djikistra<ul>
+<li>use g_cost = distance from start node</li>
+</ul>
+</li>
+<li>keep track of the directions the goal<ul>
+<li>use h_cost = distance towards the goal<ul>
+<li>this could be "euclidiean distnace (shortest distance between 2 points in space) (with or without collision)</li>
+<li>Manhattan distance = grid distance between 2 points in space (avoiding collisions) </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>optimal distance<ul>
+<li>In each iteration, always select the node with the lowest f_cost = sum(g_cost, h_cost)</li>
+</ul>
+</li>
+</ul>
 <h1 id="Working-of-RRT-(Rapid-Exploring-Random-Tree)">
 <a class="anchor" href="#Working-of-RRT-(Rapid-Exploring-Random-Tree)" aria-hidden="true"><span class="octicon octicon-link"></span></a>Working of RRT (Rapid Exploring Random Tree)<a class="anchor-link" href="#Working-of-RRT-(Rapid-Exploring-Random-Tree)"> </a>
 </h1>
+<ul>
+<li>Use random probabilities to determine</li>
+<li>Completely differet a* and djikstras algo</li>
+<li>algorithm<ul>
+<li>From the start position, generate random point</li>
+<li>if its too far, reduce to max allowable threshold</li>
+<li>connect the point to its nearest node. if you starting out it will be the root node, but subsquently there could other closer points</li>
+<li>while connecting, if there is a collision, then ignore the point, then repeat</li>
+<li>keep doing this until you generate a point close to the goal (closeness distance set by you)</li>
+</ul>
+</li>
+</ul>
+
 </div>
 </div>
 </div>
