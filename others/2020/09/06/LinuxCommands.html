@@ -93,7 +93,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      1 min read
+      2 min read
     
 </span></p>
 
@@ -122,9 +122,15 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h3"><a href="#Setup-SSH-on-a-different-port">Setup SSH on a different port </a></li>
 <li class="toc-entry toc-h3"><a href="#Setup-Remote-jupyter-notebook">Setup Remote jupyter notebook </a>
 <ul>
-<li class="toc-entry toc-h4"><a href="#Setup-jupyter-service">Setup jupyter service </a></li>
-<li class="toc-entry toc-h4"><a href="#Configure-jupyter-notebook-to-allow-public-connections">Configure jupyter notebook to allow public connections </a></li>
-<li class="toc-entry toc-h4"><a href="#set-firewall-rules">set firewall rules </a></li>
+<li class="toc-entry toc-h4"><a href="#CREATE-EXEC-SCRIPT">CREATE EXEC SCRIPT </a></li>
+<li class="toc-entry toc-h4"><a href="#CREATE-JUPYTER-SERVICE">CREATE JUPYTER SERVICE </a></li>
+<li class="toc-entry toc-h4"><a href="#CONFIG-JUPYTER-NOTEBOOK">CONFIG JUPYTER NOTEBOOK </a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#CREATE-PASSWORD-and-CERTIFICATES">CREATE PASSWORD and CERTIFICATES </a></li>
+<li class="toc-entry toc-h5"><a href="#EDIT--NOTEBOOK-CONFIGURATION-FILES">EDIT  NOTEBOOK CONFIGURATION FILES </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h4"><a href="#EDIT-FIREWALL-RULES-(if-needed)">EDIT FIREWALL RULES (if needed) </a></li>
 </ul>
 </li>
 </ul>
@@ -234,39 +240,183 @@ jupyter notebook --no-browser --port<span class="o">=</span><span class="m">8080
 systemctl restart sshd
 sudo ufw allow <span class="m">63000</span>/tcp
 </pre></div>
+<hr>
 <h3 id="Setup-Remote-jupyter-notebook">
 <a class="anchor" href="#Setup-Remote-jupyter-notebook" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup Remote jupyter notebook<a class="anchor-link" href="#Setup-Remote-jupyter-notebook"> </a>
 </h3>
-<h4 id="Setup-jupyter-service">
-<a class="anchor" href="#Setup-jupyter-service" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup jupyter service<a class="anchor-link" href="#Setup-jupyter-service"> </a>
+<h4 id="CREATE-EXEC-SCRIPT">
+<a class="anchor" href="#CREATE-EXEC-SCRIPT" aria-hidden="true"><span class="octicon octicon-link"></span></a>CREATE EXEC SCRIPT<a class="anchor-link" href="#CREATE-EXEC-SCRIPT"> </a>
 </h4>
-<h4 id="Configure-jupyter-notebook-to-allow-public-connections">
-<a class="anchor" href="#Configure-jupyter-notebook-to-allow-public-connections" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configure jupyter notebook to allow public connections<a class="anchor-link" href="#Configure-jupyter-notebook-to-allow-public-connections"> </a>
+<ul>
+<li>CREATE jupyter-startup.sh </li>
+</ul>
+<div class="highlight"><pre><span></span><span class="nb">source</span> ~/miniconda3/etc/profile.d/conda.sh
+conda activate YOUR_CONDA_VIRTUAL_ENVIRONMENT
+jupyter notebook
+</pre></div>
+<h4 id="CREATE-JUPYTER-SERVICE">
+<a class="anchor" href="#CREATE-JUPYTER-SERVICE" aria-hidden="true"><span class="octicon octicon-link"></span></a>CREATE JUPYTER SERVICE<a class="anchor-link" href="#CREATE-JUPYTER-SERVICE"> </a>
 </h4>
-<h4 id="set-firewall-rules">
-<a class="anchor" href="#set-firewall-rules" aria-hidden="true"><span class="octicon octicon-link"></span></a>set firewall rules<a class="anchor-link" href="#set-firewall-rules"> </a>
+<ul>
+<li>CREATE a following jupyter service in your home directory</li>
+<li>COPY the file to this destination ==&gt; <strong>/etc/systemd/system/jupyter.service</strong>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="o">[</span>Unit<span class="o">]</span>
+
+<span class="nv">Description</span><span class="o">=</span>Jupyter Notebook Service Description
+
+<span class="o">[</span>Service<span class="o">]</span>
+
+<span class="nv">Type</span><span class="o">=</span>simple
+
+<span class="nv">PIDFile</span><span class="o">=</span>/run/jupyter.pid
+
+<span class="nv">ExecStart</span><span class="o">=</span>/home/YOUR_USER_NAME/jupyter-startup.sh 
+
+<span class="nv">User</span><span class="o">=</span>YOUR_USER_NAME
+
+<span class="nv">Group</span><span class="o">=</span>YOUR_USER_NAME
+
+<span class="nv">Restart</span><span class="o">=</span>always
+
+<span class="nv">RestartSec</span><span class="o">=</span><span class="m">10</span>
+
+<span class="o">[</span>Install<span class="o">]</span>
+
+<span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
+</pre></div>
+<div class="highlight"><pre><span></span>- sudo systemctl <span class="nb">enable</span> jupyter.service
+- sudo systemctl daemon-reload
+- sudo systemctl restart jupyter.service
+</pre></div>
+<h4 id="CONFIG-JUPYTER-NOTEBOOK">
+<a class="anchor" href="#CONFIG-JUPYTER-NOTEBOOK" aria-hidden="true"><span class="octicon octicon-link"></span></a>CONFIG JUPYTER NOTEBOOK<a class="anchor-link" href="#CONFIG-JUPYTER-NOTEBOOK"> </a>
 </h4>
+<ul>
+<li>Create Jupyter Notebook Configuration</li>
+</ul>
+<div class="highlight"><pre><span></span>jupyter notebook –generate-config
+</pre></div>
+<h5 id="CREATE-PASSWORD-and-CERTIFICATES">
+<a class="anchor" href="#CREATE-PASSWORD-and-CERTIFICATES" aria-hidden="true"><span class="octicon octicon-link"></span></a>CREATE PASSWORD and CERTIFICATES<a class="anchor-link" href="#CREATE-PASSWORD-and-CERTIFICATES"> </a>
+</h5>
+<ul>
+<li>First generate a new password to login</li>
+</ul>
+
 </div>
 </div>
 </div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">notebook.auth</span> <span class="kn">import</span> <span class="n">passwd</span>
+<span class="kn">import</span> <span class="nn">IPython</span>
+
+<span class="n">passwd</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Enter password: ········
+Verify password: ········
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>'sha1:6ed7a3ec3487:57c304ac1ba182fa7c160d2fcac788a2c376cb5f'</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><strong>Generate the certificate file. It will be used in the configuration step</strong></li>
+</ul>
+<div class="highlight"><pre><span></span>openssl req -x509 -nodes -days <span class="m">365</span> -newkey rsa:2048 -keyout mykey.key -out mycert.pem
+</pre></div>
+<h5 id="EDIT--NOTEBOOK-CONFIGURATION-FILES">
+<a class="anchor" href="#EDIT--NOTEBOOK-CONFIGURATION-FILES" aria-hidden="true"><span class="octicon octicon-link"></span></a>EDIT  NOTEBOOK CONFIGURATION FILES<a class="anchor-link" href="#EDIT--NOTEBOOK-CONFIGURATION-FILES"> </a>
+</h5>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> .jupyter
+nano jupyter_notebook_config.py
+</pre></div>
+<ul>
+<li>
+<p><strong>Open the configuration file and edit as follows</strong></p>
+<ul>
+<li>c.NotebookApp.allow_origin = '*'</li>
+<li>c.NotebookApp.allow_remote_access = True</li>
+<li>c.NotebookApp.certfile = 'YOUR_CERTIFICATE_FILE'</li>
+<li>c.NotebookApp.ip = '0.0.0.0'</li>
+<li>c.NotebookApp.open_browser = False</li>
+<li>c.NotebookApp.password = u'<enter your="" password="" from="" above="">'&lt;/li&gt;
+<li>c.NotebookApp.port = ANY_PORT_YOU_LIKE</li>
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+<h4 id="EDIT-FIREWALL-RULES-(if-needed)">
+<a class="anchor" href="#EDIT-FIREWALL-RULES-(if-needed)" aria-hidden="true"><span class="octicon octicon-link"></span></a>EDIT FIREWALL RULES (if needed)<a class="anchor-link" href="#EDIT-FIREWALL-RULES-(if-needed)"> </a>
+</h4>
+<div class="highlight"><pre><span></span>sudo ufw allow from &lt;&lt;IP ADDRESS&gt;&gt;
+</pre></div>
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="References">
 <a class="anchor" href="#References" aria-hidden="true"><span class="octicon octicon-link"></span></a>References<a class="anchor-link" href="#References"> </a>
 </h1>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><a href="https://jupyter-notebook.readthedocs.io/en/stable/public_server.html">Config Jupyter Notebook</a></li>
+<li><a href="https://hyunyoung2.github.io/2017/11/14/How_to_Access_Jupyter_Notebook_Remotely">Config Jupyter Notebook 2</a></li>
+<li><a href="https://gist.github.com/whophil/5a2eab328d2f8c16bb31c9ceaf23164f">Create Jupyter Service</a></li>
+<li><a href="https://janakiev.com/blog/jupyter-systemd">Create Jupyter Service 2</a></li>
+<li><a href="https://www.linode.com/docs/guides/configure-firewall-with-ufw">Configure Linux firewall</a></li>
+</ul>
 
 </div>
 </div>
 </div>
-</div>
+&lt;/div&gt;
+ 
 
+</enter>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div></div>
+</div>
 
 
   </div><!-- from https://github.com/utterance/utterances -->
