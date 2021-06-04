@@ -15,9 +15,9 @@
         ,"post1": {
             "title": "Ancient Indian Computing",
             "content": "Binary Values . 1 and 0s . . Pneumonic . The binary notation is a mirror images of the modern binary notation . . Prashtra . Given a binary value, what is the next in sequence? Algorithm shown . . Sankya . Given a binary notation, what is it value? Pingala provides an efficient algorithm . . Nasta . Find the nth binary notation in the 4 digit binary system . . Uddishta . Given a number, find its metre (value) . . Lagagriya . Pyramid way to calculate combinations . . References . Pingala&#39;s Chandahsastra .",
-            "url": "https://ablearn.io/others/2021/06/02/Ancient-Indian-Computing.html",
-            "relUrl": "/others/2021/06/02/Ancient-Indian-Computing.html",
-            "date": " • Jun 2, 2021"
+            "url": "https://ablearn.io/others/2021/06/03/Ancient-Indian-Computing.html",
+            "relUrl": "/others/2021/06/03/Ancient-Indian-Computing.html",
+            "date": " • Jun 3, 2021"
         }
         
     
@@ -47,7 +47,7 @@
     
         ,"post4": {
             "title": "Notes from AGILE SAFe Training",
-            "content": "Points to Remember . SCRUM of SCRUMS (SOS) = twice a week, then cut down . | RTE - Release train engineer . Manager for scrum masters | . | PI Planning . top 10 features as input | PI objectives | or else do not start | . | User stories . it has to be user driven | I am driver, wanting to do this, that’s adds &quot;this&quot; business value | . | User-less stores . DB ==&gt; front end | . | Time is not EQUAL story points . relative | pick a base and measure against it | . | Never start sprints on Monday/and end on fridays . | PI planning . &lt;&gt;iteration planning | assign to people. (atleast team) | atleast 2 stories so that we hit the ground running | . | . . Team Burns outs | . . Daily stand ups 15 mins | use the next 15 min for stay-behind | . | .",
+            "content": "Basics . User stories . Small unit of value | it has to be user driven | I am driver, wanting to do this, that’s adds &quot;this&quot; business value | . | Features . bigger chunk of user stories | single value stream of work | typically achieved under a quarter | . | Capability . multiple streams of work | . | Epics . not same as projects | work of substantial value to the organization | can run into mulitple PI&#39;s | does not have start and end time | Define MVP clearly | Try to achieve them, if you cannot, pivot and rewrite epics | Refer below diagram | . | Architecture Runaway . Achieve the near-term features without excessive redesign and delays | It will spike up and down | Imagine an aircraft, needing to land after exit | . | . Points to Remember . SCRUM of SCRUMS (SOS) = twice a week, then cut down . | RTE - Release train engineer . Manager for scrum masters | . | PI Planning . top 10 features as input | PI objectives | or else do not start | . | . User-less stores . DB ==&gt; front end | . | Time is not EQUAL story points . relative | pick a base and measure against it | . | Never start sprints on Monday/and end on fridays . | PI planning . &lt;&gt;iteration planning | assign to people. (atleast team) | atleast 2 stories so that we hit the ground running | . | . . Team Burns outs | . . Daily stand ups 15 mins | use the next 15 min for stay-behind | . | .",
             "url": "https://ablearn.io/others/2021/05/10/SAFe-AGILE.html",
             "relUrl": "/others/2021/05/10/SAFe-AGILE.html",
             "date": " • May 10, 2021"
