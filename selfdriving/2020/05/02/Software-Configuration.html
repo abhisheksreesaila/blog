@@ -93,7 +93,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      5 min read
+      7 min read
     
 </span></p>
 
@@ -131,6 +131,13 @@ window.onload = wrap_img;
 </li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#Installing-MUSHR-from-Scratch">Installing MUSHR from Scratch </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#START-from-here">START from here </a></li>
+<li class="toc-entry toc-h2"><a href="#RealSense-SDK-Install-Prior-to-MUSHR-Stack">RealSense SDK Install Prior to MUSHR Stack </a></li>
+<li class="toc-entry toc-h2"><a href="#Pytorch-Version-Issue">Pytorch Version Issue </a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h1"><a href="#References">References </a></li>
@@ -402,6 +409,68 @@ This wil throw an <strong>SERIAL PORT ERROR</strong> and will NOT connect to BLD
     <strong>Note: </strong><strong>Everything spinning in the right direction??</strong> In the BLDC tool, Push the "top" arrow key and the wheels should move forward, and vice versa, if it moves in the reverse direction, it means the "wires" from the <strong>VESC to the motor has been criss crossed.</strong> Reverse the wire connection and you should be good. See below for visual. I personally used VESC tool to check it.
 </div>
 <img src="https://abhisheksreesaila.github.io/blog/images/software-config/motor_spin.png" alt="" title="VESC TO MOTOR CONNECTION">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Installing-MUSHR-from-Scratch">
+<a class="anchor" href="#Installing-MUSHR-from-Scratch" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installing MUSHR from Scratch<a class="anchor-link" href="#Installing-MUSHR-from-Scratch"> </a>
+</h1>
+<h2 id="START-from-here">
+<a class="anchor" href="#START-from-here" aria-hidden="true"><span class="octicon octicon-link"></span></a>START from here<a class="anchor-link" href="#START-from-here"> </a>
+</h2>
+<p><a href="https://mushr.io/hardware/nano_install/">https://mushr.io/hardware/nano_install/</a></p>
+<h2 id="RealSense-SDK-Install-Prior-to-MUSHR-Stack">
+<a class="anchor" href="#RealSense-SDK-Install-Prior-to-MUSHR-Stack" aria-hidden="true"><span class="octicon octicon-link"></span></a>RealSense SDK Install Prior to MUSHR Stack<a class="anchor-link" href="#RealSense-SDK-Install-Prior-to-MUSHR-Stack"> </a>
+</h2>
+<ul>
+<li>DO NOT install using just 1 script mentioned here, but</li>
+<li>Go step wise<ul>
+<li>Install ROS</li>
+<li>STOP!  Do not mushr stack, Install REAL SENSE hardware block (&lt;------ critical)</li>
+<li>Then, - install MUSHR </li>
+</ul>
+</li>
+</ul>
+<h2 id="Pytorch-Version-Issue">
+<a class="anchor" href="#Pytorch-Version-Issue" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pytorch Version Issue<a class="anchor-link" href="#Pytorch-Version-Issue"> </a>
+</h2>
+<ul>
+<li>
+<p>Mushr supports 1.1 version of torch as shown <a href="https://github.com/prl-mushr/mushr_rhc">here</a></p>
+<ul>
+<li>torch 1.1 needs CUDA 10.0 as shown <a href="https://pytorch.org/get-started/previous-versions/">here</a> </li>
+</ul>
+</li>
+<li>
+<p>Mushr also supports only python 2.7</p>
+</li>
+<li>
+<p>Keeping these 2 constraints in mind, you cannot take the latest STOCK image from NVIDIA (Jetpack 4.5 at the time of writing which supports CUDA 10.2) since CUDA 10.2 is not compatible with torch 1.1 (rather its only compatible with  torch 1.5 and above)</p>
+</li>
+</ul>
+<p>So 2 options</p>
+<ul>
+<li>
+<p>Install <a href="https://github.com/rbonghi/jetson_stats">this</a> and know your version first</p>
+<ol>
+<li>If you have not started, pick <strong>JETPACK 4.2</strong>.X as stock image</li>
+<li>If you are wrapping up then dont want to go back all the way to starting point of installation<ul>
+<li>install torch 1.4 from <a href="https://forums.developer.nvidia.com/t/pytorch-for-jetson-version-1-9-0-now-available/72048">here</a>. Technically, we need torch 1.5, BUT torch 1.5 only supports python 3.6. so there are 2 sub-options</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/general/pytorch-support.png" alt="" title="pytorch support for 1.5"></p>
+</li>
+</ul>
+
+<pre><code>     - update python 2.7 ==&gt; 3.6 &amp;&amp; update to torch 1.5. But python update is a nightmare
+     - update to torch 1.4 (as close as possible to 1.5) and install fix any minor errors
+       - install "libopenblas" library [here](https://www.openblas.net/)
+       - update bashrc as shown [here](https://www.programmersought.com/article/90674363798/)</code></pre>
 
 </div>
 </div>
