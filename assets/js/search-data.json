@@ -4,9 +4,9 @@
         "post0": {
             "title": "Ancient Indian Computing",
             "content": "Binary Values . 1 and 0s . . Pneumonic . The binary notation is a mirror images of the modern binary notation . . Prashtra . Given a binary value, what is the next in sequence? Algorithm shown . . Sankya . Given a binary notation, what is it value? Pingala provides an efficient algorithm . . Nasta . Find the nth binary notation in the 4 digit binary system . . Uddishta . Given a number, find its metre (value) . . Lagagriya . Pyramid way to calculate combinations . . References . Pingala&#39;s Chandahsastra .",
-            "url": "https://ablearn.io/others/2021/07/10/Ancient-Indian-Computing.html",
-            "relUrl": "/others/2021/07/10/Ancient-Indian-Computing.html",
-            "date": " • Jul 10, 2021"
+            "url": "https://ablearn.io/others/2021/07/11/Ancient-Indian-Computing.html",
+            "relUrl": "/others/2021/07/11/Ancient-Indian-Computing.html",
+            "date": " • Jul 11, 2021"
         }
         
     
@@ -257,6 +257,20 @@
 
   
 
+  
+
+  
+  
+
+  
+      ,"page13": {
+          "title": "",
+          "content": "Sitemap: {{ “sitemap.xml” | absolute_url }} | .",
+          "url": "https://ablearn.io/robots.txt",
+          "relUrl": "/robots.txt",
+          "date": ""
+      }
+      
   
 
 }
