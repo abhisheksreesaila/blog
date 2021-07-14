@@ -122,6 +122,7 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h3"><a href="#Setup-SSH-on-a-different-port">Setup SSH on a different port </a></li>
 </ul>
 </li>
+<li class="toc-entry toc-h2"><a href="#Error-loading-docker-file">Error loading docker file </a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h1"><a href="#References">References </a></li>
@@ -234,6 +235,17 @@ sudo service xrdp restart
 systemctl restart sshd
 sudo ufw allow <span class="m">63000</span>/tcp
 </pre></div>
+<h2 id="Error-loading-docker-file">
+<a class="anchor" href="#Error-loading-docker-file" aria-hidden="true"><span class="octicon octicon-link"></span></a>Error loading docker file<a class="anchor-link" href="#Error-loading-docker-file"> </a>
+</h2>
+<pre><code>sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
+sudo chmod g+rwx "/home/$USER/.docker" -R</code></pre>
+<p>Stop all the containers</p>
+
+<pre><code>docker stop $(docker ps -a -q)</code></pre>
+<p>Remove all the containers</p>
+
+<pre><code>docker rm $(docker ps -a -q)</code></pre>
 <h1 id="References">
 <a class="anchor" href="#References" aria-hidden="true"><span class="octicon octicon-link"></span></a>References<a class="anchor-link" href="#References"> </a>
 </h1>
