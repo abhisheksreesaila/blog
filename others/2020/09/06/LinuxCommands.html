@@ -190,7 +190,14 @@ dpkg --list |grep "^rc" | cut -d " " -f 3 | xargs sudo dpkg --purge</code></pre>
 cd /usr/local
 rm -rf cuda*</code></pre>
 <ul>
-<li>Removing CUDA also removed CUDNN  so we need install (from <a href="https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html">here</a>] it separately for ML frameworks such as tensorflow/pytorch to work.</li>
+<li>Update PATH VARIABLES. (XX.Y refers to your CUDA version)</li>
+</ul>
+
+<pre><code>export PATH=${PATH}:/usr/local/cuda-XX.Y/bin
+export CUDA_HOME=${CUDA_HOME}:/usr/local/cuda:/usr/local/cuda-XX.Y
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/cuda-XX.Y/lib64</code></pre>
+<ul>
+<li>Removing CUDA also removed CUDNN  so we need install from <a href="https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html">here</a> so that ML frameworks such as tensorflow/pytorch work.</li>
 </ul>
 <h2 id="Install-XRDP">
 <a class="anchor" href="#Install-XRDP" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install XRDP<a class="anchor-link" href="#Install-XRDP"> </a>
