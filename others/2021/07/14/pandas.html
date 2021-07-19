@@ -140,7 +140,13 @@ window.onload = wrap_img;
 <div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="k">TABLE</span> <span class="n">a</span> <span class="k">join</span> <span class="n">TABLE_B</span> <span class="n">b</span> <span class="k">on</span> <span class="n">a</span><span class="p">.</span><span class="n">column1</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">column2</span>
 </pre></div>
 
-<pre><code>pd.merge(left = left, right = right, how ='left')</code></pre>
+<pre><code>pd.merge(
+left = left_dataframe, 
+right = right_dataframe, 
+how ='left'                 # what kind of join? right/left/outer
+suffixes=('_fa', '_ag'),    # by default, it will _x, _y to the common columns between the tables. This will add meaningful suffixes
+left_on=['CustomField19'],  # left table columns to join
+right_on=['AssetId'])       # right table column to join</code></pre>
 <h1 id="RENAME">
 <a class="anchor" href="#RENAME" aria-hidden="true"><span class="octicon octicon-link"></span></a>RENAME<a class="anchor-link" href="#RENAME"> </a>
 </h1>

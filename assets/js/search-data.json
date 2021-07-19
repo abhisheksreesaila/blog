@@ -4,9 +4,9 @@
         "post0": {
             "title": "Ancient Indian Computing",
             "content": "Binary Values . 1 and 0s . . Pneumonic . The binary notation is a mirror images of the modern binary notation . . Prashtra . Given a binary value, what is the next in sequence? Algorithm shown . . Sankya . Given a binary notation, what is it value? Pingala provides an efficient algorithm . . Nasta . Find the nth binary notation in the 4 digit binary system . . Uddishta . Given a number, find its metre (value) . . Lagagriya . Pyramid way to calculate combinations . . References . Pingala&#39;s Chandahsastra .",
-            "url": "https://ablearn.io/others/2021/07/17/Ancient-Indian-Computing.html",
-            "relUrl": "/others/2021/07/17/Ancient-Indian-Computing.html",
-            "date": " • Jul 17, 2021"
+            "url": "https://ablearn.io/others/2021/07/18/Ancient-Indian-Computing.html",
+            "relUrl": "/others/2021/07/18/Ancient-Indian-Computing.html",
+            "date": " • Jul 18, 2021"
         }
         
     
@@ -14,7 +14,7 @@
     
         ,"post1": {
             "title": "Pandas and its SQL Equivalent",
-            "content": "JOIN . SELECT * FROM TABLE a join TABLE_B b on a.column1 = b.column2 . pd.merge(left = left, right = right, how =&#39;left&#39;) . RENAME . sp_rename(table.colA, table.ColB) . df.rename(columns = {&quot;colA&quot;: &quot;colB&quot;}, inplace=True) . WHERE . SELECT * FROM table WHERE colName = Value . df[[df.ColName == Value]] . DISTINCT . SELECT DISTINCT Col1, Col2 FROM table WHERE colName = Value . df[[&#39;col1&#39;, &#39;col2&#39;]].drop_duplicates() .",
+            "content": "JOIN . SELECT * FROM TABLE a join TABLE_B b on a.column1 = b.column2 . pd.merge( left = left_dataframe, right = right_dataframe, how =&#39;left&#39; # what kind of join? right/left/outer suffixes=(&#39;_fa&#39;, &#39;_ag&#39;), # by default, it will _x, _y to the common columns between the tables. This will add meaningful suffixes left_on=[&#39;CustomField19&#39;], # left table columns to join right_on=[&#39;AssetId&#39;]) # right table column to join . RENAME . sp_rename(table.colA, table.ColB) . df.rename(columns = {&quot;colA&quot;: &quot;colB&quot;}, inplace=True) . WHERE . SELECT * FROM table WHERE colName = Value . df[[df.ColName == Value]] . DISTINCT . SELECT DISTINCT Col1, Col2 FROM table WHERE colName = Value . df[[&#39;col1&#39;, &#39;col2&#39;]].drop_duplicates() .",
             "url": "https://ablearn.io/others/2021/07/14/pandas.html",
             "relUrl": "/others/2021/07/14/pandas.html",
             "date": " • Jul 14, 2021"
