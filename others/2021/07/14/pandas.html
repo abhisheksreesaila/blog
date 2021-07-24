@@ -116,6 +116,7 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h2"><a href="#WHERE">WHERE </a></li>
 <li class="toc-entry toc-h2"><a href="#DISTINCT">DISTINCT </a></li>
 <li class="toc-entry toc-h2"><a href="#UDPATE-column-from-another-column">UDPATE column from another column </a></li>
+<li class="toc-entry toc-h2"><a href="#RANK">RANK </a></li>
 <li class="toc-entry toc-h1"><a href="#References">References </a></li>
 </ul><!--
 #################################################
@@ -186,6 +187,16 @@ on=['CustomField19'],       # common columns to join. it will intersect for valu
 </pre></div>
 
 <pre><code>df['ColA'] = df.apply(lambda x: x['ColB'] if x['ColC']="somevalue" else x['ColA'], axis = 1]</code></pre>
+<h2 id="RANK">
+<a class="anchor" href="#RANK" aria-hidden="true"><span class="octicon octicon-link"></span></a>RANK<a class="anchor-link" href="#RANK"> </a>
+</h2>
+<div class="highlight"><pre><span></span><span class="k">select</span> <span class="n">row_number</span><span class="p">()</span> <span class="n">OVER</span> <span class="p">(</span><span class="k">order</span> <span class="k">by</span> <span class="n">col</span><span class="p">)</span> <span class="k">from</span> <span class="n">TableA</span>
+</pre></div>
+
+<pre><code>df["ColA"].rank(method="max")
+
+default = average
+possible : max, min, first, dense</code></pre>
 <h1 id="References">
 <a class="anchor" href="#References" aria-hidden="true"><span class="octicon octicon-link"></span></a>References<a class="anchor-link" href="#References"> </a>
 </h1>
