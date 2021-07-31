@@ -337,9 +337,9 @@ table td { border: 1px solid #e8e8e8; }
 
 .post figcaption { text-align: center; font-size: .8rem; font-style: italic; color: light-grey; }
 
-.page-content { -webkit-font-smoothing: antialiased !important; text-rendering: optimizeLegibility !important; font-family: "Segoe UI", SegoeUI, Roboto, "Segoe WP", "Helvetica Neue", "Helvetica", "Tahoma", "Arial", sans-serif !important; }
+.page-content { -webkit-font-smoothing: antialiased !important; text-rendering: optimizeLegibility !important; font-family: Montserrat !important; }
 
-.post-content p, .post-content li { font-size: 14px; color: #515151; }
+.post-content p, .post-content li { font-size: 16px; color: #515151; }
 
 .post-link { font-weight: normal; }
 
