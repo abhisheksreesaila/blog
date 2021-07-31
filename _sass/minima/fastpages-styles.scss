@@ -20,13 +20,13 @@
 .page-content {
         -webkit-font-smoothing: antialiased !important;
         text-rendering: optimizeLegibility !important;
-        font-family: Montserrat !important;
+        font-family: "Segoe UI", SegoeUI, Roboto, "Segoe WP", "Helvetica Neue", "Helvetica", "Tahoma", "Arial", sans-serif !important;
            
       }
 
 // make non-headings slightly lighter
 .post-content p, .post-content li {
-   font-size: 16px;
+   font-size: 18px;
    color: #515151;
 }
 
