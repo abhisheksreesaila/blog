@@ -240,7 +240,7 @@ The max pooling layer before the fully connected layer will squash all local act
 <p>CAM uses WEIGHTS at the Fully Connected layer to choose the "feature maps" that is more relevant and squash the ones which are not.  So it is highly dependent of (CONV Layer =&gt; Global Average Pooling Layer ==&gt; FC Layer) network.  GRAD-CAM uses this concept by make its more general.
   It uses GRADIENTS to provide the weights. We use the GRADIENTS in the last conv layer, do the global average pooling   ourselves, and now we have our weights!  we dont have to depend on specific GAP layer nor the weights of the fully connected layer. GRADIENTS provide a good enough "weighting mechanism" to pick the feature map that is relevant and squash the one which we dont.
 <font size="3">  
-Deep neural networks as well act as information distillation pipeline where the input image is being converted to a domain which is visually less interpretable (by removing irrelevant information) but mathematically useful for convnet to make a choice from the output classes in its last layer
+**Deep neural networks as well act as information distillation pipeline where the input image is being converted to a domain which is visually less interpretable (by removing irrelevant information) but mathematically useful for convnet to make a choice from the output classes in its last layer**
 </font></p>
 <h1 id="References">
 <a class="anchor" href="#References" aria-hidden="true"><span class="octicon octicon-link"></span></a>References<a class="anchor-link" href="#References"> </a>
