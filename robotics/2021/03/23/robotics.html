@@ -93,7 +93,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      4 min read
+      3 min read
     
 </span></p>
 
@@ -125,16 +125,6 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h3"><a href="#Djikistra-algorithm">Djikistra algorithm </a></li>
 <li class="toc-entry toc-h3"><a href="#Working-of-A#-(subset-of-Djikistra)">Working of A# (subset of Djikistra) </a></li>
 <li class="toc-entry toc-h3"><a href="#Working-of-RRT-(Rapid-Exploring-Random-Tree)">Working of RRT (Rapid Exploring Random Tree) </a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-entry toc-h1"><a href="#Reinforcement-Learning-Basics">Reinforcement Learning Basics </a>
-<ul>
-<li class="toc-entry toc-h2"><a href="#Things-to-keep-in-mind-in-RL">Things to keep in mind in RL </a>
-<ul>
-<li class="toc-entry toc-h3"><a href="#Value-vs-Reward">Value vs Reward </a></li>
-<li class="toc-entry toc-h3"><a href="#Explore-vs-Exploit">Explore vs Exploit </a></li>
 </ul>
 </li>
 </ul>
@@ -285,63 +275,6 @@ Does not suport multi-modal?</p>
 <li>keep doing this until you generate a point close to the goal (closeness distance set by you)</li>
 </ul>
 </li>
-</ul>
-<h1 id="Reinforcement-Learning-Basics">
-<a class="anchor" href="#Reinforcement-Learning-Basics" aria-hidden="true"><span class="octicon octicon-link"></span></a>Reinforcement Learning Basics<a class="anchor-link" href="#Reinforcement-Learning-Basics"> </a>
-</h1>
-<ul>
-<li>Unlike the unsuperivsed or supervised learning algorithms, it is used in dynamic env</li>
-<li>
-<p>There are 2 entities involved:</p>
-<ul>
-<li>AGENT : Software involved in getting input and executing actions</li>
-<li>Environment : House that Agent is in</li>
-</ul>
-</li>
-<li>
-<p>Input</p>
-<ul>
-<li>Take a set of observations (or states)</li>
-</ul>
-</li>
-<li>
-<p>Process  (or policy)</p>
-<ul>
-<li>Figures out the right set of actions</li>
-<li>If we used "deep learning" for this, then it becomes deep reinforcement learning</li>
-</ul>
-</li>
-<li>
-<p>Output</p>
-<ul>
-<li>Right set of commands to follow</li>
-</ul>
-</li>
-<li>Feedback<ul>
-<li>It the output received positive feedback, great, keep in mind and repeat when possible</li>
-<li>If not, change</li>
-</ul>
-</li>
-</ul>
-<h2 id="Things-to-keep-in-mind-in-RL">
-<a class="anchor" href="#Things-to-keep-in-mind-in-RL" aria-hidden="true"><span class="octicon octicon-link"></span></a>Things to keep in mind in RL<a class="anchor-link" href="#Things-to-keep-in-mind-in-RL"> </a>
-</h2>
-<h3 id="Value-vs-Reward">
-<a class="anchor" href="#Value-vs-Reward" aria-hidden="true"><span class="octicon octicon-link"></span></a>Value vs Reward<a class="anchor-link" href="#Value-vs-Reward"> </a>
-</h3>
-<ul>
-<li>Value = long term benefits</li>
-<li>Reward = Immediate feedback</li>
-<li>If its too long term, env has changed, your algorithm or function is obsolete</li>
-<li>too short term, its not a visionary and missed crucial opportunities</li>
-</ul>
-<h3 id="Explore-vs-Exploit">
-<a class="anchor" href="#Explore-vs-Exploit" aria-hidden="true"><span class="octicon octicon-link"></span></a>Explore vs Exploit<a class="anchor-link" href="#Explore-vs-Exploit"> </a>
-</h3>
-<ul>
-<li>Agent explores new env and learn ==&gt; updates policy</li>
-<li>Agent exploits exising env, fine tunes and gets good at it! </li>
-<li>Our problem : balance exploit vs explore</li>
 </ul>
 <h1 id="References">
 <a class="anchor" href="#References" aria-hidden="true"><span class="octicon octicon-link"></span></a>References<a class="anchor-link" href="#References"> </a>
