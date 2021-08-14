@@ -131,7 +131,13 @@ window.onload = wrap_img;
 </ul>
 </li>
 <li class="toc-entry toc-h3"><a href="#CROP-Map">CROP Map </a></li>
-<li class="toc-entry toc-h3"><a href="#Edit-CONFIG-files-to-use-the-map">Edit CONFIG files to use the map </a></li>
+<li class="toc-entry toc-h3"><a href="#Edit-CONFIG-files-to-use-the-map">Edit CONFIG files to use the map </a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#Base-Package">Base Package </a></li>
+<li class="toc-entry toc-h4"><a href="#RHC-Package">RHC Package </a></li>
+<li class="toc-entry toc-h4"><a href="#Set-the-static-map">Set the static map </a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -265,6 +271,13 @@ scp  ~/Desktop/real-floor0.pgm robot@&lt;&lt;CAR IP&gt;&gt;:~
 <h3 id="Edit-CONFIG-files-to-use-the-map">
 <a class="anchor" href="#Edit-CONFIG-files-to-use-the-map" aria-hidden="true"><span class="octicon octicon-link"></span></a>Edit CONFIG files to use the map<a class="anchor-link" href="#Edit-CONFIG-files-to-use-the-map"> </a>
 </h3>
+<h4 id="Base-Package">
+<a class="anchor" href="#Base-Package" aria-hidden="true"><span class="octicon octicon-link"></span></a>Base Package<a class="anchor-link" href="#Base-Package"> </a>
+</h4>
+<p>Make sure <strong>mushr/mushr_base/mushr_base/mushr_base/maps</strong> has your map and <strong>mushr_base/launch/includes/map_server.launch</strong> is set to your map</p>
+<h4 id="RHC-Package">
+<a class="anchor" href="#RHC-Package" aria-hidden="true"><span class="octicon octicon-link"></span></a>RHC Package<a class="anchor-link" href="#RHC-Package"> </a>
+</h4>
 <p>Navigate to MUSHR RHC maps directory and place your maps. Note that you need both the PGM and YAML file. 
 </p>
 <div class="flash">
@@ -287,6 +300,17 @@ cp <span class="s2">"pgm files from whichever directory you have them"</span> .
 nano map_server.launch
 </pre></div>
 <p><img src="https://abhisheksreesaila.github.io/blog/images/mushr-build-pics/map_server_launch_change.png" alt="" title="Map Server Launch File"></p>
+<h4 id="Set-the-static-map">
+<a class="anchor" href="#Set-the-static-map" aria-hidden="true"><span class="octicon octicon-link"></span></a>Set the static map<a class="anchor-link" href="#Set-the-static-map"> </a>
+</h4>
+<ul>
+<li>
+<p>Navigate to <strong>mushr_rhc_ros/launch/params/</strong></p>
+</li>
+<li>
+<p>Set the parameter <strong>static_map: "/static_map</strong>"</p>
+</li>
+</ul>
 
 </div>
 </div>
