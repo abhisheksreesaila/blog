@@ -123,6 +123,7 @@ window.onload = wrap_img;
 </ul>
 </li>
 <li class="toc-entry toc-h2"><a href="#Error-loading-docker-file">Error loading docker file </a></li>
+<li class="toc-entry toc-h2"><a href="#Install-ssh-on-ubuntu">Install ssh on ubuntu </a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h1"><a href="#References">References </a></li>
@@ -253,6 +254,19 @@ sudo chmod g+rwx "/home/$USER/.docker" -R</code></pre>
 <p>Remove all the containers</p>
 
 <pre><code>docker rm $(docker ps -a -q)</code></pre>
+<h2 id="Install-ssh-on-ubuntu">
+<a class="anchor" href="#Install-ssh-on-ubuntu" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install ssh on ubuntu<a class="anchor-link" href="#Install-ssh-on-ubuntu"> </a>
+</h2>
+<ul>
+<li>Install <code>sudo apt-get install openssh-server</code>
+</li>
+<li>Enable the ssh service by typing  <code>sudo systemctl enable ssh</code>
+</li>
+<li>Start the ssh service by typing  <code>sudo systemctl start ssh</code>
+</li>
+<li>Test it by login into the system using <code>ssh user@server-name</code>
+</li>
+</ul>
 <h1 id="References">
 <a class="anchor" href="#References" aria-hidden="true"><span class="octicon octicon-link"></span></a>References<a class="anchor-link" href="#References"> </a>
 </h1>
