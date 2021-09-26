@@ -26,8 +26,8 @@
         ,"post2": {
             "title": "CMake Basics",
             "content": "# boiler plate # cmake installed or version cmake_minimum_requred(VERSION 3.10) #project name project(&lt;&lt;your project name&gt;&gt;) # set the c++ standard in your project set(cmake_cxx_standard 11) set(cmake_cxx_standard_required True) # like print message(&quot;any message you want to print&quot;) #create executable add_executable(&lt;&lt;exec name&gt;&gt; program.cpp) /* - Create a library (SHARED or static). - The difference between them is that when its declared as STATIC, all the code is inserted into the main program, hence the main program is indepedent,SHARED = opposite, hence smaller in size */ add_library(&lt;&lt;lib exec name&gt;&gt; SHARED (or STATIC) /path/to/lib.cpp) /* - force the executable and library to build into a path you can look at it later(and not guess) - CMAKE_BINARY_PATH = default variable given by CMAKE - where ever you rum the CMAKE command. Usually in the BUILD folder */ - set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_PATH}/bin) - set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_PATH}/lib) # now that we build and forced them to go into a path, lets link both the MAIN &lt;-&gt; LIB target_link_libraries(&lt;&lt;main exec name&gt;&gt; &lt;&lt;library exec name&gt;&gt;) #in case you want to find popular package find_package(&lt;&lt;package name&gt;&gt;) if(&lt;&lt;package name&gt;&gt;_FOUND) message (&quot;Found!&quot;) include_directories(${&lt;&lt;packagen name&gt;&gt;_INCLUDE_DIRS}) target_link_libraries(&lt;&lt;main exec name&gt;&gt; ${&lt;&lt;package name&gt;&gt;_LIBRARIES}) else if (NOT &lt;&lt;package name&gt;&gt;_FOUND) message(&quot;not found!&quot;) endif() .",
-            "url": "https://ablearn.io/ros/2021/09/22/CMake-Basics.html",
-            "relUrl": "/ros/2021/09/22/CMake-Basics.html",
+            "url": "https://ablearn.io/others/2021/09/22/CMake-Basics.html",
+            "relUrl": "/others/2021/09/22/CMake-Basics.html",
             "date": " • Sep 22, 2021"
         }
         
@@ -37,8 +37,8 @@
         ,"post3": {
             "title": "ROS Basics",
             "content": "ROS Basics . Package . all the source files to execute code | src source code CMakeLists | . | . | information to execute the code. | add_executable - location of the source code | add_dependencies - hooks to the dependencies needed by your code | . catkin workspace . default workspace for all package in ROS | . | roscd . change directory to a location in a package | . | .",
-            "url": "https://ablearn.io/ros/2021/08/15/ROS-Basics.html",
-            "relUrl": "/ros/2021/08/15/ROS-Basics.html",
+            "url": "https://ablearn.io/robotics/2021/08/15/ROS-Basics.html",
+            "relUrl": "/robotics/2021/08/15/ROS-Basics.html",
             "date": " • Aug 15, 2021"
         }
         
