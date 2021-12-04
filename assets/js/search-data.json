@@ -4,9 +4,9 @@
         "post0": {
             "title": "Ancient Indian Computing",
             "content": "Binary Values . 1 and 0s . . Pneumonic . The binary notation is a mirror images of the modern binary notation . . Prashtra . Given a binary value, what is the next in sequence? Algorithm shown . . Sankya . Given a binary notation, what is it value? Pingala provides an efficient algorithm . . Nasta . Find the nth binary notation in the 4 digit binary system . . Uddishta . Given a number, find its metre (value) . . Lagagriya . Pyramid way to calculate combinations . . References . Pingala&#39;s Chandahsastra .",
-            "url": "https://ablearn.io/others/2021/12/01/Ancient-Indian-Computing.html",
-            "relUrl": "/others/2021/12/01/Ancient-Indian-Computing.html",
-            "date": " • Dec 1, 2021"
+            "url": "https://ablearn.io/others/2021/12/03/Ancient-Indian-Computing.html",
+            "relUrl": "/others/2021/12/03/Ancient-Indian-Computing.html",
+            "date": " • Dec 3, 2021"
         }
         
     
@@ -69,7 +69,7 @@
     
         ,"post6": {
             "title": "Reinforcement Learning",
-            "content": "Reinforcement Learning Basics . Unlike the unsuperivsed or supervised learning algorithms, it is used in dynamic env | There are 2 entities involved: . AGENT : Software involved in getting input and executing actions | Environment : House that Agent is in | . | Input . Take a set of observations (or states) | . | Process (or policy) . Figures out the right set of actions | If we used &quot;deep learning&quot; for this, then it becomes deep reinforcement learning | . | Output . Right set of commands to follow | . | Feedback It the output received positive feedback, great, keep in mind and repeat when possible | If not, change | . | . Things to keep in mind in RL . Value vs Reward . Value = long term benefits | Reward = Immediate feedback | If its too long term, env has changed, your algorithm or function is obsolete | too short term, its not a visionary and missed crucial opportunities | . Explore vs Exploit . Agent explores new env and learn ==&gt; updates policy | Agent exploits exising env, fine tunes and gets good at it! | Our problem : balance exploit vs explore | . Dynamic Programming . Divides a problem into multiple sub problems | Solves the simplest sub problem first and then does this recurisively until all of them are solved | . Bellman Error .",
+            "content": "Reinforcement Learning Basics . Unlike the unsuperivsed or supervised learning algorithms, it is used in dynamic env | There are 2 entities involved: . AGENT : Software involved in getting input and executing actions | Environment : House that Agent is in | . | Input . Take a set of observations (or states) | . | Process (or policy) . Figures out the right set of actions | If we used &quot;deep learning&quot; for this, then it becomes deep reinforcement learning | . | Output . Right set of commands to follow | . | Feedback It the output received positive feedback, great, keep in mind and repeat when possible | If not, change | . | . Things to keep in mind in RL . Value vs Reward . Value = long term benefits | Reward = Immediate feedback | If its too long term, env has changed, your algorithm or function is obsolete | too short term, its not a visionary and missed crucial opportunities | . Explore vs Exploit . Agent explores new env and learn ==&gt; updates policy | Agent exploits exising env, fine tunes and gets good at it! | Our problem : balance exploit vs explore | . Dynamic Programming . Divides a problem into multiple sub problems | Solves the simplest sub problem first and then does this recurisively until all of them are solved | . Squared Bellman Error . Q Learning . DDQN . Actor Critic Methods .",
             "url": "https://ablearn.io/machine%20learning/2021/08/02/RL.html",
             "relUrl": "/machine%20learning/2021/08/02/RL.html",
             "date": " • Aug 2, 2021"
