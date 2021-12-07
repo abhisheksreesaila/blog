@@ -2,21 +2,21 @@
   
     
         "post0": {
-            "title": "Optical Flow",
-            "content": "",
-            "url": "https://ablearn.io/computer%20vision/2021/12/05/Optical-Flow.html",
-            "relUrl": "/computer%20vision/2021/12/05/Optical-Flow.html",
-            "date": " • Dec 5, 2021"
+            "title": "Ancient Indian Computing",
+            "content": "Binary Values . 1 and 0s . . Pneumonic . The binary notation is a mirror images of the modern binary notation . . Prashtra . Given a binary value, what is the next in sequence? Algorithm shown . . Sankya . Given a binary notation, what is it value? Pingala provides an efficient algorithm . . Nasta . Find the nth binary notation in the 4 digit binary system . . Uddishta . Given a number, find its metre (value) . . Lagagriya . Pyramid way to calculate combinations . . References . Pingala&#39;s Chandahsastra .",
+            "url": "https://ablearn.io/others/2021/12/06/Ancient-Indian-Computing.html",
+            "relUrl": "/others/2021/12/06/Ancient-Indian-Computing.html",
+            "date": " • Dec 6, 2021"
         }
         
     
   
     
         ,"post1": {
-            "title": "Ancient Indian Computing",
-            "content": "Binary Values . 1 and 0s . . Pneumonic . The binary notation is a mirror images of the modern binary notation . . Prashtra . Given a binary value, what is the next in sequence? Algorithm shown . . Sankya . Given a binary notation, what is it value? Pingala provides an efficient algorithm . . Nasta . Find the nth binary notation in the 4 digit binary system . . Uddishta . Given a number, find its metre (value) . . Lagagriya . Pyramid way to calculate combinations . . References . Pingala&#39;s Chandahsastra .",
-            "url": "https://ablearn.io/others/2021/12/05/Ancient-Indian-Computing.html",
-            "relUrl": "/others/2021/12/05/Ancient-Indian-Computing.html",
+            "title": "Optical Flow",
+            "content": "",
+            "url": "https://ablearn.io/computer%20vision/2021/12/05/Optical-Flow.html",
+            "relUrl": "/computer%20vision/2021/12/05/Optical-Flow.html",
             "date": " • Dec 5, 2021"
         }
         
@@ -80,7 +80,7 @@
     
         ,"post7": {
             "title": "OpenCV Basics",
-            "content": "Image Reading . Read the image using opencv&#39;s imread . cv2.imread(&#39;path&#39;) .",
+            "content": "Image Reading . Read the image using opencv&#39;s imread . cv2.imread(&#39;path&#39;) . ##Image Reading ##Rotation ##Translation ##Resizing ##Drawing ##Arthimetic .",
             "url": "https://ablearn.io/others/2021/08/02/opencv.html",
             "relUrl": "/others/2021/08/02/opencv.html",
             "date": " • Aug 2, 2021"
