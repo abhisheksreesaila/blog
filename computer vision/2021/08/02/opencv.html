@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>OpenCV Basics | ABLearn</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="OpenCV Basics" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A list of useful opencv commands learnt from pyimage search university course" />
+<meta property="og:description" content="A list of useful opencv commands learnt from pyimage search university course" />
+<link rel="canonical" href="https://ablearn.io/computer%20vision/2021/08/02/opencv.html" />
+<meta property="og:url" content="https://ablearn.io/computer%20vision/2021/08/02/opencv.html" />
+<meta property="og:site_name" content="ABLearn" />
+<meta property="og:image" content="https://ablearn.io/images/post-thumbnails/opencv.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-02T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"A list of useful opencv commands learnt from pyimage search university course","mainEntityOfPage":{"@type":"WebPage","@id":"https://ablearn.io/computer%20vision/2021/08/02/opencv.html"},"@type":"BlogPosting","url":"https://ablearn.io/computer%20vision/2021/08/02/opencv.html","headline":"OpenCV Basics","dateModified":"2021-08-02T00:00:00-05:00","datePublished":"2021-08-02T00:00:00-05:00","image":"https://ablearn.io/images/post-thumbnails/opencv.png","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://ablearn.io/feed.xml" title="ABLearn" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>OpenCV Basics | ABLearn</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="OpenCV Basics" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A list of useful opencv commands learnt from pyimage search university course" />
+<meta property="og:description" content="A list of useful opencv commands learnt from pyimage search university course" />
+<link rel="canonical" href="https://ablearn.io/computer%20vision/2021/08/02/opencv.html" />
+<meta property="og:url" content="https://ablearn.io/computer%20vision/2021/08/02/opencv.html" />
+<meta property="og:site_name" content="ABLearn" />
+<meta property="og:image" content="https://ablearn.io/images/post-thumbnails/opencv.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-02T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"A list of useful opencv commands learnt from pyimage search university course","mainEntityOfPage":{"@type":"WebPage","@id":"https://ablearn.io/computer%20vision/2021/08/02/opencv.html"},"@type":"BlogPosting","url":"https://ablearn.io/computer%20vision/2021/08/02/opencv.html","headline":"OpenCV Basics","dateModified":"2021-08-02T00:00:00-05:00","datePublished":"2021-08-02T00:00:00-05:00","image":"https://ablearn.io/images/post-thumbnails/opencv.png","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://ablearn.io/feed.xml" title="ABLearn" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">ABLearn</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Categories</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">OpenCV Basics</h1><p class="page-description">A list of useful opencv commands learnt from pyimage search university course</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-08-02T00:00:00-05:00" itemprop="datePublished">
+        Aug 2, 2021
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      2 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#Computer Vision">Computer Vision</a>
+        
+      
+      </p>
+    
+
+    
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#Image-Reading">Image Reading </a></li>
+<li class="toc-entry toc-h1"><a href="#Image-Resize">Image Resize </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Translation">Translation </a></li>
+<li class="toc-entry toc-h2"><a href="#Rotation">Rotation </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#Drawing">Drawing </a></li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2021-08-02-opencv.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Upload a file to the google colab</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Image-Reading">
+<a class="anchor" href="#Image-Reading" aria-hidden="true"><span class="octicon octicon-link"></span></a>Image Reading<a class="anchor-link" href="#Image-Reading"> </a>
+</h1>
+<p>Read the image using opencv's imread</p>
+<div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">"image.jpg"</span><span class="p">)</span>
+
+<span class="n">h</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># first dim of the shape is HEIGHT</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># second dim of the shape is WEIGHT</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Image-Resize">
+<a class="anchor" href="#Image-Resize" aria-hidden="true"><span class="octicon octicon-link"></span></a>Image Resize<a class="anchor-link" href="#Image-Resize"> </a>
+</h1>
+<p>Here we are resizing the width to 50 pixels. We have to make sure the height is proportionally reduced.</p>
+<div class="highlight"><pre><span></span><span class="c1"># find out the ratio by dividing the "new" width / "old width"</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mf">50.0</span> <span class="o">/</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># multiple the ratio with the height</span>
+<span class="c1"># creating a dimension tuple; (weight, height)</span>
+<span class="n">dim</span> <span class="o">=</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">r</span><span class="p">))</span>
+
+<span class="c1"># resizing of the image</span>
+<span class="n">resized</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">INTER_AREA</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s2">"Resized (Width)"</span><span class="p">,</span> <span class="n">resized</span><span class="p">)</span>
+</pre></div>
+<p><em>Image interpolation occurs when you resize or distort your image from one pixel grid to another. Zooming refers to increase the quantity of pixels, so that when you zoom an image, you will see more detail. Interpolation works by using known data to estimate values at unknown points</em></p>
+<p>There are many  interpolation methods in opencv. Common ones include</p>
+<ul>
+<li>cv2.INTER_NEAREST</li>
+<li>cv2.INTER_LINEAR</li>
+<li>cv2.INTER_AREA</li>
+<li>cv2.INTER_CUBIC</li>
+<li>cv2.INTER_LANCZOS4</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Translation">
+<a class="anchor" href="#Translation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Translation<a class="anchor-link" href="#Translation"> </a>
+</h2>
+<p>Translation means "geometrical translation" and achieved through providing a special matrix called the Translation Matrix to the opencv translation function.</p>
+<ul>
+<li>The transformation matrix  <strong>[[ 1, 0, X] [0, 1, Y]]</strong><ul>
+<li>#X ==&gt; left and right**</li>
+<li>#Y ==&gt; up and down**</li>
+</ul>
+</li>
+</ul>
+<p>Use the positive values for X and Y for "shifting right" and "shifting down" 
+Use the negative values for X and Y for "shifting left" and "shifting up"</p>
+<div class="highlight"><pre><span></span><span class="c1"># Shift the image 25 pixels to the right and 50 pixels down</span>
+<span class="n">Mn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">25</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">50</span><span class="p">]])</span>
+
+<span class="c1"># maintains colinearity - maintains parallelism, ratio is maintained</span>
+<span class="n">shifted_ing</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">warpAffine</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">Mn</span><span class="p">,</span> <span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+<span class="c1">#show the image</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">shifted_ing</span><span class="p">)</span>
+</pre></div>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/opencv/translation1.png" alt="" title="Move right and down"></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">##Arthimetic</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Rotation">
+<a class="anchor" href="#Rotation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rotation<a class="anchor-link" href="#Rotation"> </a>
+</h2>
+<div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="s2">"image"</span><span class="p">])</span>
+
+<span class="c1"># get a height and width of the image</span>
+<span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span> <span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="c1"># get the rotation which is usually the center of the image</span>
+<span class="n">rotation_point</span>  <span class="o">=</span> <span class="p">(</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">w</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># get the rotation matrix</span>
+
+<span class="n">M</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">getRotationMatrix2D</span><span class="p">(</span><span class="n">rotation_point</span><span class="p">,</span><span class="mi">45</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#center, angle (# clock wise = negative;</span>
+<span class="c1"># counter clock wise = positive) , scaling</span>
+</pre></div>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/opencv/rotate1.png" alt="" title="Rotate 45 degrees"></p>
+<p>If you do not want the side to cropped off we have to update the rotation matrix values. Refer the link <a href="https://www.geeksforgeeks.org/rotate-image-without-cutting-off-sides-using-python-opencv">here</a>
+</p>
+<div class="flash">
+    <svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
+    <strong>Note: </strong><em>imutils</em> is a thin wrapper around opencv function and can do the "rotate bound" in 1 line rather than computing the rotation matrices ourselves using the sin/cosine values
+</div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Drawing">
+<a class="anchor" href="#Drawing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Drawing<a class="anchor-link" href="#Drawing"> </a>
+</h1>
+<div class="highlight"><pre><span></span><span class="n">canvas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"uint8"</span><span class="p">)</span>  <span class="c1"># create a blank image</span>
+<span class="n">green</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># set the color (B,G,R)</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">line</span> <span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">300</span><span class="p">,</span><span class="mi">300</span><span class="p">),</span> <span class="n">green</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># draw a green line from 0,0 to 300,300 with thickness = 2px wide</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">canvas</span><span class="p">)</span>
+<span class="c1">#################################</span>
+
+<span class="n">red</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">line</span> <span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">300</span><span class="p">),</span> <span class="n">red</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="c1"># draw a red line from 0,0 to 300,300 with thickness = 2px wide</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">canvas</span><span class="p">)</span>
+
+<span class="c1">#################################</span>
+
+<span class="n">blue</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span>  <span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">100</span><span class="p">),</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">200</span><span class="p">),</span> <span class="n">blue</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># draw a rectange ; provide the 2 corners (top right, left bottom) of the rectangle</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">canvas</span><span class="p">)</span>
+
+<span class="c1">#################################</span>
+<span class="n">pink</span> <span class="o">=</span> <span class="p">[</span><span class="mi">255</span><span class="p">,</span> <span class="mi">192</span><span class="p">,</span> <span class="mi">203</span><span class="p">]</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">canvas</span><span class="p">,(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span> <span class="mi">25</span><span class="p">,</span> <span class="n">pink</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># draw a pink circle with a center at (150, 150) and radius of 25px wide </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">canvas</span><span class="p">)</span>
+<span class="c1">#################################</span>
+
+<span class="n">random_color</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,))</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>  <span class="c1"># random color</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">line</span> <span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span> <span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span> <span class="n">random_color</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># draw a line</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">canvas</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="abhisheksreesaila/blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/computer%20vision/2021/08/02/opencv.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Always Learning</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/abhisheksreesaila" title="abhisheksreesaila"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/asreesaila" title="asreesaila"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
