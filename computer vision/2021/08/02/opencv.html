@@ -284,6 +284,7 @@ Use the negative values for X and Y for "shifting left" and "shifting up"</p>
 <span class="n">cv2</span><span class="o">.</span><span class="n">line</span> <span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span> <span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span> <span class="n">random_color</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># draw a line</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">canvas</span><span class="p">)</span>
 </pre></div>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/opencv/drawing1.png" alt="" title="opencv drawing"></p>
 
 </div>
 </div>
@@ -303,6 +304,22 @@ Use the negative values for X and Y for "shifting left" and "shifting up"</p>
 <h1 id="Image-Arthimetic">
 <a class="anchor" href="#Image-Arthimetic" aria-hidden="true"><span class="octicon octicon-link"></span></a>Image Arthimetic<a class="anchor-link" href="#Image-Arthimetic"> </a>
 </h1>
+<p>images in opencv are opencv ar numpy arrays from values 0-255. If you add and go over 255, it will max out to 255 and vice versa at 0</p>
+<div class="highlight"><pre><span></span><span class="n">added</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">([</span><span class="mi">200</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">([</span><span class="mi">100</span><span class="p">]))</span>
+<span class="n">subtracted</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">([</span><span class="mi">50</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">([</span><span class="mi">100</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"max of 255: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">added</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"min of 0: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">subtracted</span><span class="p">))</span>
+</pre></div>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/opencv/arthimetic1.png" alt="" title="opencv arthimetic"></p>
+<p>Suppose you use numpy operations, it does not max out rather performs a "modulo" operation i.e
+If you exceed 255, then its goes around and starts from 0 (like a clock starting from 1 after 12).  Similarly if you go below 0, then it starts going to values less than or equal to 255.</p>
+<div class="highlight"><pre><span></span><span class="n">added</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">([</span><span class="mi">200</span><span class="p">])</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">([</span><span class="mi">100</span><span class="p">])</span>
+<span class="n">subtracted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">([</span><span class="mi">50</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">([</span><span class="mi">100</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"wrap around: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">added</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"wrap around: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">subtracted</span><span class="p">))</span>
+</pre></div>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/opencv/arthimetic2.png" alt="" title="opencv arthimetic"></p>
+
 </div>
 </div>
 </div>
