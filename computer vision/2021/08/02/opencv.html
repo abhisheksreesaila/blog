@@ -93,7 +93,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      3 min read
+      4 min read
     
 </span></p>
 
@@ -112,14 +112,14 @@ window.onload = wrap_img;
   <div class="post-content e-content" itemprop="articleBody">
     <ul class="section-nav">
 <li class="toc-entry toc-h1"><a href="#Image-Reading">Image Reading </a></li>
-<li class="toc-entry toc-h1"><a href="#Image-Resize">Image Resize </a>
+<li class="toc-entry toc-h1"><a href="#Image-Resize">Image Resize </a></li>
+<li class="toc-entry toc-h1"><a href="#ColorSpaces">ColorSpaces </a>
 <ul>
 <li class="toc-entry toc-h2"><a href="#Translation">Translation </a></li>
 <li class="toc-entry toc-h2"><a href="#Rotation">Rotation </a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h1"><a href="#Drawing">Drawing </a></li>
-<li class="toc-entry toc-h1"><a href="#ColorSpaces">ColorSpaces </a></li>
 <li class="toc-entry toc-h1"><a href="#Image-Arthimetic">Image Arthimetic </a></li>
 </ul><!--
 #################################################
@@ -188,6 +188,23 @@ window.onload = wrap_img;
 <li>cv2.INTER_CUBIC</li>
 <li>cv2.INTER_LANCZOS4</li>
 </ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="ColorSpaces">
+<a class="anchor" href="#ColorSpaces" aria-hidden="true"><span class="octicon octicon-link"></span></a>ColorSpaces<a class="anchor-link" href="#ColorSpaces"> </a>
+</h1>
+<p>Convert the image from original to the HSV color space.</p>
+<div class="highlight"><pre><span></span><span class="n">hsv</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2HSV</span><span class="p">)</span>
+<span class="n">plt_imshow</span><span class="p">(</span><span class="s2">"HSV"</span><span class="p">,</span> <span class="n">hsv</span><span class="p">)</span>
+</pre></div>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/opencv/cs1.png" alt="" title="original"></p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/opencv/cs2.png" alt="" title="hsv space"></p>
+<p>Here is a <a href="https://docs.opencv.org/3.4/d8/d01/group__imgproc__color__conversions.html">list</a> of all opencv color spaces to use</p>
 
 </div>
 </div>
@@ -292,15 +309,6 @@ Use the negative values for X and Y for "shifting left" and "shifting up"</p>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="ColorSpaces">
-<a class="anchor" href="#ColorSpaces" aria-hidden="true"><span class="octicon octicon-link"></span></a>ColorSpaces<a class="anchor-link" href="#ColorSpaces"> </a>
-</h1>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Image-Arthimetic">
 <a class="anchor" href="#Image-Arthimetic" aria-hidden="true"><span class="octicon octicon-link"></span></a>Image Arthimetic<a class="anchor-link" href="#Image-Arthimetic"> </a>
 </h1>
@@ -319,6 +327,35 @@ If you exceed 255, then its goes around and starts from 0 (like a clock starting
 <span class="nb">print</span><span class="p">(</span><span class="s2">"wrap around: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">subtracted</span><span class="p">))</span>
 </pre></div>
 <p><img src="https://abhisheksreesaila.github.io/blog/images/opencv/arthimetic2.png" alt="" title="opencv arthimetic"></p>
+<p>We can use the arthimetic to darken or lighten the image.</p>
+<p>To <strong>lighten</strong> we have to</p>
+<ul>
+<li>Create a matrix with the exact same dim as the input image filled with ones</li>
+<li>Multiply by some arbritary high number (say 100)</li>
+<li>ADD the input image and matrix</li>
+</ul>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/opencv/arthimetic3.png" alt="" title="opencv arthimetic"></p>
+<div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"uint8"</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">added</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
+<span class="n">plt_imshow</span><span class="p">(</span><span class="s2">"Lighter"</span><span class="p">,</span> <span class="n">added</span><span class="p">)</span>
+</pre></div>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/opencv/arthimetic4.png" alt="" title="opencv arthimetic"></p>
+<p>To <strong>darken</strong> we have to</p>
+<ul>
+<li>Create a matrix with the exact same dim as the input image filled with ones</li>
+<li>SUBTRACT the input image and matrix</li>
+</ul>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/opencv/arthimetic5.png" alt="" title="opencv arthimetic"></p>
+<div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"uint8"</span><span class="p">)</span> <span class="o">*</span> <span class="mi">50</span>
+<span class="n">subtracted</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
+<span class="n">plt_imshow</span><span class="p">(</span><span class="s2">"Darker"</span><span class="p">,</span> <span class="n">subtracted</span><span class="p">)</span>
+</pre></div>
+<p></p>
+<div class="flash flash-warn">
+    <svg class="octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap" viewbox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M10 7H6l3-7-9 9h4l-3 7 9-9z"></path></svg>
+    <strong>Important: </strong>The data type (dtype) has to be "uint8" or else these opencv operations of add or subtract does not work as intended.
+</div>
+<img src="https://abhisheksreesaila.github.io/blog/images/opencv/arthimetic6.png" alt="" title="opencv arthimetic">
 
 </div>
 </div>
