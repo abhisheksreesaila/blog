@@ -109,7 +109,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      6 min read
+      8 min read
     
 </span></p>
 
@@ -133,6 +133,7 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h1"><a href="#Goal-of-the-any-Reinforcement-Learning">Goal of the any Reinforcement Learning </a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#State-Value-and-Action-Value-Function">State Value and Action Value Function </a></li>
+<li class="toc-entry toc-h3"><a href="#Solving-Bellman-Equation">Solving Bellman Equation </a></li>
 <li class="toc-entry toc-h3"><a href="#Squared-Bellman-Error">Squared Bellman Error </a></li>
 <li class="toc-entry toc-h3"><a href="#model-free-vs-model-based">model free vs model based </a></li>
 <li class="toc-entry toc-h3"><a href="#temporal-difference">temporal difference </a></li>
@@ -294,7 +295,7 @@ window.onload = wrap_img;
 </ul>
 </li>
 <li>
-<p><strong>What is the value of an agent being in state S by choosing action A?</strong></p>
+<p><strong>What is the value of an agent being in state S by choosing action A? What is this action worth?</strong></p>
 <ul>
 <li>This is exact same question as above, but a bit more granular.  We know that from a given state you can pick many actions (a1, a2, a3) and so on.  <ul>
 <li>What is the value of a state if you pick action a1 - then follow policy  $ \pi $</li>
@@ -325,9 +326,41 @@ window.onload = wrap_img;
 <li>Optimal value of state value V = For all possible actions take the MAX of (probability of executing an action A in the first place * Q value)</li>
 </ul>
 </blockquote>
-<p>$V_\pi(s)$ = $ \sum \limits_{a\in A} $ P($s^{1}|s,a$) *  Q $_\pi(s,a)$</p>
+<p>$V_\pi(s)^{*}$ = argmax $ \sum \limits_{a\in A} $ P($s^{1}|s,a$) *  Q $_\pi(s,a)$</p>
+<p>$V^{*}_\pi(s)$ = argmax $ \sum \limits_{a\in A} $ P($s^{1}|s,a$) <em> [ $ R(s,a,s^1)  + \gamma   V^{</em>}_\pi(s^1)$]</p>
 </li>
 </ul>
+<p>This is the bellman equation and forms a corner stone in reinforcement learning.</p>
+<h3 id="Solving-Bellman-Equation">
+<a class="anchor" href="#Solving-Bellman-Equation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Solving Bellman Equation<a class="anchor-link" href="#Solving-Bellman-Equation"> </a>
+</h3>
+<p>Lets recap,</p>
+<ul>
+<li>By using the concept of DISOUNTED REWARDS, we arrived at a equation for calculate expected rewards</li>
+<li>
+<p>Using the above concept, we were able to quantify 2 things in our processess.</p>
+<ul>
+<li>State value (or "V" Value)  - value of a state given a policy. From a state, you have multiple actions to follow. </li>
+<li>Action value(or "Q" Value)  - value of a state after following a particular action, then a given policy. This is a more specific version of the "state value".</li>
+</ul>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/rl/qvalues.png" alt="" title="State and Action Values">
+If i asked to pick the best action, it means i am asking to choose an action with the best Q value, which inturns leads to the best "State" value. In other words, you put your best foot forward, what else did you expect :) ?</p>
+</li>
+</ul>
+<p>Note that the bellman's equation is recursive, meaning V(s) is dependent of v(s') and so on. Lets simplify and understand the intuition first.</p>
+<p>v(s) = something + v(s')</p>
+<p>v(s') = something + v(s")</p>
+<p>v(s") = something + v(s"')</p>
+<p>Assume v(s"') is the final state, then for</p>
+<p>v(s"') = we get the value since its a terminal state</p>
+<p>now go back and substitute, to get  v(s"'), then substitute again to get v(s') and finally we get v(s)</p>
+<p>This concept of solving subproblems which ultimately leads to the final answer being calculated is called dynamic programming.</p>
+<p>So we can modify the equation ever-so-slightly to show the updates.</p>
+<p>$V_{i+1}(s)$ = argmax $ \sum \limits_{a\in A} $ P($s^{1}|s,a$) * [ $ R(s,a,s^1)  + \gamma   V_{i}(s^1)$]</p>
+<p>In our example,  v(s"') = iteration 1, v(s") = iteration 2 etc.</p>
+<p>So, given the TRANSITION PROBABILITIES and REWARD FUNCTIONS, we can easily apply the dynamic programming to the bellman equation and solve it!!  Take an example here.</p>
+<p>You are starting from random values, and then fixing them to show correct ones. Then finally from start to finish pick the box with the least cost.  This is called "value iteration".</p>
+<p>There is another variant called "Policy iteration" which updates the policy. It will explained in another blog post.</p>
 <h3 id="Squared-Bellman-Error">
 <a class="anchor" href="#Squared-Bellman-Error" aria-hidden="true"><span class="octicon octicon-link"></span></a>Squared Bellman Error<a class="anchor-link" href="#Squared-Bellman-Error"> </a>
 </h3>
@@ -337,12 +370,6 @@ window.onload = wrap_img;
 <h3 id="temporal-difference">
 <a class="anchor" href="#temporal-difference" aria-hidden="true"><span class="octicon octicon-link"></span></a>temporal difference<a class="anchor-link" href="#temporal-difference"> </a>
 </h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Glossary">
 <a class="anchor" href="#Glossary" aria-hidden="true"><span class="octicon octicon-link"></span></a>Glossary<a class="anchor-link" href="#Glossary"> </a>
 </h2>
@@ -378,11 +405,19 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="References">
 <a class="anchor" href="#References" aria-hidden="true"><span class="octicon octicon-link"></span></a>References<a class="anchor-link" href="#References"> </a>
 </h1>
 <p><a href="https://www.youtube.com/watch?v=wN3rxIKmMgE">RL Basics</a></p>
 <p><a href="https://www.youtube.com/watch?v=meywaLPitZ4&amp;list=PLYgyoWurxA_8ePNUuTLDtMvzyf-YW7im2&amp;index=3">RL Solving MDP and Reward Functions</a></p>
+<p><a href="https://www.youtube.com/watch?v=l87rgLg90HI&amp;list=PLYgyoWurxA_8ePNUuTLDtMvzyf-YW7im2&amp;index=5">RL-Solving MDP</a></p>
 <p><a href="https://www.youtube.com/watch?v=GJEL-QkT2yk&amp;list=PLYgyoWurxA_8ePNUuTLDtMvzyf-YW7im2&amp;index=2">Markov Property</a></p>
 
 </div>
