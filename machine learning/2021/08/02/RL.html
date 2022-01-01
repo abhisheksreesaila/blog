@@ -109,7 +109,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      8 min read
+      12 min read
     
 </span></p>
 
@@ -134,9 +134,8 @@ window.onload = wrap_img;
 <ul>
 <li class="toc-entry toc-h3"><a href="#State-Value-and-Action-Value-Function">State Value and Action Value Function </a></li>
 <li class="toc-entry toc-h3"><a href="#Solving-Bellman-Equation">Solving Bellman Equation </a></li>
-<li class="toc-entry toc-h3"><a href="#Squared-Bellman-Error">Squared Bellman Error </a></li>
+<li class="toc-entry toc-h3"><a href="#Temporal-Differencing">Temporal Differencing </a></li>
 <li class="toc-entry toc-h3"><a href="#model-free-vs-model-based">model free vs model based </a></li>
-<li class="toc-entry toc-h3"><a href="#temporal-difference">temporal difference </a></li>
 <li class="toc-entry toc-h2"><a href="#Glossary">Glossary </a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#Value-vs-Reward">Value vs Reward </a></li>
@@ -317,20 +316,16 @@ window.onload = wrap_img;
 <p>the policy after that has to be optimal!</p>
 <p>We do the above things, then we get $Q^{*}$  (optimal Q value)</p>
 <p>Combining these 2 above concepts,</p>
-<ul>
-<li>first in plain english</li>
-</ul>
-<blockquote>
-<ul>
-<li>Value of a state V = probability of executing an action A in the first place * Then the Q Value</li>
-<li>Optimal value of state value V = For all possible actions take the MAX of (probability of executing an action A in the first place * Q value)</li>
-</ul>
-</blockquote>
-<p>$V_\pi(s)^{*}$ = argmax $ \sum \limits_{a\in A} $ P($s^{1}|s,a$) *  Q $_\pi(s,a)$</p>
-<p>$V^{*}_\pi(s)$ = argmax $ \sum \limits_{a\in A} $ P($s^{1}|s,a$) <em> [ $ R(s,a,s^1)  + \gamma   V^{</em>}_\pi(s^1)$]</p>
 </li>
 </ul>
-<p>This is the bellman equation and forms a corner stone in reinforcement learning.</p>
+<p>Q value = probability of executing an action A in the first place * [Current reward + (discounted future rewards)]</p>
+<p>$Q^{*}(s,a)$ = argmax $ \sum \limits_{a\in A} $ P($s^{1}|s,a$) <em> [ $ R(s,a,s^1)  + \gamma   V^{</em>}(s^1)$]  ........(1)</p>
+<p>Optimal value of state value V = For all possible actions take the MAX of (probability of executing an action A in the first place * Q value)</p>
+<p>$V^{*}(s) $ = argmax $ \sum \limits_{a\in A}$ $Q^{*}(s,a)$   ........(2)</p>
+<p>Substitute (2) in (1), we get bellman equation in terms of Q values</p>
+<p>$Q^{*}(s,a)$ =  $ \sum \limits_{a\in A} $ P($s^{1}|s,a) $ <em> [$ R(s,a,s^1)  + \gamma  max Q^{</em>}(s',a)$]</p>
+<p>This is the BELLMAN EQUATION for the Q values and forms a corner stone in RL</p>
+<p>You can substitute the other way and get it in terms of "V" values. In this and future blog posts, I intend to explore Q learning and its variants, so i am comfortable looking at it from the "Q Value" perspective.</p>
 <h3 id="Solving-Bellman-Equation">
 <a class="anchor" href="#Solving-Bellman-Equation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Solving Bellman Equation<a class="anchor-link" href="#Solving-Bellman-Equation"> </a>
 </h3>
@@ -347,28 +342,45 @@ window.onload = wrap_img;
 If i asked to pick the best action, it means i am asking to choose an action with the best Q value, which inturns leads to the best "State" value. In other words, you put your best foot forward, what else did you expect :) ?</p>
 </li>
 </ul>
-<p>Note that the bellman's equation is recursive, meaning V(s) is dependent of v(s') and so on. Lets simplify and understand the intuition first.</p>
-<p>v(s) = something + v(s')</p>
-<p>v(s') = something + v(s")</p>
-<p>v(s") = something + v(s"')</p>
-<p>Assume v(s"') is the final state, then for</p>
-<p>v(s"') = we get the value since its a terminal state</p>
-<p>now go back and substitute, to get  v(s"'), then substitute again to get v(s') and finally we get v(s)</p>
+<p>Note that the bellman's equation is recursive, meaning Q(s,a) is dependent of Q(s', a) and so on. Lets simplify and understand the intuition first.</p>
+<p>Q(s, a) = something + Q(s', a)</p>
+<p>Q(s', a) = something + Q(s", a)</p>
+<p>Q(s", a) = something + Q(s"', a)</p>
+<p>Assume Q(s"', a) is the final state, then for</p>
+<p>Q(s"', a) = we get the value since its a terminal state</p>
+<p>now go back and substitute, to get  Q(s"', a), then substitute again to get Q(s', a) and finally we get Q(s, a)</p>
 <p>This concept of solving subproblems which ultimately leads to the final answer being calculated is called dynamic programming.</p>
-<p>So we can modify the equation ever-so-slightly to show the updates.</p>
-<p>$V_{i+1}(s)$ = argmax $ \sum \limits_{a\in A} $ P($s^{1}|s,a$) * [ $ R(s,a,s^1)  + \gamma   V_{i}(s^1)$]</p>
+<p>So we can modify the equation ever-so-slightly to show the updates. (Bellman equation writtten to show iterative updates)</p>
+<p>$Q_{i+1}(s,a)$ =  $ \sum \limits_{a\in A} $ P($s^{1}|s,a) $ * [$ R(s,a,s^1)  + \gamma  max Q_{i}(s',a)$]</p>
 <p>In our example,  v(s"') = iteration 1, v(s") = iteration 2 etc.</p>
 <p>So, given the TRANSITION PROBABILITIES and REWARD FUNCTIONS, we can easily apply the dynamic programming to the bellman equation and solve it!!  Take an example here.</p>
 <p>You are starting from random values, and then fixing them to show correct ones. Then finally from start to finish pick the box with the least cost.  This is called "value iteration".</p>
-<p>There is another variant called "Policy iteration" which updates the policy. It will explained in another blog post.</p>
-<h3 id="Squared-Bellman-Error">
-<a class="anchor" href="#Squared-Bellman-Error" aria-hidden="true"><span class="octicon octicon-link"></span></a>Squared Bellman Error<a class="anchor-link" href="#Squared-Bellman-Error"> </a>
+<p>There are couple of other variants called "Policy iteration" and "Hybrid Valuation" which updates the policy. It will explained in another blog post.</p>
+<hr>
+<h3 id="Temporal-Differencing">
+<a class="anchor" href="#Temporal-Differencing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Temporal Differencing<a class="anchor-link" href="#Temporal-Differencing"> </a>
 </h3>
+<p>In the world of reinforcement learning, we are not given "transition probabilities" and Rewards functions to different states are not known to begin with. The agent interacts multiple times (called episodes) and only after that "figures" out. how do we update the bellman equation in each iteration if the values are unknown? We update the equation for each interaction with the environment. Initially, we have zero knowledge, so we will pick next states randomly. Our sample size is just 1.  Just with 1 interaction its impossible to say the random state we jumped to is optimal or not. So we adjust the equation by adding a "learning rate" parameter that is usually very low (eg. 0.001). Next we repeat the steps, each time our sample is increasing, and obviosuly our confidence in knowing the entire env is also increasing. Only after a certain # of episodes we establish a full knowledge of the env.</p>
+<blockquote>
+<p>Every time you take an action. A from state S, you get a sample of <strong>$P(s^{1}|s,a$)</strong>  and a corresponding <strong>$R(s,a,s^1)$</strong></p>
+</blockquote>
+<p>Also, it wont be broken into 2 parts, rather it will fused into 1 value. <em>say sample 1</em> at the end, you will get S = {sample1, sample2, sample3...sampleEnd} Basically, its a probability distribution given by</p>
+<p>sample = $R(s,a,s^1)$  +  $\gamma Q_{i}(s^1)$</p>
+<p>TD update equation is written as</p>
+<blockquote>
+<p>Q(s,a) =  Q(s,a) + $ \alpha $ [$ R(s,a,s^1)  + \gamma  max_{a'} Q(s',a')$ - Q(s,a)]</p>
+</blockquote>
+<p>One can read this as 
+Qvalue = Current Qvalue +  learning rate (expected future reward - current Q value)
+Qvalue = Current Qvalue +  learning rate (BELLMAN ERROR)</p>
+<p>You are learning the Q values as you go, and hence the equation represents a algorithm called "Q learning"</p>
+<p>The intuition behind this is :i dont trust the sample too much but just a little. (like a good stranger) I started with a random value, but i am not sure whether i "over quoted" the Q value or "under quoted". Suppose the ideal Q value is 50. But the random value you started is 80. After getting the first sample, Qvalue = Qvalue +  learning rate (BELLMAN ERROR) where BELLMAN ERROR is negative, its tell you reduce 80. but not too much just by a small factor (lets say 0.001). Then try to get a sample from env, again try the same transition from s -&gt; s', you get negative again. you reduce 80 again. and so on... The point here is that rate of change of Q value tell you which direction to move (postive or negative in our example), learning rate tell you the TRUST factor based on which you keep updating Q values.&gt; Formally stated, treat a single sample as a representative of the distribution and apply an "incremental" update to reduce the "bellman error"</p>
+<blockquote>
+<p>Note:For those people familiar with deep learning, this is similar to the "stochastic gradient learning" where you updates for each input, and since you are looking at it piece by piece, you want to adjust the "update" to the model by a learning rate parameter. 
+From here onwards, all we will focus how to learn Q accurately. If there is magic wand, and we could know the optimal Q values between states, thats your algorithm 1. Suppose someone hands over a table, thats an option too! Life is not easy and so we will end up starting randomly and use the above equation</p>
+</blockquote>
 <h3 id="model-free-vs-model-based">
 <a class="anchor" href="#model-free-vs-model-based" aria-hidden="true"><span class="octicon octicon-link"></span></a>model free vs model based<a class="anchor-link" href="#model-free-vs-model-based"> </a>
-</h3>
-<h3 id="temporal-difference">
-<a class="anchor" href="#temporal-difference" aria-hidden="true"><span class="octicon octicon-link"></span></a>temporal difference<a class="anchor-link" href="#temporal-difference"> </a>
 </h3>
 <h2 id="Glossary">
 <a class="anchor" href="#Glossary" aria-hidden="true"><span class="octicon octicon-link"></span></a>Glossary<a class="anchor-link" href="#Glossary"> </a>
@@ -402,13 +414,23 @@ If i asked to pick the best action, it means i am asking to choose an action wit
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
 <div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#  $V_{i+1}(s)$ = argmax $ \sum \limits_{a\in A} $ P($s^{1}|s,a$) * [ $ R(s,a,s^1)  + \gamma   V_{i}(s^1)$] </span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 </div>
-</div>
-</div>
+    
+
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
