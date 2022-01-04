@@ -157,9 +157,13 @@ window.onload = wrap_img;
 <h1 id="Q-Learning">
 <a class="anchor" href="#Q-Learning" aria-hidden="true"><span class="octicon octicon-link"></span></a>Q Learning<a class="anchor-link" href="#Q-Learning"> </a>
 </h1>
-<p>The purpose of this blog post is to learn Q learning using code</p>
-<p>We will use openAI gym to apply Q learning for a FrozenLakeNoSlip environment</p>
-<p>I will explain the important parts of the code but the full code can be downloaded <a href="https://colab.research.google.com/drive/1PbJnJonr8VWaOMnbosgxHbDYX4kwntMp?usp=sharing">here</a></p>
+<p>The purpose of this blog post is to learn Q learning using code using the theory from the last blog post.</p>
+<ul>
+<li>You can find the previous one here.  <a href="https://ablearn.io/machine%20learning/2021/08/02/RL.html">Reinforcement Learning - Basics</a>
+</li>
+</ul>
+<p>We will use openAI gym to apply Q learning for a FrozenLakeNoSlip environment I will explain the important parts of the code but the full code can be downloaded <a href="https://colab.research.google.com/drive/1PbJnJonr8VWaOMnbosgxHbDYX4kwntMp?usp=sharing">here</a></p>
+<hr>
 <p><em>Initialize the OPENAI GYM. Print the action and states (observation space) just to get an idea as to how many actions and states we are dealing with</em></p>
 <div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
     <span class="n">register</span><span class="p">(</span>
@@ -189,6 +193,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<hr>
 <h2 id="Initialize">
 <a class="anchor" href="#Initialize" aria-hidden="true"><span class="octicon octicon-link"></span></a>Initialize<a class="anchor-link" href="#Initialize"> </a>
 </h2>
@@ -213,6 +218,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<hr>
 <h2 id="Choosing-Action">
 <a class="anchor" href="#Choosing-Action" aria-hidden="true"><span class="octicon octicon-link"></span></a>Choosing Action<a class="anchor-link" href="#Choosing-Action"> </a>
 </h2>
@@ -236,6 +242,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<hr>
 <h2 id="TR-Update">
 <a class="anchor" href="#TR-Update" aria-hidden="true"><span class="octicon octicon-link"></span></a>TR Update<a class="anchor-link" href="#TR-Update"> </a>
 </h2>
@@ -269,6 +276,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<hr>
 <h2 id="Bringing-it-all-together">
 <a class="anchor" href="#Bringing-it-all-together" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bringing it all together<a class="anchor-link" href="#Bringing-it-all-together"> </a>
 </h2>
