@@ -109,7 +109,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      1 min read
+      2 min read
     
 </span></p>
 
@@ -131,7 +131,7 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h1"><a href="#What-is-a-feature-in-an-image?">What is a feature in an image? </a>
 <ul>
 <li class="toc-entry toc-h2"><a href="#Why-do-we-need-features?">Why do we need features? </a></li>
-<li class="toc-entry toc-h2"><a href="#What-is-a-feature-descriptors?">What is a feature descriptors? </a></li>
+<li class="toc-entry toc-h2"><a href="#What-are-feature-descriptors?">What are feature descriptors? </a></li>
 <li class="toc-entry toc-h2"><a href="#Use-OpenCV-to-detect-features-and-feature-description">Use OpenCV to detect features and feature description </a></li>
 </ul>
 </li>
@@ -175,10 +175,11 @@ window.onload = wrap_img;
 <a class="anchor" href="#Why-do-we-need-features?" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why do we need features?<a class="anchor-link" href="#Why-do-we-need-features?"> </a>
 </h2>
 <p>NEarly all computer vision algorithms in any domain dont just consume the image as a whole and produce an output. They are always preceeded by "feature extraction" and only then peforms their calculation.  (In the world of machine learning, CNN layers are the feature extractors)</p>
-<h2 id="What-is-a-feature-descriptors?">
-<a class="anchor" href="#What-is-a-feature-descriptors?" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is a feature descriptors?<a class="anchor-link" href="#What-is-a-feature-descriptors?"> </a>
+<h2 id="What-are-feature-descriptors?">
+<a class="anchor" href="#What-are-feature-descriptors?" aria-hidden="true"><span class="octicon octicon-link"></span></a>What are feature descriptors?<a class="anchor-link" href="#What-are-feature-descriptors?"> </a>
 </h2>
-<p>After</p>
+<p>features are just points on the image (referred to as "keypoints") We need a "describe" them to make it more useful. 
+featrure descriptors - as the name suggest, describe the surroudings of a "keypoint" by capturing few vital ingredients around the keypoint. Think of it as vector (a collection) used to describe.  A good analogy would be a persons face.  "eye", "color of the skin", "hair" etc. are features.  color of the eye is "brown", color is "black/brown/white", "Grey/Black/Blonde" hair color are feature descriptors</p>
 <h2 id="Use-OpenCV-to-detect-features-and-feature-description">
 <a class="anchor" href="#Use-OpenCV-to-detect-features-and-feature-description" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use OpenCV to detect features and feature description<a class="anchor-link" href="#Use-OpenCV-to-detect-features-and-feature-description"> </a>
 </h2>
