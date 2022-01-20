@@ -34,6 +34,9 @@ featrure descriptors - as the name suggest, describe the surroudings of a "keypo
 <hr />
 <h2 id="What-is-feature-matching?">What is feature matching?<a class="anchor-link" href="#What-is-feature-matching?"> </a></h2><p>Given 2 images, we want to compare the features between each other. If they are similar images, then we will end up high degree of "matches" else we wont. its simple.</p>
 <h3 id="Ok-why-is-this-useful?">Ok why is this useful?<a class="anchor-link" href="#Ok-why-is-this-useful?"> </a></h3><p>By tracking the features between 2 images, we can begin to understand if and how the objects in the images are "moving". By doing this over mulltiple images, we can "track" the moving objects within an image, movement of a camera w.r.t to the image etc.</p>
+<hr />
+<p>The full working code is available <a href="https://colab.research.google.com/drive/1rUtldAJRTyVpeB8zJmfWUEO3Bo16qifz#scrollTo=DVvf09RdXh9c">here</a> in google colab</p>
+<hr />
 <h2 id="Use-OpenCV-to-detect-features-and-feature-description">Use OpenCV to detect features and feature description<a class="anchor-link" href="#Use-OpenCV-to-detect-features-and-feature-description"> </a></h2><div class="highlight"><pre><span></span><span class="c1">#Load Different Image Pairs</span>
 <span class="n">img1</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;images/image0.jpg&quot;</span><span class="p">)</span>
 <span class="n">img2</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;images/image1.jpg&quot;</span><span class="p">)</span>
@@ -87,12 +90,6 @@ featrure descriptors - as the name suggest, describe the surroudings of a "keypo
 <span class="n">cv2_imshow</span><span class="p">(</span><span class="n">img_briefmatch</span><span class="p">)</span>
 </pre></div>
 <p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/imatching.png" alt="" title="Image Matching" /></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 
 </div>
 </div>
