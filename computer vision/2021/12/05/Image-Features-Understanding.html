@@ -201,8 +201,11 @@ featrure descriptors - as the name suggest, describe the surroudings of a "keypo
 <div class="highlight"><pre><span></span><span class="c1">#Load Different Image Pairs</span>
 <span class="n">img1</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">"images/image0.jpg"</span><span class="p">)</span>
 <span class="n">img2</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">"images/image1.jpg"</span><span class="p">)</span>
-
-<span class="c1"># INITIALIZE FAST DETECTOR</span>
+</pre></div>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/img1.png" alt="" title="Image 1"></p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/img2.png" alt="" title="Image 2"></p>
+<hr>
+<div class="highlight"><pre><span></span><span class="c1"># INITIALIZE FAST DETECTOR</span>
 <span class="n">fast</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">FastFeatureDetector_create</span><span class="p">()</span>
 <span class="n">kp</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="n">detect</span><span class="p">(</span><span class="n">img1</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
 
