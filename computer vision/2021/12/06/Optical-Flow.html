@@ -109,7 +109,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      1 min read
+      4 min read
     
 </span></p>
 
@@ -129,7 +129,23 @@ window.onload = wrap_img;
     <ul class="section-nav">
 <li class="toc-entry toc-h1"><a href="#Optical-Flow-vs-Motion-Field">Optical Flow vs Motion Field </a></li>
 <li class="toc-entry toc-h1"><a href="#Optical-Flow-Assumptions">Optical Flow Assumptions </a></li>
-<li class="toc-entry toc-h1"><a href="#Optical-Flow-Estimation">Optical Flow Estimation </a></li>
+<li class="toc-entry toc-h1"><a href="#Optical-Flow-Estimation">Optical Flow Estimation </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Sparse-Optical-Flow">Sparse Optical Flow </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Load-Images">Load Images </a></li>
+<li class="toc-entry toc-h3"><a href="#Feature-Extraction">Feature Extraction </a></li>
+<li class="toc-entry toc-h3"><a href="#Run-Optical-Flow">Run Optical Flow </a></li>
+<li class="toc-entry toc-h3"><a href="#Visualize">Visualize </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Deep-Optical-Flow">Deep Optical Flow </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Calculate-Optical-Flow">Calculate Optical Flow </a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toc-entry toc-h1"><a href="#References">References </a></li>
 </ul><!--
 #################################################
@@ -167,11 +183,10 @@ window.onload = wrap_img;
 <p>Using the variation in brightness patterns between consecutives images can help you track the object(s). This is called <em>OPTICAL FLOW</em>.</p>
 <p>OPTICAL FLOW indicates MOTION of objects in most of the cases. But there could be images with "illusions" that changes brightness patterns but does not correspond to "object movement" in them". For eg. see below.</p>
 <hr>
-<p>The object is moving but there is no change in brightness pattern. So very hard to detect motion
-<img src="https://abhisheksreesaila.github.io/blog/images/stereo/op1.png" alt="" title="Motion Field without Optical Flow"></p>
+<p>The object is moving but there is no change in brightness pattern. So very hard to detect motion</p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/op1.png" alt="" title="Motion Field without Optical Flow"></p>
 <p>Here the light source is moving and hence the brightness pattern is changing, but there is no motion.</p>
-<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/mf1.png" alt="" title="Optical Flow without Motion Field - start position"></p>
-<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/mf2.png" alt="" title="Optical Flow without Motion Field - end position"></p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/general/mf1.png" alt="" title="Optical Flow without Motion Field"></p>
 <h1 id="Optical-Flow-Assumptions">
 <a class="anchor" href="#Optical-Flow-Assumptions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Optical Flow Assumptions<a class="anchor-link" href="#Optical-Flow-Assumptions"> </a>
 </h1>
@@ -190,6 +205,102 @@ window.onload = wrap_img;
 <h1 id="Optical-Flow-Estimation">
 <a class="anchor" href="#Optical-Flow-Estimation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Optical Flow Estimation<a class="anchor-link" href="#Optical-Flow-Estimation"> </a>
 </h1>
+<p>We will look at the "classic" methods of optical flow estimation. OPENCV provides a lot of inbuilt methods to compute them</p>
+<h2 id="Sparse-Optical-Flow">
+<a class="anchor" href="#Sparse-Optical-Flow" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sparse Optical Flow<a class="anchor-link" href="#Sparse-Optical-Flow"> </a>
+</h2>
+<p>We compute optical flow by extracting important features only. We will use the "feature extraction" techniques from the <a href="https://ablearn.io/computer%20vision/2021/12/05/Image-Features-Understanding.html">earlier blog post</a> and determine the optical flow. Sparse Optical Flow is fast but not very accurate.
+The code is available here.</p>
+<p>For this exercise we use the dataset from <a href="http://www.cvlibs.net/datasets/kitti/">KITTI Vision Car Dataset</a> available here.</p>
+<h3 id="Load-Images">
+<a class="anchor" href="#Load-Images" aria-hidden="true"><span class="octicon octicon-link"></span></a>Load Images<a class="anchor-link" href="#Load-Images"> </a>
+</h3>
+<div class="highlight"><pre><span></span><span class="c1">#Load two consecutive images</span>
+<span class="n">img1</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">"images/000199_10.png"</span><span class="p">)</span>
+<span class="n">img2</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">"images/000199_11.png"</span><span class="p">)</span>
+
+<span class="c1">#Convert both images to grayscale</span>
+<span class="c1">## We need the gray scale images for the functions below</span>
+<span class="n">gray1</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">im1</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
+<span class="n">gray2</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">im2</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
+</pre></div>
+<h3 id="Feature-Extraction">
+<a class="anchor" href="#Feature-Extraction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Feature Extraction<a class="anchor-link" href="#Feature-Extraction"> </a>
+</h3>
+<p>We will use the Shi-Tomasi corner detector from OPENCV. To understand how to define the parameters, you can use <a href="https://docs.opencv.org/master/dd/d1a/group__imgproc__feature.html#ga1d6bb77486c8f92d79c8793ad995d541">this link</a></p>
+<div class="highlight"><pre><span></span><span class="n">feature_params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">maxCorners</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="n">qualityLevel</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">minDistance</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span><span class="n">blocksize</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">prev</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">goodFeaturesToTrack</span><span class="p">(</span><span class="n">gray1</span><span class="p">,</span><span class="n">feature_params</span><span class="p">[</span><span class="s1">'maxCorners'</span><span class="p">],</span> <span class="n">feature_params</span><span class="p">[</span><span class="s2">"qualityLevel"</span><span class="p">],</span> <span class="n">feature_params</span><span class="p">[</span><span class="s2">"minDistance"</span><span class="p">],</span> <span class="n">feature_params</span><span class="p">[</span><span class="s2">"blocksize"</span><span class="p">])</span>
+</pre></div>
+<p>By obtaining the features and drawing them, we obtain the following similar to below.</p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/sparse-optical-flow-fe.png" alt="" title="Corners detected (features) extracted from the image"></p>
+<h3 id="Run-Optical-Flow">
+<a class="anchor" href="#Run-Optical-Flow" aria-hidden="true"><span class="octicon octicon-link"></span></a>Run Optical Flow<a class="anchor-link" href="#Run-Optical-Flow"> </a>
+</h3>
+<p>Launch the Lucas Kanade Optical Flow algorithm (<em>cv2.calcOpticalFlowPyrLK</em>) with the features and both grayscale images.</p>
+<div class="highlight"><pre><span></span><span class="n">lk_params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">winSize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span> <span class="p">,</span> <span class="n">maxLevel</span> <span class="o">=</span> <span class="mi">2</span> <span class="p">,</span> <span class="n">criteria</span> <span class="o">=</span> <span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">TERM_CRITERIA_EPS</span> <span class="o">|</span> <span class="n">cv2</span><span class="o">.</span><span class="n">TERM_CRITERIA_COUNT</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">))</span>
+
+<span class="c1"># img1 and img2 = images</span>
+<span class="c1"># prev = features of the first image</span>
+<span class="nb">next</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">error</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">calcOpticalFlowPyrLK</span><span class="p">(</span><span class="n">img1</span><span class="p">,</span> <span class="n">img2</span><span class="p">,</span> <span class="n">prev</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">winSize</span><span class="o">=</span><span class="n">lk_params</span><span class="p">[</span><span class="s2">"winSize"</span><span class="p">],</span> <span class="n">maxLevel</span><span class="o">=</span><span class="n">lk_params</span><span class="p">[</span><span class="s2">"maxLevel"</span><span class="p">],</span><span class="n">criteria</span><span class="o">=</span><span class="n">lk_params</span><span class="p">[</span><span class="s2">"criteria"</span><span class="p">])</span>
+
+
+<span class="c1">#Store the Matches (status=1 means a match)</span>
+<span class="n">good_old</span> <span class="o">=</span> <span class="n">prev</span><span class="p">[</span><span class="n">status</span> <span class="o">==</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">good_new</span> <span class="o">=</span> <span class="nb">next</span><span class="p">[</span><span class="n">status</span> <span class="o">==</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+<h3 id="Visualize">
+<a class="anchor" href="#Visualize" aria-hidden="true"><span class="octicon octicon-link"></span></a>Visualize<a class="anchor-link" href="#Visualize"> </a>
+</h3>
+<p>Go through each matched feature, and draw it on the second image</p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/opticalflowop1.png" alt="" title="Optical Flow Output"></p>
+<p>Here is a video for a more intuitive show of the optical flow
+
+</p>
+<center>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/mNGbiAWzRSw" frameborder="0" allowfullscreen=""></iframe>
+</center>
+
+<h2 id="Deep-Optical-Flow">
+<a class="anchor" href="#Deep-Optical-Flow" aria-hidden="true"><span class="octicon octicon-link"></span></a>Deep Optical Flow<a class="anchor-link" href="#Deep-Optical-Flow"> </a>
+</h2>
+<p>In Deep Optical Flow we compute optical flow for every pixel. Just to clarify, we dont use deep learning (yet!)</p>
+<p>The full code is available here</p>
+<ol>
+<li>Load the images using openv functions as before</li>
+</ol>
+<h3 id="Calculate-Optical-Flow">
+<a class="anchor" href="#Calculate-Optical-Flow" aria-hidden="true"><span class="octicon octicon-link"></span></a>Calculate Optical Flow<a class="anchor-link" href="#Calculate-Optical-Flow"> </a>
+</h3>
+<p>Wait! no feature extraction? Yes thats correct. Since we are runnning optical flow on every pixel, we can directly use the corresponding opencv function. If you'd like to understand how to tweak the parameters, you can visit this <a href="https://docs.opencv.org/3.0-beta/modules/video/doc/motion_analysis_and_object_tracking.html#calcopticalflowfarneback">link</a></p>
+<div class="highlight"><pre><span></span><span class="n">flow</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">calcOpticalFlowFarneback</span><span class="p">(</span><span class="n">gray1</span><span class="p">,</span> <span class="n">gray2</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Shapes Gray &amp; Flow"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gray1</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">flow</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">" "</span><span class="p">)</span>
+
+<span class="sd">"""</span>
+<span class="sd">Shapes Gray &amp; Flow</span>
+<span class="sd">(376, 1241)</span>
+<span class="sd">(376, 1241, 2)</span>
+<span class="sd">"""</span>
+</pre></div>
+<p></p>
+<div class="flash flash-warn">
+    <svg class="octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap" viewbox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M10 7H6l3-7-9 9h4l-3 7 9-9z"></path></svg>
+    <strong>Important: </strong>Here flow is a 2d matrix which has the same shape as input but contains the "$ \delta x $" (represented by U) and "$ \delta y$" (represented by V) for each point (X,Y).  
+</div>
+<img src="https://abhisheksreesaila.github.io/blog/images/stereo/flow-shown.png" alt="" title="Flow Matrix Shown Visually">
+<p>Accorinding to OPENCV, we get U and V in cartesian coordinates. To show this visually it will be good if we can find "magnitude" and "direction".  then we will intuitively know how much it moved and in what angle. Catesian system does not provide that.  Luckily for us, "polar system coordinates" gives us what we want.</p>
+<div class="highlight"><pre><span></span><span class="n">magnitude</span><span class="p">,</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cartToPolar</span><span class="p">(</span><span class="n">flow</span><span class="p">[</span><span class="o">...</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">flow</span><span class="p">[</span><span class="o">...</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+<p>
+</p>
+<center>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/QkuOY7AObh8" frameborder="0" allowfullscreen=""></iframe>
+</center>
+
+
 </div>
 </div>
 </div>
