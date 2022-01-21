@@ -142,6 +142,9 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h2"><a href="#Deep-Optical-Flow">Deep Optical Flow </a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#Calculate-Optical-Flow">Calculate Optical Flow </a></li>
+<li class="toc-entry toc-h3"><a href="#Setting-the-HUE-Value">Setting the HUE Value </a></li>
+<li class="toc-entry toc-h3"><a href="#Converting-HUE-to-RGB">Converting HUE to RGB </a></li>
+<li class="toc-entry toc-h3"><a href="#Video">Video </a></li>
 </ul>
 </li>
 </ul>
@@ -184,9 +187,9 @@ window.onload = wrap_img;
 <p>OPTICAL FLOW indicates MOTION of objects in most of the cases. But there could be images with "illusions" that changes brightness patterns but does not correspond to "object movement" in them". For eg. see below.</p>
 <hr>
 <p>The object is moving but there is no change in brightness pattern. So very hard to detect motion</p>
-<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/op1.png" alt="" title="Motion Field without Optical Flow"></p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/op.png" alt="" title="Motion Field without Optical Flow"></p>
 <p>Here the light source is moving and hence the brightness pattern is changing, but there is no motion.</p>
-<p><img src="https://abhisheksreesaila.github.io/blog/images/general/mf1.png" alt="" title="Optical Flow without Motion Field"></p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/mf.png" alt="" title="Optical Flow without Motion Field"></p>
 <h1 id="Optical-Flow-Assumptions">
 <a class="anchor" href="#Optical-Flow-Assumptions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Optical Flow Assumptions<a class="anchor-link" href="#Optical-Flow-Assumptions"> </a>
 </h1>
@@ -294,6 +297,15 @@ The code is available here.</p>
 <p>Accorinding to OPENCV, we get U and V in cartesian coordinates. To show this visually it will be good if we can find "magnitude" and "direction".  then we will intuitively know how much it moved and in what angle. Catesian system does not provide that.  Luckily for us, "polar system coordinates" gives us what we want.</p>
 <div class="highlight"><pre><span></span><span class="n">magnitude</span><span class="p">,</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cartToPolar</span><span class="p">(</span><span class="n">flow</span><span class="p">[</span><span class="o">...</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">flow</span><span class="p">[</span><span class="o">...</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
+<h3 id="Setting-the-HUE-Value">
+<a class="anchor" href="#Setting-the-HUE-Value" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setting the HUE Value<a class="anchor-link" href="#Setting-the-HUE-Value"> </a>
+</h3>
+<h3 id="Converting-HUE-to-RGB">
+<a class="anchor" href="#Converting-HUE-to-RGB" aria-hidden="true"><span class="octicon octicon-link"></span></a>Converting HUE to RGB<a class="anchor-link" href="#Converting-HUE-to-RGB"> </a>
+</h3>
+<h3 id="Video">
+<a class="anchor" href="#Video" aria-hidden="true"><span class="octicon octicon-link"></span></a>Video<a class="anchor-link" href="#Video"> </a>
+</h3>
 <p>
 </p>
 <center>
@@ -311,6 +323,7 @@ The code is available here.</p>
 <a class="anchor" href="#References" aria-hidden="true"><span class="octicon octicon-link"></span></a>References<a class="anchor-link" href="#References"> </a>
 </h1>
 <p><a href="https://www.youtube.com/watch?v=lnXFcmLB7sM&amp;t=92s">Optical Flow Definition</a></p>
+<p><a href="https://courses.thinkautonomous.ai/optical-flow">Workshops from Think Autonomous Course</a></p>
 
 </div>
 </div>
