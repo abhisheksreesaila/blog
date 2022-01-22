@@ -24,10 +24,10 @@
   
     
         ,"post2": {
-            "title": "Stereo Vision",
-            "content": "Pinhole Camera Basics . . Perspective Projection . https://docs.opencv.org/3.4.3/d9/d0c/group__calib3d.html . Intrinsic and Extrinsic Parameters . Simple Stereo . Calibrated Stereo . Epipolar Geometry . Stereo Algorithms .",
-            "url": "https://ablearn.io/computer%20vision/2021/12/07/StereoVision.html",
-            "relUrl": "/computer%20vision/2021/12/07/StereoVision.html",
+            "title": "Pinhole Camera Basics",
+            "content": "&quot;Stereo Vision&quot; . &quot;Two eyes are always better than one!&quot; . toc:true- branch: master | badges: false | comments: true | categories: [Computer Vision] | hide: false | search_exclude: false | image: images/post-thumbnails/sv2.png | metadata_key1: notes | metadata_key2: | .",
+            "url": "https://ablearn.io/2021/12/07/StereoVision.html",
+            "relUrl": "/2021/12/07/StereoVision.html",
             "date": " • Dec 7, 2021"
         }
         
