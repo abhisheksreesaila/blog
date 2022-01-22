@@ -3,34 +3,36 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Pinhole Camera Basics | ABLearn</title>
+<title>Stereo Vision | ABLearn</title>
 <meta name="generator" content="Jekyll v4.0.0" />
-<meta property="og:title" content="Pinhole Camera Basics" />
+<meta property="og:title" content="Stereo Vision" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Always Learning" />
-<meta property="og:description" content="Always Learning" />
-<link rel="canonical" href="https://ablearn.io/2021/12/07/StereoVision.html" />
-<meta property="og:url" content="https://ablearn.io/2021/12/07/StereoVision.html" />
+<meta name="description" content="Two eyes are always better than one!" />
+<meta property="og:description" content="Two eyes are always better than one!" />
+<link rel="canonical" href="https://ablearn.io/computer%20vision/2021/12/07/StereoVision.html" />
+<meta property="og:url" content="https://ablearn.io/computer%20vision/2021/12/07/StereoVision.html" />
 <meta property="og:site_name" content="ABLearn" />
+<meta property="og:image" content="https://ablearn.io/images/post-thumbnails/sv2.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-12-07T00:00:00-06:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"https://ablearn.io/2021/12/07/StereoVision.html"},"description":"Always Learning","@type":"BlogPosting","url":"https://ablearn.io/2021/12/07/StereoVision.html","headline":"Pinhole Camera Basics","dateModified":"2021-12-07T00:00:00-06:00","datePublished":"2021-12-07T00:00:00-06:00","@context":"https://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://ablearn.io/computer%20vision/2021/12/07/StereoVision.html"},"description":"Two eyes are always better than one!","@type":"BlogPosting","url":"https://ablearn.io/computer%20vision/2021/12/07/StereoVision.html","headline":"Stereo Vision","dateModified":"2021-12-07T00:00:00-06:00","datePublished":"2021-12-07T00:00:00-06:00","image":"https://ablearn.io/images/post-thumbnails/sv2.png","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://ablearn.io/feed.xml" title="ABLearn" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Pinhole Camera Basics | ABLearn</title>
+<title>Stereo Vision | ABLearn</title>
 <meta name="generator" content="Jekyll v4.0.0" />
-<meta property="og:title" content="Pinhole Camera Basics" />
+<meta property="og:title" content="Stereo Vision" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Always Learning" />
-<meta property="og:description" content="Always Learning" />
-<link rel="canonical" href="https://ablearn.io/2021/12/07/StereoVision.html" />
-<meta property="og:url" content="https://ablearn.io/2021/12/07/StereoVision.html" />
+<meta name="description" content="Two eyes are always better than one!" />
+<meta property="og:description" content="Two eyes are always better than one!" />
+<link rel="canonical" href="https://ablearn.io/computer%20vision/2021/12/07/StereoVision.html" />
+<meta property="og:url" content="https://ablearn.io/computer%20vision/2021/12/07/StereoVision.html" />
 <meta property="og:site_name" content="ABLearn" />
+<meta property="og:image" content="https://ablearn.io/images/post-thumbnails/sv2.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-12-07T00:00:00-06:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"https://ablearn.io/2021/12/07/StereoVision.html"},"description":"Always Learning","@type":"BlogPosting","url":"https://ablearn.io/2021/12/07/StereoVision.html","headline":"Pinhole Camera Basics","dateModified":"2021-12-07T00:00:00-06:00","datePublished":"2021-12-07T00:00:00-06:00","@context":"https://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://ablearn.io/computer%20vision/2021/12/07/StereoVision.html"},"description":"Two eyes are always better than one!","@type":"BlogPosting","url":"https://ablearn.io/computer%20vision/2021/12/07/StereoVision.html","headline":"Stereo Vision","dateModified":"2021-12-07T00:00:00-06:00","datePublished":"2021-12-07T00:00:00-06:00","image":"https://ablearn.io/images/post-thumbnails/sv2.png","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
@@ -101,7 +103,7 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Pinhole Camera Basics</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-12-07T00:00:00-06:00" itemprop="datePublished">
+    <h1 class="post-title p-name" itemprop="name headline">Stereo Vision</h1><p class="page-description">Two eyes are always better than one!</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-12-07T00:00:00-06:00" itemprop="datePublished">
         Dec 7, 2021
       </time>
        • <span class="read-time" title="Estimated read time">
@@ -112,33 +114,27 @@ window.onload = wrap_img;
 </span></p>
 
     
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#Computer Vision">Computer Vision</a>
+        
+      
+      </p>
+    
 
     
-      
-        <div class="pb-5 d-flex flex-wrap flex-justify-end">
-          <div class="px-2">
-
-    <a href="https://github.com/abhisheksreesaila/blog/tree/master/_notebooks/2021-12-07-StereoVision.ipynb" role="button" target="_blank">
-<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
-    </a>
-</div>
-
-          <div class="px-2">
-    <a href="https://mybinder.org/v2/gh/abhisheksreesaila/blog/master?filepath=_notebooks%2F2021-12-07-StereoVision.ipynb" target="_blank">
-        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
-    </a>
-</div>
-
-          <div class="px-2">
-    <a href="https://colab.research.google.com/github/abhisheksreesaila/blog/blob/master/_notebooks/2021-12-07-StereoVision.ipynb" target="_blank">
-        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
-    </a>
-</div>
-        </div>
       </header>
 
   <div class="post-content e-content" itemprop="articleBody">
-    <!--
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#Pinhole-Camera-Basics">Pinhole Camera Basics </a></li>
+<li class="toc-entry toc-h1"><a href="#Perspective-Projection">Perspective Projection </a></li>
+<li class="toc-entry toc-h1"><a href="#Intrinsic-and-Extrinsic-Parameters">Intrinsic and Extrinsic Parameters </a></li>
+<li class="toc-entry toc-h1"><a href="#Simple-Stereo">Simple Stereo </a></li>
+<li class="toc-entry toc-h1"><a href="#Calibrated-Stereo">Calibrated Stereo </a></li>
+<li class="toc-entry toc-h1"><a href="#Epipolar-Geometry">Epipolar Geometry </a></li>
+<li class="toc-entry toc-h1"><a href="#Stereo-Algorithms">Stereo Algorithms </a></li>
+</ul><!--
 #################################################
 ### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
 #################################################
@@ -154,32 +150,45 @@ window.onload = wrap_img;
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="&quot;Stereo-Vision&quot;">"Stereo Vision"<a class="anchor-link" href="#&quot;Stereo-Vision&quot;"> </a></h2><blockquote><p>"Two eyes are always better than one!"</p>
-</blockquote>
-<ul>
-<li>toc:true- branch: master</li>
-<li>badges: false</li>
-<li>comments: true</li>
-<li>categories: [Computer Vision]</li>
-<li>hide: false</li>
-<li>search_exclude: false</li>
-<li>image: images/post-thumbnails/sv2.png</li>
-<li>metadata_key1: notes</li>
-<li>metadata_key2: </li>
-</ul>
-
+<h1 id="Pinhole-Camera-Basics">
+<a class="anchor" href="#Pinhole-Camera-Basics" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pinhole Camera Basics<a class="anchor-link" href="#Pinhole-Camera-Basics"> </a>
+</h1>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/pinhole.png" alt="" title="Pinhole Camera"></p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/similartri.png" alt="" title="Similar Triangles"></p>
+<h1 id="Perspective-Projection">
+<a class="anchor" href="#Perspective-Projection" aria-hidden="true"><span class="octicon octicon-link"></span></a>Perspective Projection<a class="anchor-link" href="#Perspective-Projection"> </a>
+</h1>
+<p><a href="https://docs.opencv.org/3.4.3/d9/d0c/group__calib3d.html">https://docs.opencv.org/3.4.3/d9/d0c/group__calib3d.html</a></p>
+<h1 id="Intrinsic-and-Extrinsic-Parameters">
+<a class="anchor" href="#Intrinsic-and-Extrinsic-Parameters" aria-hidden="true"><span class="octicon octicon-link"></span></a>Intrinsic and Extrinsic Parameters<a class="anchor-link" href="#Intrinsic-and-Extrinsic-Parameters"> </a>
+</h1>
+<h1 id="Simple-Stereo">
+<a class="anchor" href="#Simple-Stereo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Simple Stereo<a class="anchor-link" href="#Simple-Stereo"> </a>
+</h1>
+<h1 id="Calibrated-Stereo">
+<a class="anchor" href="#Calibrated-Stereo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Calibrated Stereo<a class="anchor-link" href="#Calibrated-Stereo"> </a>
+</h1>
+<h1 id="Epipolar-Geometry">
+<a class="anchor" href="#Epipolar-Geometry" aria-hidden="true"><span class="octicon octicon-link"></span></a>Epipolar Geometry<a class="anchor-link" href="#Epipolar-Geometry"> </a>
+</h1>
+<h1 id="Stereo-Algorithms">
+<a class="anchor" href="#Stereo-Algorithms" aria-hidden="true"><span class="octicon octicon-link"></span></a>Stereo Algorithms<a class="anchor-link" href="#Stereo-Algorithms"> </a>
+</h1>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 
 </div>
@@ -189,7 +198,15 @@ window.onload = wrap_img;
 
 
 
-  </div><a class="u-url" href="/2021/12/07/StereoVision.html" hidden></a>
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="abhisheksreesaila/blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/computer%20vision/2021/12/07/StereoVision.html" hidden></a>
 </article>
       </div>
     </main><footer class="site-footer h-card">
