@@ -109,7 +109,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      2 min read
+      8 min read
     
 </span></p>
 
@@ -128,12 +128,20 @@ window.onload = wrap_img;
   <div class="post-content e-content" itemprop="articleBody">
     <ul class="section-nav">
 <li class="toc-entry toc-h1"><a href="#Pinhole-Camera-Basics">Pinhole Camera Basics </a></li>
-<li class="toc-entry toc-h1"><a href="#Intrinsic-and-Extrinsic-Parameters">Intrinsic and Extrinsic Parameters </a></li>
-<li class="toc-entry toc-h1"><a href="#Perspective-Imaging-with-Pinhole">Perspective Imaging with Pinhole </a></li>
-<li class="toc-entry toc-h1"><a href="#Simple-Stereo">Simple Stereo </a></li>
-<li class="toc-entry toc-h1"><a href="#Calibrated-Stereo">Calibrated Stereo </a></li>
-<li class="toc-entry toc-h1"><a href="#Epipolar-Geometry">Epipolar Geometry </a></li>
-<li class="toc-entry toc-h1"><a href="#Stereo-Algorithms">Stereo Algorithms </a></li>
+<li class="toc-entry toc-h1"><a href="#Perspective-Imaging-with-Pinhole">Perspective Imaging with Pinhole </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Pinhole-Properties">Pinhole Properties </a></li>
+<li class="toc-entry toc-h2"><a href="#LENS">LENS </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#Camera-Calibration">Camera Calibration </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Derive-a-Equation-For-Camera-Calibration">Derive a Equation For Camera Calibration </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#TL;DR-version-of-Intrinsic-and-Extrinsic-Parameters">TL;DR version of Intrinsic and Extrinsic Parameters </a></li>
+<li class="toc-entry toc-h1"><a href="#I-understand-Calibration-now.--How-do-we-starting-writing-code?">I understand Calibration now.  How do we starting writing code? </a></li>
+<li class="toc-entry toc-h1"><a href="#Code">Code </a></li>
 <li class="toc-entry toc-h1"><a href="#References">References </a></li>
 </ul><!--
 #################################################
@@ -162,52 +170,154 @@ window.onload = wrap_img;
 <ul>
 <li>The object (flower) is said to be "in the "world" and its position is given by "world coordinates"</li>
 <li>Now imagine The light rays from the object pass through a pinhole and gets projected on a wall.  The wall  is the "image plane" and the hole it passes through is called the "pinhole". The camera is placed at the pinhole. The camera is said to be in the "Camera plane"</li>
-<li>The distance between the camera placed at the pinhole and the wall (image plane) is called "focal length"
+<li>The distance between the camera placed at the pinhole and the wall (image plane) is called "focal length"</li>
+<li>"z" is also called Depth
 <div class="flash">
     <svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
-    <strong>Note: </strong>Our goal is to take the 3D coordinates (x,y,z) and project them camera plane (3D) and then later to the image plane (2D).  
+    <strong>Note: </strong>Our goal is to take the 3D coordinates (x,y,z) and TRANSFORM them  to camera plane (3D) and then later PROJECT THEM to the image plane (2D).  
 </div>
-We move from WORLD =&gt; CAMERA =&gt; IMAGE. This is called Forward Imaging Model. </li>
+We move from WORLD =&gt; CAMERA =&gt; IMAGE. This is called Forward Imaging Model.  Also the projection from Camera to the image plane is called "Perspective Projection". so we can write the forward imaging model as
+<div class="flash">
+    <svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
+    <strong>Note: </strong>$ [x_w, y_w, z_w] $ (Coordinate transformation) =&gt;  $ [x_c, y_c, z_c]  $ =&gt; (Perspective Projection) $ =&gt;   [x_i, y_i]   $ 
+</div>
+</li>
 </ul>
-<hr>
-<h1 id="Intrinsic-and-Extrinsic-Parameters">
-<a class="anchor" href="#Intrinsic-and-Extrinsic-Parameters" aria-hidden="true"><span class="octicon octicon-link"></span></a>Intrinsic and Extrinsic Parameters<a class="anchor-link" href="#Intrinsic-and-Extrinsic-Parameters"> </a>
-</h1>
-<p>Lets first move from WORLD =&gt; CAMERA</p>
-<p>Imagine a camera placed somewhere in an empty room other than the corners.  Fix a corner of this empty room as the origin.  Then camera is at a <em>distance</em> from this corner. Additionally it will be at an <em>angle</em> to the orgin of the world coordinate, in our case, the corner of the room we have chosen. In computer vision terms, the camera is said to be "translated (geometric translation, not language tranlsation :) )  and "rotated" w.r.t to the world coordinate. Hence, we need some sort of translation and rotation variables that will help us take the world cooridinates of the image and project them to the camera first. Right? We call this "Extrinsic Parameters"</p>
-<p>Now, CAMERA =&gt; IMAGE. This is easy. We just have focal length (shown and described above). This is called Intrinsic parameters.</p>
 <hr>
 <h1 id="Perspective-Imaging-with-Pinhole">
 <a class="anchor" href="#Perspective-Imaging-with-Pinhole" aria-hidden="true"><span class="octicon octicon-link"></span></a>Perspective Imaging with Pinhole<a class="anchor-link" href="#Perspective-Imaging-with-Pinhole"> </a>
 </h1>
 <p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/similartri.png" alt="" title="Similar Triangles"></p>
 <p>The above diagram is exactly same as "Pinhole" diagram with labels removed for explaining geometry.The yellow and blue triangles are similar.  By the property of similar triangles (see below note), we have</p>
-<p>$r_i/f = r_o/z$</p>
-<p>$ r_i $ and $ r_o $ are <a href="https://mathinsight.org/vector_introduction">vectors</a> describing the point on the image and world respectively. Hence we can split and write the equation as $
+<ul>
+<li>$r_i/f = r_o/z$</li>
+</ul>
+<p>Where $r_o = (x_o, y_o, z_o )$ and $ r_i = (x_i, y_i, f) $</p>
+<p>$ r_i $ and $ r_o $ are <a href="https://mathinsight.org/vector_introduction">vectors</a> describing the point on the image and world respectively. Hence we can split and write the equation as</p>
+<ul>
+<li>$ x_i/f = x_o/z $  ;   $ y_i/f = y_i/z $
+<div class="flash">
+    <svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
+    <strong>Note: </strong>Triangles are set to be "similar" if they are of the same shape but not necessarily the same size. If 2 triangles have this property then 
+</div>  <em>$AB/DE = BC/EF$</em>
+</li>
+</ul>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/s-triangles-2.png" alt="" title="Similar Triangles Concept"></p>
+<hr>
+<h2 id="Pinhole-Properties">
+<a class="anchor" href="#Pinhole-Properties" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pinhole Properties<a class="anchor-link" href="#Pinhole-Properties"> </a>
+</h2>
+<ol>
+<li>Straight line remains straight in the image plane</li>
+<li>Magnification is inversely proportional to depth ($z_o$). In other words, The further you are from the camera, smaller you appear. Now this is obvious since we all use cameras today. But take a look at the parallel lines intersects for a railway track. The distance between the parallel tracks becomes so small in the image plane that it looks like intersection though in reality we know its parallel throughout. The point of intersection is called the "Vanishing Point"</li>
+</ol>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/railway-tracks.png" alt="" title="Similar Triangles Concept"></p>
+<ol>
+<li>Since a pinhole is a tiny hole letting the light inside the camera to capture the images, for a large object it will take a few seconds before the image is captured. Imagine clicking a camera and waiting 5 seconds to see the image!!  To improve this, we substitute pinhole with LENS. </li>
+</ol>
+<h2 id="LENS">
+<a class="anchor" href="#LENS" aria-hidden="true"><span class="octicon octicon-link"></span></a>LENS<a class="anchor-link" href="#LENS"> </a>
+</h2>
+<p>We wont cover LENS and its properties, but just keep in mind, LENS are just a "pinhole" made larger. Thats a simplistic view of it. OBviously with more area to capture light, now the wait time to capture the image is reduced, but light is scattered now, and hence causes distortions in your image.
+Apart from the focal length we introduce "distortion coefficients" as one of the Intrinisic Parameters.  All modern cameras use spohisticated lenses.</p>
+<p>See below</p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/lens-camera.png" alt="" title="Lens vs Camera"></p>
+<hr>
+<h1 id="Camera-Calibration">
+<a class="anchor" href="#Camera-Calibration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Camera Calibration<a class="anchor-link" href="#Camera-Calibration"> </a>
+</h1>
+<p></p>
+<div class="flash">
+    <svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
+    <strong>Note: </strong>The goal of calibration is estimate the Extrinsic and Intrinsic parameters. 
+</div>
+<h2 id="Derive-a-Equation-For-Camera-Calibration">
+<a class="anchor" href="#Derive-a-Equation-For-Camera-Calibration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Derive a Equation For Camera Calibration<a class="anchor-link" href="#Derive-a-Equation-For-Camera-Calibration"> </a>
+</h2>
+<p></p>
+<div class="flash flash-error">
+    <svg class="octicon octicon-alert octicon octicon-alert octicon octicon-alert octicon octicon-alert" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 000 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 00.01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg>
+    <strong>Warning: </strong>This is math heavy. There is a TL:DR version in the next section that you can skip to.
+</div>
+<p>Lets use our knowledge about pinhole, perspective projection and derive a simple linear model for calibration.</p>
+<p>Take a point in world coordinate. Assume you are given "Extrinsic Parameters" and so you have successfully transformed them into camera coordinates
+Applying perspective projection formula from above we get, $ x_i/f = x_c/z_c $  ;   $ y_i/f = y_c/z_c $   where *_c denotes coordinates in camera plane.</p>
+<p>Rewriting the equation we get,</p>
+<p>$ x_i = f * x_i/z_c $  ;   $ y_i = f * y_i/z_c $</p>
+<p>Lets take a closer look at the IMAGE PLANE.</p>
+<p>For a sake of understanding the basic pinhole model we assumed the image plane to have "mm" millimetres as the unit of measurement. So we take a world coordinate in "m" and convert to "mm". In reality, we all know it is measured in "pixels" measured by a image sensor. So there could be "mulitple pixels per mm" and so the alternative measurement to be consisdered is "pixel density" which is nothing but "pixels per mm". So introduce this to in the equation as follows.</p>
+<p>$ x_i = m * f * x_i/z_c $  ;   $ y_i = m * f * y_i/z_c $</p>
+<p>Why we multiply?</p>
+<ul>
+<li>Pixel Density = 1 ; 1 mm contains 1px;  </li>
+<li>Pixel Density = 10 ; 1 mm contains 10px;   2 mm contains 20px;  3 mm contains 30px;  X mm contains (PixelDensity * X)px;  </li>
+</ul>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/ImagePlaneToSensor.png" alt="" title="Image Plane To Image Sensor Mapping.png"></p>
+<p>Second assumption we made was the centre of the Image plane (measured in mm) is the centre of the Image Sensor which may or may not be true. To avoid this uncertainity, we just place the centre of the image sensor to be at the far left-side corner (for understanding and mathematical convenience) and just add whatever that needs to be added to get the correct centre. so now the equation becomes,</p>
+<p>$ x_i = m_x * f * x_c/z_c + O_x $  ;   $ y_i = m_y * f * y_c/z_c  + O_y $  x_i  and y_i is popularly referred to as u and v.</p>
+<p>$ u = m_x * f * x_c/z_c + O_x $  ;   $ v = m_y * f * y_c/z_c  + O_y $</p>
+<p>$ u = f_x * x_c/z_c + O_x $  ;   $ v = f_y * y_c/z_c  + O_y $  Where $ f_x and f_x $ are focal lengths measured in pixels
+</p>
+<div class="flash flash-warn">
+    <svg class="octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap" viewbox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M10 7H6l3-7-9 9h4l-3 7 9-9z"></path></svg>
+    <strong>Important: </strong>$ f_x, f_y, O_x, O_y $ represent the camera’s internal geometry and are called INTRINSIC parameters
+</div>
+U and V are non-linear equation, but mathematically its convenient to have a linear equation if we can get one. Homogenous coordinates to the rescue!
+<p>Play <a href="https://wordsandbuttons.online/interactive_guide_to_homogeneous_coordinates.html">here</a> to get a good visual understanding. Basically, the concept is to add "fake" coordinate at the end to scale the values in the same propotion. For eg.  8/4 (=2) is same as 16/8 (=2).  Similarly in the world of coordinates geometry [3,2] will be same as [6,4,2] where 2 is the scale factor (or the fake coordinate added). We can always get the original value back from [6,4,2] by division [6/2,4/2]</p>
+<p>First multiply with $ z_c $</p>
+<p>$ u * z_c = f_x * x_c + O_x * z_c $  ;   $ v * z_c = f_y * y_c  + O_y * z_c $</p>
+<p>Represent them in Homogenous Coordinates
 </p>
 <div class="flash">
-    <svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
-    <strong>Note: </strong>Triangles are set to be "similar" if they are of the same shape but not necessarily the same size. If 2 triangles have this property then 
-</div>  *$AB/DE = BC/EF$*
-<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/s-triangles.png" alt="" title="Similar Triangles Concept"></p>
+    <svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
+    <strong>Note: </strong>(To convince ourselves that it is the same equation we derived moments ago, just divide z_c in the matrix. All these are just math tricks to get the same answer)
+</div>
+$$
+
+\begin{bmatrix} u_h  \\  v_h \\ w_h  \end{bmatrix}
+=
+\begin{bmatrix} f_x*x_c + O_x*z_c  \\     f_y*y_c + O_y*z_c  \\ z_c  \end{bmatrix}
+
+$$<p>Showing the same equation in Matrix form</p>
+$$
+
+M_{int} = K = 
+
+\begin{bmatrix} f_x &amp; 0 &amp; O_x &amp; 0 \\  0 &amp; f_y &amp; O_y &amp; 0  \\ 0 &amp; 0 &amp; 1 &amp; 0   \end{bmatrix}
+\begin{bmatrix} x_c \\ y_c \\ z_c \\ 1 \end{bmatrix}
+
+$$<p>This is also called "Intrinsic Matrix or Camera Matrix" popularly shown as K</p>
 <hr>
-<h1 id="Simple-Stereo">
-<a class="anchor" href="#Simple-Stereo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Simple Stereo<a class="anchor-link" href="#Simple-Stereo"> </a>
+<p>In the beginning of this section we assumed we are given Camera Coordinates. Lets revisit that assumption and see if not given how to calculate them.</p>
+<h1 id="TL;DR-version-of-Intrinsic-and-Extrinsic-Parameters">
+<a class="anchor" href="#TL;DR-version-of-Intrinsic-and-Extrinsic-Parameters" aria-hidden="true"><span class="octicon octicon-link"></span></a>TL;DR version of Intrinsic and Extrinsic Parameters<a class="anchor-link" href="#TL;DR-version-of-Intrinsic-and-Extrinsic-Parameters"> </a>
 </h1>
-<h1 id="Calibrated-Stereo">
-<a class="anchor" href="#Calibrated-Stereo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Calibrated Stereo<a class="anchor-link" href="#Calibrated-Stereo"> </a>
+<ul>
+<li>WORLD =&gt; CAMERA</li>
+</ul>
+<p>Imagine a camera placed somewhere in an empty room other than the corners.  Fix a corner of this empty room as the origin.  Then camera is at a <em>distance</em> from this corner. Additionally it will be at an <em>angle</em> to the orgin of the world coordinate, in our case, the corner of the room we have chosen. In computer vision terms, the camera is said to be "translated (geometric translation, not language tranlsation :) )  and "rotated" w.r.t to the world coordinate. Hence, we need some sort of translation and rotation variables that will help us take the world cooridinates of the image and project them to the camera first. Right? We call this "Extrinsic Parameters"</p>
+<ul>
+<li>CAMERA =&gt; IMAGE </li>
+</ul>
+<p>We just have focal length (shown and described above). This is referred to as an Intrinsic parameter.</p>
+<hr>
+<h1 id="I-understand-Calibration-now.--How-do-we-starting-writing-code?">
+<a class="anchor" href="#I-understand-Calibration-now.--How-do-we-starting-writing-code?" aria-hidden="true"><span class="octicon octicon-link"></span></a>I understand Calibration now.  How do we starting writing code?<a class="anchor-link" href="#I-understand-Calibration-now.--How-do-we-starting-writing-code?"> </a>
 </h1>
-<h1 id="Epipolar-Geometry">
-<a class="anchor" href="#Epipolar-Geometry" aria-hidden="true"><span class="octicon octicon-link"></span></a>Epipolar Geometry<a class="anchor-link" href="#Epipolar-Geometry"> </a>
-</h1>
-<h1 id="Stereo-Algorithms">
-<a class="anchor" href="#Stereo-Algorithms" aria-hidden="true"><span class="octicon octicon-link"></span></a>Stereo Algorithms<a class="anchor-link" href="#Stereo-Algorithms"> </a>
+<p>Opencv provides all the functions built-in to estimate parameters. Think of an real world object as an input and the pixel coordinates as the output. The problem at hand is to adjust the middle box in between in such a way that we get the desired output from the input provided. If we do this once, you will get an estimate, but those parameters are likely only to be useful in that angle, direction of the camera. Repeat the steps multiple times and you have a good estimate. It sort of unsupervised machine learning so to speak!</p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/calib-visual.png" alt="" title="Calibration Paramters Estimation"></p>
+<hr>
+<h1 id="Code">
+<a class="anchor" href="#Code" aria-hidden="true"><span class="octicon octicon-link"></span></a>Code<a class="anchor-link" href="#Code"> </a>
 </h1>
 <h1 id="References">
 <a class="anchor" href="#References" aria-hidden="true"><span class="octicon octicon-link"></span></a>References<a class="anchor-link" href="#References"> </a>
 </h1>
 <p><a href="https://docs.opencv.org/3.4.3/d9/d0c/group__calib3d.html">OpenCV Calibration</a></p>
 <p><a href="https://learnopencv.com/camera-calibration-using-opencv/">Geometry of Image Formation</a></p>
+<p><a href="https://www.youtube.com/watch?v=_EhY31MSbNM&amp;t=194s">Pinhole basics</a></p>
+<p><a href="https://www.youtube.com/watch?v=qByYk6JggQU">Calibration Basics</a></p>
+<p><a href="https://personal.math.ubc.ca/~pwalls/math-python/jupyter/latex/">Latex in Jupyter Notebook</a></p>
 
 </div>
 </div>
