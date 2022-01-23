@@ -109,7 +109,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      8 min read
+      10 min read
     
 </span></p>
 
@@ -139,7 +139,7 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h2"><a href="#Derive-a-Equation-For-Camera-Calibration">Derive a Equation For Camera Calibration </a></li>
 </ul>
 </li>
-<li class="toc-entry toc-h1"><a href="#TL;DR-version-of-Intrinsic-and-Extrinsic-Parameters">TL;DR version of Intrinsic and Extrinsic Parameters </a></li>
+<li class="toc-entry toc-h1"><a href="#Projection-Matrix">Projection Matrix </a></li>
 <li class="toc-entry toc-h1"><a href="#I-understand-Calibration-now.--How-do-we-starting-writing-code?">I understand Calibration now.  How do we starting writing code? </a></li>
 <li class="toc-entry toc-h1"><a href="#Code">Code </a></li>
 <li class="toc-entry toc-h1"><a href="#References">References </a></li>
@@ -237,7 +237,7 @@ Apart from the focal length we introduce "distortion coefficients" as one of the
 <p></p>
 <div class="flash flash-error">
     <svg class="octicon octicon-alert octicon octicon-alert octicon octicon-alert octicon octicon-alert" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 000 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 00.01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg>
-    <strong>Warning: </strong>This is math heavy. There is a TL:DR version in the next section that you can skip to.
+    <strong>Warning: </strong>This is math heavy.
 </div>
 <p>Lets use our knowledge about pinhole, perspective projection and derive a simple linear model for calibration.</p>
 <p>Take a point in world coordinate. Assume you are given "Extrinsic Parameters" and so you have successfully transformed them into camera coordinates
@@ -288,21 +288,58 @@ M_{int} = K =
 
 $$<p>This is also called "Intrinsic Matrix or Camera Matrix" popularly shown as K</p>
 <hr>
-<p>In the beginning of this section we assumed we are given Camera Coordinates.</p>
-<p>R = Rotation Matrix
-T = Transition Matrix</p>
-<h1 id="TL;DR-version-of-Intrinsic-and-Extrinsic-Parameters">
-<a class="anchor" href="#TL;DR-version-of-Intrinsic-and-Extrinsic-Parameters" aria-hidden="true"><span class="octicon octicon-link"></span></a>TL;DR version of Intrinsic and Extrinsic Parameters<a class="anchor-link" href="#TL;DR-version-of-Intrinsic-and-Extrinsic-Parameters"> </a>
-</h1>
-<ul>
-<li>WORLD =&gt; CAMERA</li>
-</ul>
+<p>In the beginning of this section we assumed we are given Camera Coordinates. Lets check out what it consists of.</p>
 <p>Imagine a camera placed somewhere in an empty room other than the corners.  Fix a corner of this empty room as the origin.  Then camera is at a <em>distance</em> from this corner. Additionally it will be at an <em>angle</em> to the orgin of the world coordinate, in our case, the corner of the room we have chosen. In computer vision terms, the camera is said to be "translated (geometric translation, not language tranlsation :) )  and "rotated" w.r.t to the world coordinate. Hence, we need some sort of translation and rotation variables that will help us take the world cooridinates of the image and project them to the camera first. Right? We call this "Extrinsic Parameters"</p>
-<ul>
-<li>CAMERA =&gt; IMAGE </li>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/coordsys1.png" alt="" title="Co-ordinate system changes">
+<em><a href="https://www.scratchapixel.com/lessons/3d-basic-rendering/computing-pixel-coordinates-of-3d-point/mathematics-computing-2d-coordinates-of-3d-points">Source</a></em></p>
+<p>In the picture above local refers to camera coordinate system. Lets call the "pink point" as P. Also observe that "the pink point" is not 2 different points but the exact same point but represented in 2 different systems. In other words  $ P_{camera} $  is same as $  P_{world} $</p>
+<p>Rotation is provided by the rotation matrix and  is given as follows :-</p>
+$$
+
+R 
+=
+\begin{bmatrix} r_1 &amp; r_2 &amp; r_3 \\  r_4 &amp; r_5 &amp; r_6  \\  r_7 &amp; r_8 &amp; r_9  \end{bmatrix}
+
+$$<ul>
+<li>$  r_1, r_2, r_3  $ represents rotation in the x direction </li>
+<li>$  r_4, r_5, r_6  $ represents rotation in the y direction </li>
+<li>$  r_7, r_8, r_9  $ represents rotation in the z direction </li>
 </ul>
-<p>We just have focal length (shown and described above). This is referred to as an Intrinsic parameter.</p>
-<hr>
+<p>Now we have,</p>
+<blockquote>
+<p>$ P_{camera} $ = R *  ($ P_{world} - C_{world}) $  where $ C_{world} $ is the translation. Its negative since "Z" axis of the camera system is exactly opposite to the world system. It has to be done this way so that X and Y axis are in sync i.e if we move left in 1 system, it moves left in the other and so on.</p>
+</blockquote>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/extparam.png" alt="" title="World to Camera Transformation"><a href="%22http://www.cse.psu.edu/~rtc12/CSE486/lecture12.pdf%22">Source</a></p>
+<p>Changing this to homogenous coordinates we get,</p>
+$$
+
+M_{ext} = 
+
+\begin{bmatrix} X_{c}  \\  Y_{c} \\ Z_{c}  \\ 1 \end{bmatrix}
+=
+
+\begin{bmatrix} r_1 &amp; r_2 &amp; r_3 &amp; 0 \\  r_4 &amp; r_5 &amp; r_6 &amp; 0   \\  r_7 &amp; r_8 &amp; r_9 &amp; 0  \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}
+
+\begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; -c_{x} \\   0 &amp; 1 &amp; 0 &amp; -c_{y}  \\   0 &amp; 0 &amp; 1 &amp; -c_{z} \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}
+
+\begin{bmatrix} X_{w}  \\  Y_{w} \\ Z_{w}  \\ 1 \end{bmatrix}
+
+$$<p>$ M_{ext} $ is the Extrinisic Matrix</p>
+<h1 id="Projection-Matrix">
+<a class="anchor" href="#Projection-Matrix" aria-hidden="true"><span class="octicon octicon-link"></span></a>Projection Matrix<a class="anchor-link" href="#Projection-Matrix"> </a>
+</h1>
+<p>In the begining of the blog post we said We want to move from WORLD =&gt; CAMERA =&gt; IMAGE to take the world coordinates and place them on the image. From the previous section we understood that to move from</p>
+<ul>
+<li>WORLD =&gt; CAMERA = we need extrinisic matrix</li>
+<li>CAMERA =&gt; IMAGE = we need intrinsic matrix</li>
+</ul>
+<p>We can show mathematically as</p>
+<p>$ u_{h} = M_{int}  M_{ext} X_{w} $</p>
+<p>Image points in Homogenous Coordinates =  Intrinsic Matrix <em> Extrinisic Matrix </em> (point in the world coordinate)</p>
+<p>We can combine these 2 matrices into 1 matrix called "Projection Matrix"</p>
+<blockquote>
+<p>$ u_{h} = P X_{w} $</p>
+</blockquote>
 <h1 id="I-understand-Calibration-now.--How-do-we-starting-writing-code?">
 <a class="anchor" href="#I-understand-Calibration-now.--How-do-we-starting-writing-code?" aria-hidden="true"><span class="octicon octicon-link"></span></a>I understand Calibration now.  How do we starting writing code?<a class="anchor-link" href="#I-understand-Calibration-now.--How-do-we-starting-writing-code?"> </a>
 </h1>
