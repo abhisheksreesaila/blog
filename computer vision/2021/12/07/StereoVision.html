@@ -109,7 +109,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      10 min read
+      5 min read
     
 </span></p>
 
@@ -127,21 +127,18 @@ window.onload = wrap_img;
 
   <div class="post-content e-content" itemprop="articleBody">
     <ul class="section-nav">
-<li class="toc-entry toc-h1"><a href="#Pinhole-Camera-Basics">Pinhole Camera Basics </a></li>
-<li class="toc-entry toc-h1"><a href="#Perspective-Imaging-with-Pinhole">Perspective Imaging with Pinhole </a>
+<li class="toc-entry toc-h1"><a href="#The-loss-of-depth">The loss of depth </a></li>
+<li class="toc-entry toc-h1"><a href="#How-to-recover?">How to recover? </a></li>
+<li class="toc-entry toc-h1"><a href="#Finding-Depth">Finding Depth </a>
 <ul>
-<li class="toc-entry toc-h2"><a href="#Pinhole-Properties">Pinhole Properties </a></li>
-<li class="toc-entry toc-h2"><a href="#Pinhole-vs-Lens">Pinhole vs Lens </a></li>
+<li class="toc-entry toc-h2"><a href="#Problems-with-stereo-matching">Problems with stereo matching </a></li>
 </ul>
 </li>
-<li class="toc-entry toc-h1"><a href="#Camera-Calibration">Camera Calibration </a>
+<li class="toc-entry toc-h1"><a href="#Calibration-of-the-Stereo">Calibration of the Stereo </a>
 <ul>
-<li class="toc-entry toc-h2"><a href="#Derive-a-Equation-For-Camera-Calibration">Derive a Equation For Camera Calibration </a></li>
+<li class="toc-entry toc-h2"><a href="#Epipolar-Geometry">Epipolar Geometry </a></li>
 </ul>
 </li>
-<li class="toc-entry toc-h1"><a href="#Projection-Matrix">Projection Matrix </a></li>
-<li class="toc-entry toc-h1"><a href="#I-understand-Calibration-now.--How-do-we-starting-writing-code?">I understand Calibration now.  How do we starting writing code? </a></li>
-<li class="toc-entry toc-h1"><a href="#Code">Code </a></li>
 <li class="toc-entry toc-h1"><a href="#References">References </a></li>
 </ul><!--
 #################################################
@@ -162,202 +159,71 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Pinhole-Camera-Basics">
-<a class="anchor" href="#Pinhole-Camera-Basics" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pinhole Camera Basics<a class="anchor-link" href="#Pinhole-Camera-Basics"> </a>
+<h1 id="The-loss-of-depth">
+<a class="anchor" href="#The-loss-of-depth" aria-hidden="true"><span class="octicon octicon-link"></span></a>The loss of depth<a class="anchor-link" href="#The-loss-of-depth"> </a>
 </h1>
-<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/pinhole.png" alt="" title="Pinhole Camera"></p>
-<p>Before we go explain this in detail lets clarify the terms</p>
-<ul>
-<li>The object (flower) is said to be "in the "world" and its position is given by "world coordinates"</li>
-<li>Now imagine The light rays from the object pass through a pinhole and gets projected on a wall.  The wall  is the "image plane" and the hole it passes through is called the "pinhole". The camera is placed at the pinhole. The camera is said to be in the "Camera plane"</li>
-<li>The distance between the camera placed at the pinhole and the wall (image plane) is called "focal length"</li>
-<li>"z" is also called Depth
-<div class="flash">
-    <svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
-    <strong>Note: </strong>Our goal is to take the 3D coordinates (x,y,z) and TRANSFORM them  to camera plane (3D) and then later PROJECT THEM to the image plane (2D).  
-</div>
-We move from WORLD =&gt; CAMERA =&gt; IMAGE. This is called Forward Imaging Model.  Also the projection from Camera to the image plane is called "Perspective Projection". so we can write the forward imaging model as
-<div class="flash">
-    <svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
-    <strong>Note: </strong>$ [x_w, y_w, z_w] $ (Coordinate transformation) =&gt;  $ [x_c, y_c, z_c]  $ =&gt; (Perspective Projection) $ =&gt;   [x_i, y_i]   $ 
-</div>
-</li>
-</ul>
-<hr>
-<h1 id="Perspective-Imaging-with-Pinhole">
-<a class="anchor" href="#Perspective-Imaging-with-Pinhole" aria-hidden="true"><span class="octicon octicon-link"></span></a>Perspective Imaging with Pinhole<a class="anchor-link" href="#Perspective-Imaging-with-Pinhole"> </a>
+<p>Given a point in the image plane (U, V), can we find a corresponding point in the world system? The answer is NO.  When we move capture a image we know that 3d world coordinate gets transformed to camera cooridinate and then a 2D image plane. Refer to this blog post for indepth details. Since we loose information, more specifically "Z" depth information, it is impossible to get it back.  In other words, given an image point you cannot reverse engineer WORLD coordinate since you have lost a crucial "Z" coordinate in the translation process. however, you havent lost "X", "Y".  There is hope to get it back, but we need additional help.</p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/monocular.png" alt="" title="Loss of Depth"></p>
+<p>Since we know "X", "Y", we know it exists somewhere along the line shown as dotted green lines. Why? This was the same line which was used in the projection of object onto the image plane to derive all the math. So, it can also assist in the reverse direction as well.</p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/projection.png" alt="" title="Projection of the object on image plane"></p>
+<h1 id="How-to-recover?">
+<a class="anchor" href="#How-to-recover?" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to recover?<a class="anchor-link" href="#How-to-recover?"> </a>
 </h1>
-<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/similartri.png" alt="" title="Similar Triangles"></p>
-<p>The above diagram is exactly same as "Pinhole" diagram with labels removed for explaining geometry.The yellow and blue triangles are similar.  By the property of similar triangles (see below note), we have</p>
+<p>The trick is to understand how nature does this. We all have 2 eyes, and we perceive depth (3d) in all objects. Don't we? The "second eye" provides its view of the world  in addition to the first, and both together work together perceive depth.</p>
+<p>Lets apply the same concept here. lets bring in another camera, place it horizontally along the same axis at a distance, find the exact same spot (U, V) on it, guess the point on the "dotted green line".  The intersection of these 2 dotted green lines gives you the depth Z.  See below for the visual</p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/stereo.png" alt="" title="Stereo Vision"></p>
 <ul>
-<li>$r_i/f = r_o/z$</li>
+<li>$ u_r v_r $ and  $ u_l v_l $ are the exact same point of the image as seen in the right and left camera respectively</li>
+<li>the distance between the cameras is called baseline denoted by b</li>
+<li>the camera plane is placed at the pinhole with origin (0,0,0) on the left and (b,0,0) on the right</li>
+<li>P (x, y, z) is the scene point that we are trying to compute using the 2 cameras.</li>
 </ul>
-<p>Where $r_o = (x_o, y_o, z_o )$ and $ r_i = (x_i, y_i, f) $</p>
-<p>$ r_i $ and $ r_o $ are <a href="https://mathinsight.org/vector_introduction">vectors</a> describing the point on the image and world respectively. Hence we can split and write the equation as</p>
-<ul>
-<li>$ x_i/f = x_o/z $  ;   $ y_i/f = y_i/z $
-<div class="flash">
-    <svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
-    <strong>Note: </strong>Triangles are set to be "similar" if they are of the same shape but not necessarily the same size. If 2 triangles have this property then 
-</div>  <em>$AB/DE = BC/EF$</em>
-</li>
-</ul>
-<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/s-triangles-2.png" alt="" title="Similar Triangles Concept"></p>
-<hr>
-<h2 id="Pinhole-Properties">
-<a class="anchor" href="#Pinhole-Properties" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pinhole Properties<a class="anchor-link" href="#Pinhole-Properties"> </a>
-</h2>
-<ol>
-<li>Straight line remains straight in the image plane</li>
-<li>Magnification is inversely proportional to depth ($z_o$). In other words, The further you are from the camera, smaller you appear. Now this is obvious since we all use cameras today. But take a look at the parallel lines intersects for a railway track. The distance between the parallel tracks becomes so small in the image plane that it looks like intersection though in reality we know its parallel throughout. The point of intersection is called the "Vanishing Point"</li>
-</ol>
-<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/railway-tracks.png" alt="" title="Similar Triangles Concept"></p>
-<ol>
-<li>Since a pinhole is a tiny hole letting the light inside the camera to capture the images, for a large object it will take a few seconds before the image is captured. Imagine clicking a camera and waiting 5 seconds to see the image!!  To improve this, we substitute pinhole with LENS. </li>
-</ol>
-<h2 id="Pinhole-vs-Lens">
-<a class="anchor" href="#Pinhole-vs-Lens" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pinhole vs Lens<a class="anchor-link" href="#Pinhole-vs-Lens"> </a>
-</h2>
-<p>We wont cover LENS and its properties, but just keep in mind, LENS are just a "pinhole" made larger. Thats a simplistic view of it. OBviously with more area to capture light, now the wait time to capture the image is reduced, but light is scattered now, and hence causes distortions in your image.
-Apart from the focal length we introduce "distortion coefficients" as one of the Intrinisic Parameters.  All modern cameras use spohisticated lenses.</p>
-<p>See below</p>
-<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/lens-camera.png" alt="" title="Pinhole vs Lens"></p>
-<hr>
-<h1 id="Camera-Calibration">
-<a class="anchor" href="#Camera-Calibration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Camera Calibration<a class="anchor-link" href="#Camera-Calibration"> </a>
+<p>This concept of using 2 cameras to perceive depth in the real world is called Simple Stereo Vision.  In this blog post lets understand the mechanics of such a system.</p>
+<h1 id="Finding-Depth">
+<a class="anchor" href="#Finding-Depth" aria-hidden="true"><span class="octicon octicon-link"></span></a>Finding Depth<a class="anchor-link" href="#Finding-Depth"> </a>
 </h1>
-<p></p>
-<div class="flash">
-    <svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
-    <strong>Note: </strong>The goal of calibration is estimate the Extrinsic and Intrinsic parameters. 
-</div>
-<h2 id="Derive-a-Equation-For-Camera-Calibration">
-<a class="anchor" href="#Derive-a-Equation-For-Camera-Calibration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Derive a Equation For Camera Calibration<a class="anchor-link" href="#Derive-a-Equation-For-Camera-Calibration"> </a>
-</h2>
-<p></p>
-<div class="flash flash-error">
-    <svg class="octicon octicon-alert octicon octicon-alert octicon octicon-alert octicon octicon-alert octicon octicon-alert" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 000 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 00.01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg>
-    <strong>Warning: </strong>This is math heavy.
-</div>
-<p>Lets use our knowledge about pinhole, perspective projection and derive a simple linear model for calibration.</p>
-<p>Take a point in world coordinate. Assume you are given "Extrinsic Parameters" and so you have successfully transformed them into camera coordinates
-Applying perspective projection formula from above we get, $ x_i/f = x_c/z_c $  ;   $ y_i/f = y_c/z_c $   where *_c denotes coordinates in camera plane.</p>
-<p>Rewriting the equation we get,</p>
-<p>$ x_i = f * x_i/z_c $  ;   $ y_i = f * y_i/z_c $</p>
-<p>Lets take a closer look at the IMAGE PLANE.</p>
-<p>For a sake of understanding the basic pinhole model we assumed the image plane to have "mm" millimetres as the unit of measurement. So we take a world coordinate in "m" and convert to "mm". In reality, we all know it is measured in "pixels" measured by a image sensor. So there could be "mulitple pixels per mm" and so the alternative measurement to be consisdered is "pixel density" which is nothing but "pixels per mm". So introduce this to in the equation as follows.</p>
-<p>$ x_i = m * f * x_i/z_c $  ;   $ y_i = m * f * y_i/z_c $</p>
-<p>Why we multiply?</p>
-<ul>
-<li>Pixel Density = 1 ; 1 mm contains 1px;  </li>
-<li>Pixel Density = 10 ; 1 mm contains 10px;   2 mm contains 20px;  3 mm contains 30px;  X mm contains (PixelDensity * X)px;  </li>
-</ul>
-<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/ImagePlaneToSensor.png" alt="" title="Image Plane To Image Sensor Mapping.png"></p>
-<p>Second assumption we made was the centre of the Image plane (measured in mm) is the centre of the Image Sensor which may or may not be true. To avoid this uncertainity, we just place the centre of the image sensor to be at the far left-side corner (for understanding and mathematical convenience) and just add whatever that needs to be added to get the correct centre. so now the equation becomes,</p>
-<p>$ x_i = m_x * f * x_c/z_c + O_x $  ;   $ y_i = m_y * f * y_c/z_c  + O_y $  x_i  and y_i is popularly referred to as u and v.</p>
-<p>$ u = m_x * f * x_c/z_c + O_x $  ;   $ v = m_y * f * y_c/z_c  + O_y $</p>
-<p>$ u = f_x * x_c/z_c + O_x $  ;   $ v = f_y * y_c/z_c  + O_y $  Where $ f_x and f_x $ are focal lengths measured in pixels
+<p>Lets start with the basics. For a pinhole based camera system we know the following equations</p>
+<p>$ u_l = f_x * x/z + O_x $  ;   $ v_l = f_y * y/z  + O_y $</p>
+<p>For the right camera, its the same but the camera axis is shifted by "b"</p>
+<p>$ u_r = f_x * x/z + O_x $  ;   $ v_r = f_y * y/z  + O_y $</p>
+<p>Using the 4 equations, solving for x, y, z  we get</p>
+<p>$ x = \frac {b (u_l - O_x)}{ u_l - u_r } $
+$ y = \frac {b f_x (v_l - O_y)}{f_y (u_l - u_r)} $
+$ z = \frac {b f_x}{ u_l - u_r } $</p>
+<p>Where $ u_l - u_r $ is called disparity and its inversely propotional to "z" 
 </p>
 <div class="flash flash-warn">
     <svg class="octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap" viewbox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M10 7H6l3-7-9 9h4l-3 7 9-9z"></path></svg>
-    <strong>Important: </strong>$ f_x, f_y, O_x, O_y $ represent the camera’s internal geometry and are called INTRINSIC parameters
+    <strong>Important: </strong>If we know the internal parameters fx, fy, ox, oy and compute disparity, we compute Z and hence the depth. 
 </div>
-U and V are non-linear equation, but mathematically its convenient to have a linear equation if we can get one. Homogenous coordinates to the rescue!
-<p>Play <a href="https://wordsandbuttons.online/interactive_guide_to_homogeneous_coordinates.html">here</a> to get a good visual understanding. Basically, the concept is to add "fake" coordinate at the end to scale the values in the same propotion. For eg.  8/4 (=2) is same as 16/8 (=2).  Similarly in the world of coordinates geometry [3,2] will be same as [6,4,2] where 2 is the scale factor (or the fake coordinate added). We can always get the original value back from [6,4,2] by division [6/2,4/2]</p>
-<p>First multiply with $ z_c $</p>
-<p>$ u * z_c = f_x * x_c + O_x * z_c $  ;   $ v * z_c = f_y * y_c  + O_y * z_c $</p>
-<p>Represent them in Homogenous Coordinates
-</p>
-<div class="flash">
-    <svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
-    <strong>Note: </strong>(To convince ourselves that it is the same equation we derived moments ago, just divide z_c in the matrix. All these are just math tricks to get the same answer)
+<p>If the object is closer to the camera, you will see a large disparity. for example, U value in the left camera will be 100, whereas the right camera it will be 75.  This is exact same pixel in the image but having 2 different values. The opposite is also true i.e the object is far, there will be very less difference between the U values (Say 100 and 95).  At infinite distance, U values will exactly be the same.</p>
+<p>Disparity is propotional to baseline meaning if the distance between camera increase, disparity will increase.</p>
+<p>I keep mentioning only "U" because there is no $v_l - v_r $ in the equation. which means only the horizontal component between the 2 cameras vary not the "vertical component".  This proporty shows that  $ u_r, v_r $ and $ u_l $ and $ v_l $ lie along the same line (show by the yellow line). when we are computing DISPARITY to solve for X, Y, Z  in the real world, we can pick a point in the left camera $ (u_l, v_l) $ and  ONLY search along the same line in the right camera (and not wander aimlessly and search the whole image) to get the $ u_r, v_r $ .i.e  its a "1D" search problem. See image below for an example. This is often called the <strong>"correspondence problem"</strong></p>
+<h2 id="Problems-with-stereo-matching">
+<a class="anchor" href="#Problems-with-stereo-matching" aria-hidden="true"><span class="octicon octicon-link"></span></a>Problems with stereo matching<a class="anchor-link" href="#Problems-with-stereo-matching"> </a>
+</h2>
+<p>Did we solve of finding depth just by solving 2 cameras? yes for the most part, but if the images have the repetitive texture, its impossible to compute disparity and therefore can't compute depth.  see image below.</p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/texture.png" alt="" title="Stereo Vision CAN be computed"></p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/no-texture.png" alt="" title="Stereo Vision CANNOT be computed"></p>
+<h1 id="Calibration-of-the-Stereo">
+<a class="anchor" href="#Calibration-of-the-Stereo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Calibration of the Stereo<a class="anchor-link" href="#Calibration-of-the-Stereo"> </a>
+</h1>
+<p>In the section above we assumed the stereo is calibrated that means we know the how they are aligned with respect to each other. In practice if there are 2 camera taking a shot at the same picture at 2 different angles, if we know the internal parameters of each camera, then we can calculate the alignment ourselves and hence compute the depth.  that is what we will explore in this section</p>
+<p>Consider the above picture.  It is identical to the one in the earlier section except that left and right cameras have their own coordinate system $(x_l,y_l, z_l)$ and $ (x_r, y_r, z_r)$ respectively.</p>
+<p>Our goal is to compute the "translation" and "rotation" of one camera w.r.t the other.</p>
+<h2 id="Epipolar-Geometry">
+<a class="anchor" href="#Epipolar-Geometry" aria-hidden="true"><span class="octicon octicon-link"></span></a>Epipolar Geometry<a class="anchor-link" href="#Epipolar-Geometry"> </a>
+</h2>
 </div>
-$$
-
-\begin{bmatrix} u_h  \\  v_h \\ w_h  \end{bmatrix}
-=
-\begin{bmatrix} f_x*x_c + O_x*z_c  \\     f_y*y_c + O_y*z_c  \\ z_c  \end{bmatrix}
-
-$$<p>Showing the same equation in Matrix form</p>
-$$
-
-M_{int} = K = 
-
-\begin{bmatrix} f_x &amp; 0 &amp; O_x &amp; 0 \\  0 &amp; f_y &amp; O_y &amp; 0  \\ 0 &amp; 0 &amp; 1 &amp; 0   \end{bmatrix}
-\begin{bmatrix} x_c \\ y_c \\ z_c \\ 1 \end{bmatrix}
-
-$$<p>This is also called "Intrinsic Matrix or Camera Matrix" popularly shown as K</p>
-<hr>
-<p>In the beginning of this section we assumed we are given Camera Coordinates. Lets check out what it consists of.</p>
-<p>Imagine a camera placed somewhere in an empty room other than the corners.  Fix a corner of this empty room as the origin.  Then camera is at a <em>distance</em> from this corner. Additionally it will be at an <em>angle</em> to the orgin of the world coordinate, in our case, the corner of the room we have chosen. In computer vision terms, the camera is said to be "translated (geometric translation, not language tranlsation :) )  and "rotated" w.r.t to the world coordinate. Hence, we need some sort of translation and rotation variables that will help us take the world cooridinates of the image and project them to the camera first. Right? We call this "Extrinsic Parameters"</p>
-<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/coordsys1.png" alt="" title="Co-ordinate system changes">
-<em><a href="https://www.scratchapixel.com/lessons/3d-basic-rendering/computing-pixel-coordinates-of-3d-point/mathematics-computing-2d-coordinates-of-3d-points">Source</a></em></p>
-<p>In the picture above local refers to camera coordinate system. Lets call the "pink point" as P. Also observe that "the pink point" is not 2 different points but the exact same point but represented in 2 different systems. In other words  $ P_{camera} $  is same as $  P_{world} $</p>
-<p>Rotation is provided by the rotation matrix and  is given as follows :-</p>
-$$
-
-R 
-=
-\begin{bmatrix} r_1 &amp; r_2 &amp; r_3 \\  r_4 &amp; r_5 &amp; r_6  \\  r_7 &amp; r_8 &amp; r_9  \end{bmatrix}
-
-$$<ul>
-<li>$  r_1, r_2, r_3  $ represents rotation in the x direction </li>
-<li>$  r_4, r_5, r_6  $ represents rotation in the y direction </li>
-<li>$  r_7, r_8, r_9  $ represents rotation in the z direction </li>
-</ul>
-<p>Now we have,</p>
-<blockquote>
-<p>$ P_{camera} $ = R *  ($ P_{world} - C_{world}) $  where $ C_{world} $ is the translation. Its negative since "Z" axis of the camera system is exactly opposite to the world system. It has to be done this way so that X and Y axis are in sync i.e if we move left in 1 system, it moves left in the other and so on.</p>
-</blockquote>
-<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/extparam.png" alt="" title="World to Camera Transformation"><a href="%22http://www.cse.psu.edu/~rtc12/CSE486/lecture12.pdf%22">Source</a></p>
-<p>Changing this to homogenous coordinates we get,</p>
-$$
-
-M_{ext} = 
-
-\begin{bmatrix} X_{c}  \\  Y_{c} \\ Z_{c}  \\ 1 \end{bmatrix}
-=
-
-\begin{bmatrix} r_1 &amp; r_2 &amp; r_3 &amp; 0 \\  r_4 &amp; r_5 &amp; r_6 &amp; 0   \\  r_7 &amp; r_8 &amp; r_9 &amp; 0  \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}
-
-\begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; -c_{x} \\   0 &amp; 1 &amp; 0 &amp; -c_{y}  \\   0 &amp; 0 &amp; 1 &amp; -c_{z} \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}
-
-\begin{bmatrix} X_{w}  \\  Y_{w} \\ Z_{w}  \\ 1 \end{bmatrix}
-
-$$<p>$ M_{ext} $ is the Extrinisic Matrix</p>
-<h1 id="Projection-Matrix">
-<a class="anchor" href="#Projection-Matrix" aria-hidden="true"><span class="octicon octicon-link"></span></a>Projection Matrix<a class="anchor-link" href="#Projection-Matrix"> </a>
-</h1>
-<p>In the begining of the blog post we said We want to move from WORLD =&gt; CAMERA =&gt; IMAGE to take the world coordinates and place them on the image. From the previous section we understood that to move from</p>
-<ul>
-<li>WORLD =&gt; CAMERA = we need extrinisic matrix</li>
-<li>CAMERA =&gt; IMAGE = we need intrinsic matrix</li>
-</ul>
-<p>We can show mathematically as</p>
-<p>$ u_{h} = M_{int}  M_{ext} X_{w} $</p>
-<p>Image points in Homogenous Coordinates =  Intrinsic Matrix <em> Extrinisic Matrix </em> (point in the world coordinate)</p>
-<p>We can combine these 2 matrices into 1 matrix called "Projection Matrix"</p>
-<blockquote>
-<p>$ u_{h} = P X_{w} $</p>
-</blockquote>
-<h1 id="I-understand-Calibration-now.--How-do-we-starting-writing-code?">
-<a class="anchor" href="#I-understand-Calibration-now.--How-do-we-starting-writing-code?" aria-hidden="true"><span class="octicon octicon-link"></span></a>I understand Calibration now.  How do we starting writing code?<a class="anchor-link" href="#I-understand-Calibration-now.--How-do-we-starting-writing-code?"> </a>
-</h1>
-<p>Opencv provides all the functions built-in to estimate parameters. Think of an real world object as an input and the pixel coordinates as the output. The problem at hand is to adjust the middle box in between in such a way that we get the desired output from the input provided. If we do this once, you will get an estimate, but those parameters are likely only to be useful in that angle, direction of the camera. Repeat the steps multiple times and you have a good estimate. It sort of unsupervised machine learning so to speak!</p>
-<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/calib-visual.png" alt="" title="Calibration Paramters Estimation"></p>
-<hr>
-<h1 id="Code">
-<a class="anchor" href="#Code" aria-hidden="true"><span class="octicon octicon-link"></span></a>Code<a class="anchor-link" href="#Code"> </a>
-</h1>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="References">
 <a class="anchor" href="#References" aria-hidden="true"><span class="octicon octicon-link"></span></a>References<a class="anchor-link" href="#References"> </a>
 </h1>
-<p><a href="https://docs.opencv.org/3.4.3/d9/d0c/group__calib3d.html">OpenCV Calibration</a></p>
-<p><a href="https://learnopencv.com/camera-calibration-using-opencv/">Geometry of Image Formation</a></p>
-<p><a href="https://www.youtube.com/watch?v=_EhY31MSbNM&amp;t=194s">Pinhole basics</a></p>
-<p><a href="https://www.youtube.com/watch?v=qByYk6JggQU">Calibration Basics</a></p>
-<p><a href="https://personal.math.ubc.ca/~pwalls/math-python/jupyter/latex/">Latex in Jupyter Notebook</a></p>
-<p><a href="https://www.scratchapixel.com/lessons/3d-basic-rendering/computing-pixel-coordinates-of-3d-point/mathematics-computing-2d-coordinates-of-3d-points">Conversion of Coordinate Basics</a></p>
+<p><a href="https://www.youtube.com/watch?v=hUVyDabn1Mg">Stereo Vision</a></p>
 
 </div>
 </div>
