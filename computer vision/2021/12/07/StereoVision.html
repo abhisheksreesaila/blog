@@ -163,9 +163,9 @@ window.onload = wrap_img;
 <a class="anchor" href="#The-loss-of-depth" aria-hidden="true"><span class="octicon octicon-link"></span></a>The loss of depth<a class="anchor-link" href="#The-loss-of-depth"> </a>
 </h1>
 <p>Given a point in the image plane (U, V), can we find a corresponding point in the world system? The answer is NO.  When we move capture a image we know that 3d world coordinate gets transformed to camera cooridinate and then a 2D image plane. Refer to this blog post for indepth details. Since we loose information, more specifically "Z" depth information, it is impossible to get it back.  In other words, given an image point you cannot reverse engineer WORLD coordinate since you have lost a crucial "Z" coordinate in the translation process. however, you havent lost "X", "Y".  There is hope to get it back, but we need additional help.</p>
-<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/monocular.png" alt="" title="Loss of Depth"></p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/monocular2.png" alt="" title="Loss of Depth"></p>
 <p>Since we know "X", "Y", we know it exists somewhere along the line shown as dotted green lines. Why? This was the same line which was used in the projection of object onto the image plane to derive all the math. So, it can also assist in the reverse direction as well.</p>
-<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/projection.png" alt="" title="Projection of the object on image plane"></p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/projection2.png" alt="" title="Projection of the object on image plane"></p>
 <h1 id="How-to-recover?">
 <a class="anchor" href="#How-to-recover?" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to recover?<a class="anchor-link" href="#How-to-recover?"> </a>
 </h1>
