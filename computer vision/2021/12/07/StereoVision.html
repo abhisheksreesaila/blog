@@ -208,7 +208,11 @@ $ z = \frac {b f_x}{ u_l - u_r } $</p>
 <h1 id="Calibration-of-the-Stereo">
 <a class="anchor" href="#Calibration-of-the-Stereo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Calibration of the Stereo<a class="anchor-link" href="#Calibration-of-the-Stereo"> </a>
 </h1>
-<p>In the section above we assumed the stereo is calibrated that means we know the how they are aligned with respect to each other. In practice if there are 2 camera taking a shot at the same picture at 2 different angles, if we know the internal parameters of each camera, then we can calculate the alignment ourselves and hence compute the depth.  that is what we will explore in this section</p>
+<p>In the section above we assumed the stereo is calibrated that means we know the how they are aligned with respect to each other.</p>
+<p>Suppose we take a photo of effiel tower on a iphone. Then another person take a same photo with a slight different angle from samsung android phone. Is it possible to compute Z depth information and hence reocover the 3d structure of the image?  The answer turns out to be yes.</p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/Uncalibrated-stereo.png" alt="" title="Uncalibrated Stereo"></p>
+<p>Every digital camera embeds certain metadata within the image such as the focal length etc. which can be read as internal parameters. All we need to compute are the external parameters.</p>
+<p>In practice if there are 2 camera taking a shot at the same picture at 2 different angles, if we know the internal parameters of each camera, then we can calculate the alignment ourselves and hence compute the depth.  that is what we will explore in this section</p>
 <p>Consider the above picture.  It is identical to the one in the earlier section except that left and right cameras have their own coordinate system $(x_l,y_l, z_l)$ and $ (x_r, y_r, z_r)$ respectively.</p>
 <p>Our goal is to compute the "translation" and "rotation" of one camera w.r.t the other.</p>
 <h2 id="Epipolar-Geometry">
