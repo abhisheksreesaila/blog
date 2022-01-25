@@ -109,7 +109,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      5 min read
+      6 min read
     
 </span></p>
 
@@ -137,6 +137,11 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h1"><a href="#Calibration-of-the-Stereo">Calibration of the Stereo </a>
 <ul>
 <li class="toc-entry toc-h2"><a href="#Epipolar-Geometry">Epipolar Geometry </a></li>
+<li class="toc-entry toc-h2"><a href="#Now-why-do-we-care-about-epipolar-geometry?">Now why do we care about epipolar geometry? </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Epipolar-Constraint">Epipolar Constraint </a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-entry toc-h1"><a href="#References">References </a></li>
@@ -218,7 +223,26 @@ $ z = \frac {b f_x}{ u_l - u_r } $</p>
 <h2 id="Epipolar-Geometry">
 <a class="anchor" href="#Epipolar-Geometry" aria-hidden="true"><span class="octicon octicon-link"></span></a>Epipolar Geometry<a class="anchor-link" href="#Epipolar-Geometry"> </a>
 </h2>
-<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/epipolar-plane.png" alt="" title="Epipolar Plane"></p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/epipolar_geo.png" alt="" title="Epipolar Plane"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The plane formed by the scene point (P) and camera origins $ o_l $  and $ o_r $ is called epipolar plane</p>
+<p>The projection of the center of left camera on the right one and vice versa $ e_l $ and $ e_r $ are called epipoles</p>
+<p>Every scene point will have it own epipolar plane.</p>
+<h2 id="Now-why-do-we-care-about-epipolar-geometry?">
+<a class="anchor" href="#Now-why-do-we-care-about-epipolar-geometry?" aria-hidden="true"><span class="octicon octicon-link"></span></a>Now why do we care about epipolar geometry?<a class="anchor-link" href="#Now-why-do-we-care-about-epipolar-geometry?"> </a>
+</h2>
+<p>We have to find a geometrical constraint, using which an equation can be setup. Solving for that equation will give the answers.</p>
+<h3 id="Epipolar-Constraint">
+<a class="anchor" href="#Epipolar-Constraint" aria-hidden="true"><span class="octicon octicon-link"></span></a>Epipolar Constraint<a class="anchor-link" href="#Epipolar-Constraint"> </a>
+</h3>
+<p>Consider a vector perpendicular to $x_l$</p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/epipolar_cons.png" alt="" title="Epipolar Constraint"></p>
 
 </div>
 </div>
