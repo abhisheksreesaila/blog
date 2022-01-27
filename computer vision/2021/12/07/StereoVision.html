@@ -143,7 +143,11 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h3"><a href="#How-does-this-work-in-practice?">How does this work in practice? </a></li>
 </ul>
 </li>
-<li class="toc-entry toc-h2"><a href="#Finding-correspondence">Finding correspondence </a></li>
+<li class="toc-entry toc-h2"><a href="#Finding-correspondence">Finding correspondence </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Computing-Depth">Computing Depth </a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-entry toc-h1"><a href="#References">References </a></li>
@@ -309,9 +313,17 @@ Where t = position of right camera w.r.t to left; R = orientation of right camer
 </h2>
 <p>In the previous sectionn, we said given a point $u_l, v_l$ finding a matching point $u_r v_r$ is a 1D search problem i.e. we have to search only in 1 direction, horizontally. But wait! where?  Can epipolar geometry help in the telling me the section the image to search?</p>
 <p>Fortunately the answer is yes! There is only other component of EPIPOLAR geometry to the rescue! Epipolar line.</p>
-<p>The projection of all the points on the vector $X_l$ will lie on a line called EPIPOLAR line. See below for visual.</p>
+<p>Imagine looking at the second camera origin, all the points on the $X_l$ will fall on the image plane as shown in red. also, this red line will intersect with the epipolar plane. This intersection is the epipolar line. In other words, The projection of all the points on the vector $X_l$ will lie on a line called EPIPOLAR line.</p>
 <p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/epipolar-line.png" alt="" title="Epipolar line"></p>
-
+<p>From the epipolar constraint, we have</p>
+<blockquote>
+<p>$U_l$ F $U_r$ = 0</p>
+</blockquote>
+<p>$au_r + bv_r + c = 0$ is a simple linear equation of the line that has all the projection points of $X_l$</p>
+<p>-- insert a gif image ---</p>
+<h3 id="Computing-Depth">
+<a class="anchor" href="#Computing-Depth" aria-hidden="true"><span class="octicon octicon-link"></span></a>Computing Depth<a class="anchor-link" href="#Computing-Depth"> </a>
+</h3>
 </div>
 </div>
 </div>
