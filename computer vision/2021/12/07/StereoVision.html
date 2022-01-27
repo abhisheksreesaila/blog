@@ -109,7 +109,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      6 min read
+      8 min read
     
 </span></p>
 
@@ -140,8 +140,10 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h2"><a href="#Now-why-do-we-care-about-epipolar-geometry?">Now why do we care about epipolar geometry? </a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#Epipolar-Constraint">Epipolar Constraint </a></li>
+<li class="toc-entry toc-h3"><a href="#How-does-this-work-in-practice?">How does this work in practice? </a></li>
 </ul>
 </li>
+<li class="toc-entry toc-h2"><a href="#Finding-correspondence">Finding correspondence </a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h1"><a href="#References">References </a></li>
@@ -204,11 +206,12 @@ $ z = \frac {b f_x}{ u_l - u_r } $</p>
 <p>If the object is closer to the camera, you will see a large disparity. for example, U value in the left camera will be 100, whereas the right camera it will be 75.  This is exact same pixel in the image but having 2 different values. The opposite is also true i.e the object is far, there will be very less difference between the U values (Say 100 and 95).  At infinite distance, U values will exactly be the same.</p>
 <p>Disparity is propotional to baseline meaning if the distance between camera increase, disparity will increase.</p>
 <p>I keep mentioning only "U" because there is no $v_l - v_r $ in the equation. which means only the horizontal component between the 2 cameras vary not the "vertical component".  This proporty shows that  $ u_r, v_r $ and $ u_l $ and $ v_l $ lie along the same line (show by the yellow line). when we are computing DISPARITY to solve for X, Y, Z  in the real world, we can pick a point in the left camera $ (u_l, v_l) $ and  ONLY search along the same line in the right camera (and not wander aimlessly and search the whole image) to get the $ u_r, v_r $ .i.e  its a "1D" search problem. See image below for an example. This is often called the <strong>"correspondence problem"</strong></p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/texture.png" alt="" title="Finding Correspondence"></p>
+<p>The white patch in the picture is called the "scan line".</p>
 <h2 id="Problems-with-stereo-matching">
 <a class="anchor" href="#Problems-with-stereo-matching" aria-hidden="true"><span class="octicon octicon-link"></span></a>Problems with stereo matching<a class="anchor-link" href="#Problems-with-stereo-matching"> </a>
 </h2>
 <p>Did we solve of finding depth just by solving 2 cameras? yes for the most part, but if the images have the repetitive texture, its impossible to compute disparity and therefore can't compute depth.  see image below.</p>
-<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/texture.png" alt="" title="Stereo Vision CAN be computed"></p>
 <p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/no-texture.png" alt="" title="Stereo Vision CANNOT be computed"></p>
 <h1 id="Calibration-of-the-Stereo">
 <a class="anchor" href="#Calibration-of-the-Stereo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Calibration of the Stereo<a class="anchor-link" href="#Calibration-of-the-Stereo"> </a>
@@ -231,18 +234,83 @@ $ z = \frac {b f_x}{ u_l - u_r } $</p>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The plane formed by the scene point (P) and camera origins $ o_l $  and $ o_r $ is called epipolar plane</p>
-<p>The projection of the center of left camera on the right one and vice versa $ e_l $ and $ e_r $ are called epipoles</p>
+<ul>
+<li>
+<p>The highlighted triangle is "Epipolar Plane". Its the plane formed by the scene point (P) and camera origins $ o_l $  and $ o_r $ is called epipolar plane</p>
+</li>
+<li>
+<p>$e_l$ and $e_r$ are the projection of camera's origin on the left and right image planes respectively.  They are also called epipoles</p>
+</li>
+<li>
 <p>Every scene point will have it own epipolar plane.</p>
+</li>
+</ul>
 <h2 id="Now-why-do-we-care-about-epipolar-geometry?">
 <a class="anchor" href="#Now-why-do-we-care-about-epipolar-geometry?" aria-hidden="true"><span class="octicon octicon-link"></span></a>Now why do we care about epipolar geometry?<a class="anchor-link" href="#Now-why-do-we-care-about-epipolar-geometry?"> </a>
 </h2>
-<p>We have to find a geometrical constraint, using which an equation can be setup. Solving for that equation will give the answers.</p>
+<blockquote>
+<p>Our goal is to find a equation such that we can calculate t, R (translation, Rotation)</p>
+</blockquote>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/epipolar_cons.png" alt="" title="Epipolar Constraint"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Epipolar-Constraint">
 <a class="anchor" href="#Epipolar-Constraint" aria-hidden="true"><span class="octicon octicon-link"></span></a>Epipolar Constraint<a class="anchor-link" href="#Epipolar-Constraint"> </a>
 </h3>
-<p>Consider a vector perpendicular to $x_l$</p>
-<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/epipolar_cons.png" alt="" title="Epipolar Constraint"></p>
+<p>Consider a vector perpendicular to $X_l$ (highlighted in pink). Lets call it N</p>
+<p>From linear algebra,</p>
+<ul>
+<li>N = Cross Product between t and $X_l$</li>
+<li>N = t X $X_l$....(1)
+Also, <ul>
+<li>$X_l$ * N = 0 (dot product of N and $X_l$ is 0).....(2)</li>
+</ul>
+</li>
+</ul>
+<p>Hence from (1) and (2)</p>
+<p>(t X $X_l$) * $X_l$ = 0</p>
+<blockquote>
+<p>This is the epipolar constraint.</p>
+</blockquote>
+<p>$X_l$ is a vector composed of elements $(x_l, y_l, z_l)$ and $x_l = R x_r + t$ (from the perspective projection)
+Where t = position of right camera w.r.t to left; R = orientation of right camera w.r.t to left. At the end you will end up with</p>
+<blockquote>
+<p>$X_l$ E $X_r$ = 0   ...(1)</p>
+</blockquote>
+<ul>
+<li>
+<p>E is a 3x3 matrix called the Essential Matrix</p>
+<p>But we notice $X_l$ and $X_r$ stil exists! Our goal is to find these values.  So using perspective projection,</p>
+</li>
+</ul>
+<p>$ u = f_x * x_l/z_l + O_x $  ;   $ v = f_y * y_l/z_l + O_y $  Where $ f_x and f_x $ are focal lengths measured in pixels</p>
+<p>Substituting for $x_l$ in equation (1) and expressing in matrix form, we get rid of $x_l$  and $y_l$. but $z_l$ remains!  But $z_l$ can never be 0, since it the depth. In common man terms, the world exists infront of the camera, so world coordinate will have some value of "z", hence z &lt;&gt; 0. Using these concepts we arrive at</p>
+<blockquote>
+<p>$U_l  K^{-1}_l E K^{-1}_r U_r$ = 0</p>
+<p>$U_l$ F $U_r$ = 0</p>
+</blockquote>
+<p>Where F is called fundamental matrix. I have intentionally skipped the math but for those mathematically inclined check out explanation <a href="https://www.youtube.com/watch?v=6kpBqfgSPRc">here</a></p>
+<h3 id="How-does-this-work-in-practice?">
+<a class="anchor" href="#How-does-this-work-in-practice?" aria-hidden="true"><span class="octicon octicon-link"></span></a>How does this work in practice?<a class="anchor-link" href="#How-does-this-work-in-practice?"> </a>
+</h3>
+<ol>
+<li>Suppose we are given the "F" matrix, we can easily get "E" since we "K" is given to us</li>
+</ol>
+<ol>
+<li>Once you get E from step 1, then a technique called "<a href="https://keisan.casio.com/exec/system/15076953160460">singular value decomposition</a>" we can decompose it into "t" and "R"</li>
+</ol>
+<h2 id="Finding-correspondence">
+<a class="anchor" href="#Finding-correspondence" aria-hidden="true"><span class="octicon octicon-link"></span></a>Finding correspondence<a class="anchor-link" href="#Finding-correspondence"> </a>
+</h2>
+<p>In the previous sectionn, we said given a point $u_l, v_l$ finding a matching point $u_r v_r$ is a 1D search problem i.e. we have to search only in 1 direction, horizontally. But wait! where?  Can epipolar geometry help in the telling me the section the image to search?</p>
+<p>Fortunately the answer is yes! There is only other component of EPIPOLAR geometry to the rescue! Epipolar line.</p>
+<p>The projection of all the points on the vector $X_l$ will lie on a line called EPIPOLAR line. See below for visual.</p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/epipolar-line.png" alt="" title="Epipolar line"></p>
 
 </div>
 </div>
