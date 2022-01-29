@@ -4,10 +4,17 @@ title: About Me
 permalink: /about/
 ---
 
-I am Abhishek Sreesaila, certified Azure Cloud Solution Architect at EY, with a passion for data and machine learning. I am also a self-driving car enthusiast, built a self driving car during my spare time and using it to learn robotics. 
 
-In the blog, you will find pratical tips on data, azure cloud, machine learning and robotics. Also, I will throw in couple of life hacks I have learnt along the way such as mind maps, clean code, self-help books that will possibly enrich your career and personal life. I play tennis and chess but not at a level that I can write about it :) You can reach me at this <a href="mailto:abhishek.sreesaila@gmail.com"> email address </a>
+This blog is a dumping ground for all my thoughts and learnings in the data, cloud & machine learning space.  Wherever possible I will try to explain the concepts intuitively either in words or a visual to help me understand (as well others reading)
 
+Once in a while, I will throw in couple of life hacks I have learnt along the way such as mind maps, self-help books that made a difference in my life and might help you. 
+
+```
+If (you like it)
+ SHARE 
+else
+ THATS OK 
+```
 
 
 
