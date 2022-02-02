@@ -307,13 +307,13 @@ R
 $$<ul>
 <li>$  r_1, r_2, r_3  $ represents rotation in the x direction </li>
 <li>$  r_4, r_5, r_6  $ represents rotation in the y direction </li>
-<li>$  r_7, r_8, r_9  $ represents rotation in the z direction </li>
-</ul>
-<p>R</p>
-<p>Now we have,</p>
-<blockquote>
-<p>$ P_{camera} $ = R *  ($ P_{world} - C_{world}) $  where $ C_{world} $ is the translation. Its negative since "Z" axis of the camera system is exactly opposite to the world system. It has to be done this way so that X and Y axis are in sync i.e if we move left in 1 system, it moves left in the other and so on.</p>
+<li>$  r_7, r_8, r_9  $ represents rotation in the z direction <blockquote>
+<p>R is also taken as <a href="https://en.wikipedia.org/wiki/Orthogonal_matrix">Orthonormal Matrix</a>
+Now we have,
+$ P_{camera} $ = R *  ($ P_{world} - C_{world}) $  where $ C_{world} $ is the translation. Its negative since "Z" axis of the camera system is exactly opposite to the world system. It has to be done this way so that X and Y axis are in sync i.e if we move left in 1 system, it moves left in the other and so on.</p>
 </blockquote>
+</li>
+</ul>
 <p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/extparam.png" alt="" title="World to Camera Transformation"><a href="%22http://www.cse.psu.edu/~rtc12/CSE486/lecture12.pdf%22">Source</a></p>
 <p>Changing this to homogenous coordinates we get,</p>
 $$
@@ -365,7 +365,9 @@ $$
 
 \begin{bmatrix} r_1 &amp; r_2 &amp; r_3  \\  r_4 &amp; r_5 &amp; r_6 \\  r_7 &amp; r_8 &amp; r_9  \end{bmatrix}
 
-$$<p>We know that Rotation matrix R is a orthonormal matrix. K is the Upper Right Triangular matrix.  It is possible to decouple them through a process called <strong><a href="https://www.emathhelp.net/en/calculators/linear-algebra/qr-factorization-calculator/">QR Factorization</a></strong></p>
+$$<p>We know that Rotation matrix R is a orthonormal matrix. K is the Upper Right Triangular matrix.</p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/KMatrix-UpperTri.png" alt="" title="Upper Triangular Matrix">
+It is possible to decouple them through a process called <strong><a href="https://www.emathhelp.net/en/calculators/linear-algebra/qr-factorization-calculator/">QR Factorization</a></strong></p>
 <h1 id="I-understand-Calibration-now.--How-do-we-starting-writing-code?">
 <a class="anchor" href="#I-understand-Calibration-now.--How-do-we-starting-writing-code?" aria-hidden="true"><span class="octicon octicon-link"></span></a>I understand Calibration now.  How do we starting writing code?<a class="anchor-link" href="#I-understand-Calibration-now.--How-do-we-starting-writing-code?"> </a>
 </h1>
