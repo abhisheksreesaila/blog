@@ -109,7 +109,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      10 min read
+      11 min read
     
 </span></p>
 
@@ -136,10 +136,14 @@ window.onload = wrap_img;
 </li>
 <li class="toc-entry toc-h1"><a href="#Camera-Calibration">Camera Calibration </a>
 <ul>
-<li class="toc-entry toc-h2"><a href="#Derive-a-Equation-For-Camera-Calibration">Derive a Equation For Camera Calibration </a></li>
+<li class="toc-entry toc-h2"><a href="#Derive-an-equation-for-camera-calibration">Derive an equation for camera calibration </a></li>
 </ul>
 </li>
-<li class="toc-entry toc-h1"><a href="#Projection-Matrix">Projection Matrix </a></li>
+<li class="toc-entry toc-h1"><a href="#Projection-Matrix">Projection Matrix </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Decomposing-Projection-Matrix">Decomposing Projection Matrix </a></li>
+</ul>
+</li>
 <li class="toc-entry toc-h1"><a href="#I-understand-Calibration-now.--How-do-we-starting-writing-code?">I understand Calibration now.  How do we starting writing code? </a></li>
 <li class="toc-entry toc-h1"><a href="#Code">Code </a></li>
 <li class="toc-entry toc-h1"><a href="#References">References </a></li>
@@ -231,8 +235,8 @@ Apart from the focal length we introduce "distortion coefficients" as one of the
     <svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
     <strong>Note: </strong>The goal of calibration is estimate the Extrinsic and Intrinsic parameters. 
 </div>
-<h2 id="Derive-a-Equation-For-Camera-Calibration">
-<a class="anchor" href="#Derive-a-Equation-For-Camera-Calibration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Derive a Equation For Camera Calibration<a class="anchor-link" href="#Derive-a-Equation-For-Camera-Calibration"> </a>
+<h2 id="Derive-an-equation-for-camera-calibration">
+<a class="anchor" href="#Derive-an-equation-for-camera-calibration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Derive an equation for camera calibration<a class="anchor-link" href="#Derive-an-equation-for-camera-calibration"> </a>
 </h2>
 <p></p>
 <div class="flash flash-error">
@@ -305,6 +309,7 @@ $$<ul>
 <li>$  r_4, r_5, r_6  $ represents rotation in the y direction </li>
 <li>$  r_7, r_8, r_9  $ represents rotation in the z direction </li>
 </ul>
+<p>R</p>
 <p>Now we have,</p>
 <blockquote>
 <p>$ P_{camera} $ = R *  ($ P_{world} - C_{world}) $  where $ C_{world} $ is the translation. Its negative since "Z" axis of the camera system is exactly opposite to the world system. It has to be done this way so that X and Y axis are in sync i.e if we move left in 1 system, it moves left in the other and so on.</p>
@@ -338,8 +343,29 @@ $$<p>$ M_{ext} $ is the Extrinisic Matrix</p>
 <p>Image points in Homogenous Coordinates =  Intrinsic Matrix <em> Extrinisic Matrix </em> (point in the world coordinate)</p>
 <p>We can combine these 2 matrices into 1 matrix called "Projection Matrix"</p>
 <blockquote>
-<p>$ u_{h} = P X_{w} $</p>
+<p>$ u_{h} = P X_{w} $  Where  P = $ M_{int} M_{ext} $</p>
 </blockquote>
+$$
+
+\begin{bmatrix} p_1 &amp; p_2 &amp; p_3 &amp; p_4 \\  p_5 &amp; p_6 &amp; p_7 &amp; p_8   \\  p_9 &amp; p_{10} &amp; p_{11} &amp; p_{12}     \end{bmatrix}
+ = 
+\begin{bmatrix} f_x &amp; 0 &amp; O_x &amp; 0 \\  0 &amp; f_y &amp; O_y &amp; 0  \\ 0 &amp; 0 &amp; 1 &amp; 0   \end{bmatrix}
+
+\begin{bmatrix} r_1 &amp; r_2 &amp; r_3 &amp; t_x \\  r_4 &amp; r_5 &amp; r_6 &amp; t_y   \\  r_7 &amp; r_8 &amp; r_9 &amp; t_z  \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}
+
+$$<h2 id="Decomposing-Projection-Matrix">
+<a class="anchor" href="#Decomposing-Projection-Matrix" aria-hidden="true"><span class="octicon octicon-link"></span></a>Decomposing Projection Matrix<a class="anchor-link" href="#Decomposing-Projection-Matrix"> </a>
+</h2>
+<p>From the above Projection Matrix  P = $ M_{int} M_{ext} $  we can deduce that</p>
+$$
+
+\begin{bmatrix} p_1 &amp; p_2 &amp; p_3  \\  p_5 &amp; p_6 &amp; p_7    \\  p_9 &amp; p_{10} &amp; p_{11}   \end{bmatrix}
+ = 
+\begin{bmatrix} f_x &amp; 0 &amp; O_x \\  0 &amp; f_y &amp; O_y  \\ 0 &amp; 0 &amp; 1    \end{bmatrix}
+
+\begin{bmatrix} r_1 &amp; r_2 &amp; r_3  \\  r_4 &amp; r_5 &amp; r_6 \\  r_7 &amp; r_8 &amp; r_9  \end{bmatrix}
+
+$$<p>We know that Rotation matrix R is a orthonormal matrix. K is the Upper Right Triangular matrix.  It is possible to decouple them through a process called <strong><a href="https://www.emathhelp.net/en/calculators/linear-algebra/qr-factorization-calculator/">QR Factorization</a></strong></p>
 <h1 id="I-understand-Calibration-now.--How-do-we-starting-writing-code?">
 <a class="anchor" href="#I-understand-Calibration-now.--How-do-we-starting-writing-code?" aria-hidden="true"><span class="octicon octicon-link"></span></a>I understand Calibration now.  How do we starting writing code?<a class="anchor-link" href="#I-understand-Calibration-now.--How-do-we-starting-writing-code?"> </a>
 </h1>

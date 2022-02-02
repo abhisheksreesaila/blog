@@ -199,19 +199,24 @@ window.onload = wrap_img;
 <p>$ u_r = f_x * x/z + O_x $  ;   $ v_r = f_y * y/z  + O_y $</p>
 <p>Using the 4 equations, solving for x, y, z  we get</p>
 <p>$ x = \frac {b (u_l - O_x)}{ u_l - u_r } $
-$ y = \frac {b f_x (v_l - O_y)}{f_y (u_l - u_r)} $
-$ z = \frac {b f_x}{ u_l - u_r } $</p>
-<p>Where $ u_l - u_r $ is called disparity and its inversely propotional to "z" 
+$ y = \frac {b f_x (v_l - O_y)}{f_y (u_l - u_r)} $</p>
+<p><strong>$ z = \frac {b f_x}{ u_l - u_r } $</strong>
 </p>
+<div class="flash">
+    <svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
+    <strong>Note: </strong>$ u_l - u_r $ is called Disparity and its inversely propotional to "z". 
+</div>
 <div class="flash flash-warn">
     <svg class="octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap" viewbox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M10 7H6l3-7-9 9h4l-3 7 9-9z"></path></svg>
     <strong>Important: </strong>If we know the internal parameters fx, fy, ox, oy and compute disparity, we compute Z and hence the depth. 
 </div>
-<p>If the object is closer to the camera, you will see a large disparity. for example, U value in the left camera will be 100, whereas the right camera it will be 75.  This is exact same pixel in the image but having 2 different values. The opposite is also true i.e the object is far, there will be very less difference between the U values (Say 100 and 95).  At infinite distance, U values will exactly be the same.</p>
+If the object is closer to the camera, you will see a large disparity. for example, U value in the left camera will be 100, whereas the right camera it will be 75.  This is exact same pixel in the image but having 2 different values. The opposite is also true i.e the object is far, there will be very less difference between the U values (Say 100 and 95).  At infinite distance, U values will exactly be the same.
+<blockquote>
 <p>Disparity is propotional to baseline meaning if the distance between camera increase, disparity will increase.</p>
+</blockquote>
 <p>I keep mentioning only "U" because there is no $v_l - v_r $ in the equation. which means only the horizontal component between the 2 cameras vary not the "vertical component".  This proporty shows that  $ u_r, v_r $ and $ u_l $ and $ v_l $ lie along the same line (show by the yellow line). when we are computing DISPARITY to solve for X, Y, Z  in the real world, we can pick a point in the left camera $ (u_l, v_l) $ and  ONLY search along the same line in the right camera (and not wander aimlessly and search the whole image) to get the $ u_r, v_r $ .i.e  its a "1D" search problem. See image below for an example. This is often called the <strong>"correspondence problem"</strong></p>
-<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/texture.png" alt="" title="Finding Correspondence"></p>
-<p>The white patch in the picture is called the "scan line".</p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/texture.png" alt="" title="Finding Correspondence">
+The white patch in the picture is called the "scan line".</p>
 <h2 id="Problems-with-stereo-matching">
 <a class="anchor" href="#Problems-with-stereo-matching" aria-hidden="true"><span class="octicon octicon-link"></span></a>Problems with stereo matching<a class="anchor-link" href="#Problems-with-stereo-matching"> </a>
 </h2>
