@@ -129,7 +129,11 @@ window.onload = wrap_img;
     <ul class="section-nav">
 <li class="toc-entry toc-h1"><a href="#Purpose">Purpose </a>
 <ul>
-<li class="toc-entry toc-h2"><a href="#Outline-of-the-implementation">Outline of the implementation </a></li>
+<li class="toc-entry toc-h2"><a href="#Outline-of-the-implementation">Outline of the implementation </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Bonus-Section">Bonus Section </a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-entry toc-h1"><a href="#References">References </a></li>
@@ -207,6 +211,28 @@ window.onload = wrap_img;
 </ul>
 </li>
 </ul>
+<h3 id="Bonus-Section">
+<a class="anchor" href="#Bonus-Section" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bonus Section<a class="anchor-link" href="#Bonus-Section"> </a>
+</h3>
+<p>Given the following</p>
+<ol>
+<li>disparity map</li>
+<li>camera matrices</li>
+<li>baseline</li>
+</ol>
+<ul>
+<li>
+<p>Use <strong>cv2.stereoRectify</strong>. to get a perspective transformation matrix (or Q matrix)</p>
+</li>
+<li>
+<p>Use the Q Matrix and <strong>cv2.reprojectImageTo3D</strong> to get a points in 3D space (camera)</p>
+</li>
+<li>
+<p>Use library such as "open3d" to visualize</p>
+</li>
+</ul>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/3d-reconstruction.png" alt="" title="3D reconstruction"></p>
+<p>see opencv documentation <a href="https://docs.opencv.org/3.4/d9/d0c/group__calib3d.html#ga1bc1152bd57d63bc524204f21fde6e02">here</a> for explanation</p>
 
 </div>
 </div>
