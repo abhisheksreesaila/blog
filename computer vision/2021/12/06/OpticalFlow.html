@@ -142,8 +142,7 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h2"><a href="#Deep-Optical-Flow">Deep Optical Flow </a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#Calculate-Optical-Flow">Calculate Optical Flow </a></li>
-<li class="toc-entry toc-h3"><a href="#Setting-the-HUE-Value">Setting the HUE Value </a></li>
-<li class="toc-entry toc-h3"><a href="#Converting-HUE-to-RGB">Converting HUE to RGB </a></li>
+<li class="toc-entry toc-h3"><a href="#Setting-the-HSV-Value">Setting the HSV Value </a></li>
 <li class="toc-entry toc-h3"><a href="#Video">Video </a></li>
 </ul>
 </li>
@@ -297,12 +296,13 @@ The code is available here.</p>
 <p>Accorinding to OPENCV, we get U and V in cartesian coordinates. To show this visually it will be good if we can find "magnitude" and "direction".  then we will intuitively know how much it moved and in what angle. Catesian system does not provide that.  Luckily for us, "polar system coordinates" gives us what we want.</p>
 <div class="highlight"><pre><span></span><span class="n">magnitude</span><span class="p">,</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cartToPolar</span><span class="p">(</span><span class="n">flow</span><span class="p">[</span><span class="o">...</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">flow</span><span class="p">[</span><span class="o">...</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
-<h3 id="Setting-the-HUE-Value">
-<a class="anchor" href="#Setting-the-HUE-Value" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setting the HUE Value<a class="anchor-link" href="#Setting-the-HUE-Value"> </a>
+<h3 id="Setting-the-HSV-Value">
+<a class="anchor" href="#Setting-the-HSV-Value" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setting the HSV Value<a class="anchor-link" href="#Setting-the-HSV-Value"> </a>
 </h3>
-<h3 id="Converting-HUE-to-RGB">
-<a class="anchor" href="#Converting-HUE-to-RGB" aria-hidden="true"><span class="octicon octicon-link"></span></a>Converting HUE to RGB<a class="anchor-link" href="#Converting-HUE-to-RGB"> </a>
-</h3>
+<p>H = Hue, represents the Color
+S = Saturation, represents the Intensity
+V = Value.  set to maximum to show the color, if its set to low (Say 0) it shows BLACK</p>
+<p>HSV color arranges color in the form of a cone, so can represent angles and magnitude and thats precisely what we want. Refer <a href="https://medium.theuxblog.com/basics-of-color-theory-83abc55ce94b">here</a> for details.</p>
 <h3 id="Video">
 <a class="anchor" href="#Video" aria-hidden="true"><span class="octicon octicon-link"></span></a>Video<a class="anchor-link" href="#Video"> </a>
 </h3>
