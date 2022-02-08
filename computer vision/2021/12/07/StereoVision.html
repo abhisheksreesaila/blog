@@ -3,12 +3,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Stereo Vision | ABLearn</title>
+<title>Stereo Vision - PART 1 | ABLearn</title>
 <meta name="generator" content="Jekyll v4.0.0" />
-<meta property="og:title" content="Stereo Vision" />
+<meta property="og:title" content="Stereo Vision - PART 1" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Two eyes are always better than one!" />
-<meta property="og:description" content="Two eyes are always better than one!" />
+<meta name="description" content="Why do we need stereo? Two eyes are always better than one!" />
+<meta property="og:description" content="Why do we need stereo? Two eyes are always better than one!" />
 <link rel="canonical" href="https://ablearn.io/computer%20vision/2021/12/07/StereoVision.html" />
 <meta property="og:url" content="https://ablearn.io/computer%20vision/2021/12/07/StereoVision.html" />
 <meta property="og:site_name" content="ABLearn" />
@@ -16,15 +16,15 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-12-07T00:00:00-06:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"https://ablearn.io/computer%20vision/2021/12/07/StereoVision.html"},"description":"Two eyes are always better than one!","@type":"BlogPosting","url":"https://ablearn.io/computer%20vision/2021/12/07/StereoVision.html","headline":"Stereo Vision","dateModified":"2021-12-07T00:00:00-06:00","datePublished":"2021-12-07T00:00:00-06:00","image":"https://ablearn.io/images/post-thumbnails/sv2.png","@context":"https://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://ablearn.io/computer%20vision/2021/12/07/StereoVision.html"},"description":"Why do we need stereo? Two eyes are always better than one!","@type":"BlogPosting","url":"https://ablearn.io/computer%20vision/2021/12/07/StereoVision.html","headline":"Stereo Vision - PART 1","dateModified":"2021-12-07T00:00:00-06:00","datePublished":"2021-12-07T00:00:00-06:00","image":"https://ablearn.io/images/post-thumbnails/sv2.png","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://ablearn.io/feed.xml" title="ABLearn" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Stereo Vision | ABLearn</title>
+<title>Stereo Vision - PART 1 | ABLearn</title>
 <meta name="generator" content="Jekyll v4.0.0" />
-<meta property="og:title" content="Stereo Vision" />
+<meta property="og:title" content="Stereo Vision - PART 1" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Two eyes are always better than one!" />
-<meta property="og:description" content="Two eyes are always better than one!" />
+<meta name="description" content="Why do we need stereo? Two eyes are always better than one!" />
+<meta property="og:description" content="Why do we need stereo? Two eyes are always better than one!" />
 <link rel="canonical" href="https://ablearn.io/computer%20vision/2021/12/07/StereoVision.html" />
 <meta property="og:url" content="https://ablearn.io/computer%20vision/2021/12/07/StereoVision.html" />
 <meta property="og:site_name" content="ABLearn" />
@@ -32,7 +32,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-12-07T00:00:00-06:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"https://ablearn.io/computer%20vision/2021/12/07/StereoVision.html"},"description":"Two eyes are always better than one!","@type":"BlogPosting","url":"https://ablearn.io/computer%20vision/2021/12/07/StereoVision.html","headline":"Stereo Vision","dateModified":"2021-12-07T00:00:00-06:00","datePublished":"2021-12-07T00:00:00-06:00","image":"https://ablearn.io/images/post-thumbnails/sv2.png","@context":"https://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://ablearn.io/computer%20vision/2021/12/07/StereoVision.html"},"description":"Why do we need stereo? Two eyes are always better than one!","@type":"BlogPosting","url":"https://ablearn.io/computer%20vision/2021/12/07/StereoVision.html","headline":"Stereo Vision - PART 1","dateModified":"2021-12-07T00:00:00-06:00","datePublished":"2021-12-07T00:00:00-06:00","image":"https://ablearn.io/images/post-thumbnails/sv2.png","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
@@ -103,13 +103,13 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Stereo Vision</h1><p class="page-description">Two eyes are always better than one!</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-12-07T00:00:00-06:00" itemprop="datePublished">
+    <h1 class="post-title p-name" itemprop="name headline">Stereo Vision - PART 1</h1><p class="page-description">Why do we need stereo? Two eyes are always better than one!</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-12-07T00:00:00-06:00" itemprop="datePublished">
         Dec 7, 2021
       </time>
        • <span class="read-time" title="Estimated read time">
     
     
-      9 min read
+      4 min read
     
 </span></p>
 
@@ -127,27 +127,16 @@ window.onload = wrap_img;
 
   <div class="post-content e-content" itemprop="articleBody">
     <ul class="section-nav">
-<li class="toc-entry toc-h1"><a href="#The-loss-of-depth">The loss of depth </a></li>
-<li class="toc-entry toc-h1"><a href="#How-to-recover?">How to recover? </a></li>
-<li class="toc-entry toc-h1"><a href="#Finding-Depth">Finding Depth </a>
+<li class="toc-entry toc-h1"><a href="#Purpose">Purpose </a></li>
+<li class="toc-entry toc-h1"><a href="#Why-do-we-need-Stereo?">Why do we need Stereo? </a>
 <ul>
+<li class="toc-entry toc-h2"><a href="#The-loss-of-depth">The loss of depth </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#How-to-recover?">How to recover? </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Finding-Depth">Finding Depth </a></li>
 <li class="toc-entry toc-h2"><a href="#Problems-with-stereo-matching">Problems with stereo matching </a></li>
-</ul>
-</li>
-<li class="toc-entry toc-h1"><a href="#Calibration-of-the-Stereo">Calibration of the Stereo </a>
-<ul>
-<li class="toc-entry toc-h2"><a href="#Epipolar-Geometry">Epipolar Geometry </a></li>
-<li class="toc-entry toc-h2"><a href="#Now-why-do-we-care-about-epipolar-geometry?">Now why do we care about epipolar geometry? </a>
-<ul>
-<li class="toc-entry toc-h3"><a href="#Epipolar-Constraint">Epipolar Constraint </a></li>
-<li class="toc-entry toc-h3"><a href="#How-does-this-work-in-practice?">How does this work in practice? </a></li>
-</ul>
-</li>
-<li class="toc-entry toc-h2"><a href="#Finding-correspondence">Finding correspondence </a>
-<ul>
-<li class="toc-entry toc-h3"><a href="#Computing-Depth">Computing Depth </a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li class="toc-entry toc-h1"><a href="#References">References </a></li>
@@ -170,16 +159,28 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="The-loss-of-depth">
-<a class="anchor" href="#The-loss-of-depth" aria-hidden="true"><span class="octicon octicon-link"></span></a>The loss of depth<a class="anchor-link" href="#The-loss-of-depth"> </a>
+<h1 id="Purpose">
+<a class="anchor" href="#Purpose" aria-hidden="true"><span class="octicon octicon-link"></span></a>Purpose<a class="anchor-link" href="#Purpose"> </a>
 </h1>
+<p>In this multi-part blog post, we try to understand</p>
+<ul>
+<li>Why we need stereo in computer vision?</li>
+<li>Given any stereo cameras, how can we calibrate and use them to find depth?</li>
+<li>Summary of steps</li>
+</ul>
+<h1 id="Why-do-we-need-Stereo?">
+<a class="anchor" href="#Why-do-we-need-Stereo?" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why do we need Stereo?<a class="anchor-link" href="#Why-do-we-need-Stereo?"> </a>
+</h1>
+<h2 id="The-loss-of-depth">
+<a class="anchor" href="#The-loss-of-depth" aria-hidden="true"><span class="octicon octicon-link"></span></a>The loss of depth<a class="anchor-link" href="#The-loss-of-depth"> </a>
+</h2>
 <p>Given a point in the image plane (U, V), can we find a corresponding point in the world system? The answer is NO.  When we move capture a image we know that 3d world coordinate gets transformed to camera cooridinate and then a 2D image plane. Refer to this blog post for indepth details. Since we loose information, more specifically "Z" depth information, it is impossible to get it back.  In other words, given an image point you cannot reverse engineer WORLD coordinate since you have lost a crucial "Z" coordinate in the translation process. however, you havent lost "X", "Y".  There is hope to get it back, but we need additional help.</p>
 <p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/monocular2.png" alt="" title="Loss of Depth"></p>
 <p>Since we know "X", "Y", we know it exists somewhere along the line shown as dotted green lines. Why? This was the same line which was used in the projection of object onto the image plane to derive all the math. So, it can also assist in the reverse direction as well.</p>
 <p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/projection2.png" alt="" title="Projection of the object on image plane"></p>
-<h1 id="How-to-recover?">
+<h3 id="How-to-recover?">
 <a class="anchor" href="#How-to-recover?" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to recover?<a class="anchor-link" href="#How-to-recover?"> </a>
-</h1>
+</h3>
 <p>The trick is to understand how nature does this. We all have 2 eyes, and we perceive depth (3d) in all objects. Don't we? The "second eye" provides its view of the world  in addition to the first, and both together work together perceive depth.</p>
 <p>Lets apply the same concept here. lets bring in another camera, place it horizontally along the same axis at a distance, find the exact same spot (U, V) on it, guess the point on the "dotted green line".  The intersection of these 2 dotted green lines gives you the depth Z.  See below for the visual</p>
 <p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/stereo.png" alt="" title="Stereo Vision"></p>
@@ -190,9 +191,9 @@ window.onload = wrap_img;
 <li>P (x, y, z) is the scene point that we are trying to compute using the 2 cameras.</li>
 </ul>
 <p>This concept of using 2 cameras to perceive depth in the real world is called Simple Stereo Vision.  In this blog post lets understand the mechanics of such a system.</p>
-<h1 id="Finding-Depth">
+<h2 id="Finding-Depth">
 <a class="anchor" href="#Finding-Depth" aria-hidden="true"><span class="octicon octicon-link"></span></a>Finding Depth<a class="anchor-link" href="#Finding-Depth"> </a>
-</h1>
+</h2>
 <p>Lets start with the basics. For a pinhole based camera system we know the following equations</p>
 <p>$ u_l = f_x * x/z + O_x $  ;   $ v_l = f_y * y/z  + O_y $</p>
 <p>For the right camera, its the same but the camera axis is shifted by "b"</p>
@@ -222,134 +223,7 @@ The white patch in the picture is called the "scan line".</p>
 </h2>
 <p>Did we solve of finding depth just by solving 2 cameras? yes for the most part, but if the images have the repetitive texture, its impossible to compute disparity and therefore can't compute depth.  see image below.</p>
 <p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/no-texture.png" alt="" title="Stereo Vision CANNOT be computed"></p>
-<h1 id="Calibration-of-the-Stereo">
-<a class="anchor" href="#Calibration-of-the-Stereo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Calibration of the Stereo<a class="anchor-link" href="#Calibration-of-the-Stereo"> </a>
-</h1>
-<p>In the section above we assumed the stereo is calibrated that means we know the how they are aligned with respect to each other.</p>
-<p>Suppose we take a photo of effiel tower on a iphone. Then another person take a same photo with a slight different angle from samsung android phone. Is it possible to compute Z depth information and hence reocover the 3d structure of the image?  The answer turns out to be yes.</p>
-<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/Uncalibrated-stereo.png" alt="" title="Uncalibrated Stereo"></p>
-<p>Every digital camera embeds certain metadata within the image such as the focal length etc. which can be read as internal parameters. All we need to compute are the external parameters.</p>
-<p>In practice if there are 2 camera taking a shot at the same picture at 2 different angles, if we know the internal parameters of each camera, then we can calculate the alignment ourselves and hence compute the depth.  that is what we will explore in this section</p>
-<p>Consider the above picture.  It is identical to the one in the earlier section except that left and right cameras have their own coordinate system $(x_l,y_l, z_l)$ and $ (x_r, y_r, z_r)$ respectively.</p>
-<p>Our goal is to compute the "translation" and "rotation" of one camera w.r.t the other.</p>
-<h2 id="Epipolar-Geometry">
-<a class="anchor" href="#Epipolar-Geometry" aria-hidden="true"><span class="octicon octicon-link"></span></a>Epipolar Geometry<a class="anchor-link" href="#Epipolar-Geometry"> </a>
-</h2>
-<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/epipolar_geo.png" alt="" title="Epipolar Plane"></p>
 
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>
-<p>The highlighted triangle is "Epipolar Plane". Its the plane formed by the scene point (P) and camera origins $ o_l $  and $ o_r $ is called epipolar plane</p>
-</li>
-<li>
-<p>$e_l$ and $e_r$ are the projection of camera's origin on the left and right image planes respectively.  They are also called epipoles</p>
-</li>
-<li>
-<p>Every scene point will have it own epipolar plane.</p>
-</li>
-</ul>
-<h2 id="Now-why-do-we-care-about-epipolar-geometry?">
-<a class="anchor" href="#Now-why-do-we-care-about-epipolar-geometry?" aria-hidden="true"><span class="octicon octicon-link"></span></a>Now why do we care about epipolar geometry?<a class="anchor-link" href="#Now-why-do-we-care-about-epipolar-geometry?"> </a>
-</h2>
-<blockquote>
-<p>Our goal is to find a equation such that we can calculate t, R (translation, Rotation)</p>
-</blockquote>
-<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/epipolar_cons.png" alt="" title="Epipolar Constraint"></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Epipolar-Constraint">
-<a class="anchor" href="#Epipolar-Constraint" aria-hidden="true"><span class="octicon octicon-link"></span></a>Epipolar Constraint<a class="anchor-link" href="#Epipolar-Constraint"> </a>
-</h3>
-<p>Consider a vector perpendicular to $X_l$ (highlighted in pink). Lets call it N</p>
-<p>From linear algebra,</p>
-<ul>
-<li>N = Cross Product between t and $X_l$</li>
-<li>N = t X $X_l$....(1)
-Also, <ul>
-<li>$X_l$ * N = 0 (dot product of N and $X_l$ is 0).....(2)</li>
-</ul>
-</li>
-</ul>
-<p>Hence from (1) and (2)</p>
-<p>(t X $X_l$) * $X_l$ = 0</p>
-<blockquote>
-<p>This is the epipolar constraint.</p>
-</blockquote>
-<p>$X_l$ is a vector composed of elements $(x_l, y_l, z_l)$ and $x_l = R x_r + t$ (from the perspective projection)
-Where t = position of right camera w.r.t to left; R = orientation of right camera w.r.t to left. At the end you will end up with</p>
-<blockquote>
-<p>$X_l$ E $X_r$ = 0   ...(1)</p>
-</blockquote>
-<ul>
-<li>
-<p>E is a 3x3 matrix called the Essential Matrix</p>
-<p>But we notice $X_l$ and $X_r$ stil exists! Our goal is to find these values.  So using perspective projection,</p>
-</li>
-</ul>
-<p>$ u = f_x * x_l/z_l + O_x $  ;   $ v = f_y * y_l/z_l + O_y $  Where $ f_x and f_x $ are focal lengths measured in pixels</p>
-<p>Substituting for $x_l$ in equation (1) and expressing in matrix form, we get rid of $x_l$  and $y_l$. but $z_l$ remains!  But $z_l$ can never be 0, since it the depth. In common man terms, the world exists infront of the camera, so world coordinate will have some value of "z", hence z &lt;&gt; 0. Using these concepts we arrive at</p>
-<blockquote>
-<p>$U_l  K^{-1}_l E K^{-1}_r U_r$ = 0</p>
-<p>$U_l$ F $U_r$ = 0</p>
-</blockquote>
-<p>where $U_l$ =  $[u_l, v_l, 1]$</p>
-<p>and $U_r$ = $$ \begin{bmatrix} u_r \\  v_r \\  1 \end{bmatrix} $$</p>
-<p>Where F is called fundamental matrix. I have intentionally skipped the math but for those mathematically inclined check out explanation <a href="https://www.youtube.com/watch?v=6kpBqfgSPRc">here</a></p>
-<h3 id="How-does-this-work-in-practice?">
-<a class="anchor" href="#How-does-this-work-in-practice?" aria-hidden="true"><span class="octicon octicon-link"></span></a>How does this work in practice?<a class="anchor-link" href="#How-does-this-work-in-practice?"> </a>
-</h3>
-<ol>
-<li>Suppose we are given the "F" matrix, we can easily get "E" since we "K" is given to us</li>
-</ol>
-<ol>
-<li>Once you get E from step 1, then a technique called "<a href="https://keisan.casio.com/exec/system/15076953160460">singular value decomposition</a>" we can decompose it into "t" and "R"</li>
-</ol>
-<h2 id="Finding-correspondence">
-<a class="anchor" href="#Finding-correspondence" aria-hidden="true"><span class="octicon octicon-link"></span></a>Finding correspondence<a class="anchor-link" href="#Finding-correspondence"> </a>
-</h2>
-<p>In the previous sectionn, we said given a point $u_l, v_l$ finding a matching point $u_r v_r$ is a 1D search problem i.e. we have to search only in 1 direction, horizontally. But wait! where?  Can epipolar geometry help in the telling me the section the image to search?</p>
-<p>Fortunately the answer is yes! There is only other component of EPIPOLAR geometry to the rescue! Epipolar line.</p>
-<p>Imagine looking at the second camera origin, all the points on the $X_l$ will fall on the image plane as shown in red. also, this red line will intersect with the epipolar plane. This intersection is the epipolar line. In other words, The projection of all the points on the vector $X_l$ will lie on a line called EPIPOLAR line.</p>
-<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/epipolar-line.png" alt="" title="Epipolar line"></p>
-<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/epipolarline2.png%20%5Bsource%5D(https://en.wikipedia.org/wiki/Epipolar_geometry" alt="">)</p>
-<p><img src="https://abhisheksreesaila.github.io/blog/images/stereo/epipolar-formation.gif" alt="" title="Epipolar line Formation- Animated"></p>
-<p>From the last section, we have</p>
-<blockquote>
-<p>$U_l$ F $U_r$ = 0</p>
-</blockquote>
-<p>Expanding..</p>
-$$
-
-
-\begin{bmatrix} u_{l} \\  v_{l} \\  1  \end{bmatrix}
-
-\begin{bmatrix} f_{11} &amp; f_{12} &amp; f_{13} \\  f_{21} &amp; f_{22} &amp; f_{23}  \\  f_{31} &amp; f_{32} &amp; f_{33}  \end{bmatrix}
-
-\begin{bmatrix} u_r \\  v_r \\  1 \end{bmatrix}
-
-=  0
-
-$$<p>Multiplying...</p>
-<p>$(f_{11}u_l +f_{12}v_l + f_{31})u_r + (f_{21}u_l +f_{22}v_l + f_{32})v_r + (f_{13}u_l +f_{23}v_l + f_{33})= 0 $</p>
-<p>Simplified to...</p>
-<p>$Au_r + Bv_r + C = 0$ is a simple linear equation of the line that has all the projection points of $X_l$</p>
-<blockquote>
-<p>This is the equation for the epipolar line</p>
-</blockquote>
-<h3 id="Computing-Depth">
-<a class="anchor" href="#Computing-Depth" aria-hidden="true"><span class="octicon octicon-link"></span></a>Computing Depth<a class="anchor-link" href="#Computing-Depth"> </a>
-</h3>
 </div>
 </div>
 </div>
