@@ -4,8 +4,8 @@
         "post0": {
             "title": "Multi Task Learning",
             "content": "Definition . Multi Task Learning - Adaption of a single neural network model to multiple tasks such as segmentation, depth estimation etc. | Segmenation : Per Pixel Classification of an image to identify objects such as trees, roads, people etc. | Depth estimation : Estimating the distance from the camera | . We will producing a output such as the one below. Here is the code . Explanation . What tasks can be combined? . Architecture Pattern . Our Implementation . Final Thoughts . References .",
-            "url": "https://ablearn.io/reinforcement%20learning/2022/03/25/Hydranets.html",
-            "relUrl": "/reinforcement%20learning/2022/03/25/Hydranets.html",
+            "url": "https://ablearn.io/computer%20vision/2022/03/25/Hydranets.html",
+            "relUrl": "/computer%20vision/2022/03/25/Hydranets.html",
             "date": " • Mar 25, 2022"
         }
         
