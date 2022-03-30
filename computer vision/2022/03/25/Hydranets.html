@@ -131,9 +131,22 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h1"><a href="#Explanation">Explanation </a>
 <ul>
 <li class="toc-entry toc-h2"><a href="#What-tasks-can-be-combined?">What tasks can be combined? </a></li>
-<li class="toc-entry toc-h2"><a href="#Architecture-Pattern">Architecture Pattern </a></li>
-<li class="toc-entry toc-h2"><a href="#Our-Implementation">Our Implementation </a></li>
-<li class="toc-entry toc-h2"><a href="#Final-Thoughts">Final Thoughts </a></li>
+<li class="toc-entry toc-h2"><a href="#Architecture">Architecture </a></li>
+<li class="toc-entry toc-h2"><a href="#Our-Implementation">Our Implementation </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Code-Walkthrough">Code Walkthrough </a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#Encoder">Encoder </a></li>
+<li class="toc-entry toc-h4"><a href="#Decoder">Decoder </a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#Highlights-of-the-network">Highlights of the network </a></li>
+<li class="toc-entry toc-h5"><a href="#Output">Output </a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-entry toc-h1"><a href="#References">References </a></li>
@@ -174,59 +187,127 @@ window.onload = wrap_img;
     <iframe width="560" height="315" src="https://www.youtube.com/embed/iXpnkIxrbq0" frameborder="0" allowfullscreen=""></iframe>
 </center>
 
-Here is the <a href="https://colab.research.google.com/drive/1Q8Oi37D-Qf2d5Oemo5aXuq1kPC5vePCZ?usp=sharing">code</a>
 <h1 id="Explanation">
 <a class="anchor" href="#Explanation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Explanation<a class="anchor-link" href="#Explanation"> </a>
 </h1>
 <h2 id="What-tasks-can-be-combined?">
 <a class="anchor" href="#What-tasks-can-be-combined?" aria-hidden="true"><span class="octicon octicon-link"></span></a>What tasks can be combined?<a class="anchor-link" href="#What-tasks-can-be-combined?"> </a>
 </h2>
-<h2 id="Architecture-Pattern">
-<a class="anchor" href="#Architecture-Pattern" aria-hidden="true"><span class="octicon octicon-link"></span></a>Architecture Pattern<a class="anchor-link" href="#Architecture-Pattern"> </a>
+<p>Based on this <a href="https://arxiv.org/pdf/1905.07553.pdf">paper</a> the following observations were made</p>
+<ul>
+<li>Segmentation + anything = becomes better</li>
+<li>Anything + segmentation = make it worse</li>
+<li>Anything + Normals = makes it better</li>
+</ul>
+<h2 id="Architecture">
+<a class="anchor" href="#Architecture" aria-hidden="true"><span class="octicon octicon-link"></span></a>Architecture<a class="anchor-link" href="#Architecture"> </a>
 </h2>
+<p>The 2 most recent and popular ones are</p>
+<ul>
+<li><a href="https://blog.google/technology/ai/introducing-pathways-next-generation-ai-architecture/">Google Pathways</a></li>
+<li><a href="https://www.youtube.com/watch?v=IHH47nZ7FZU&amp;t=248s">Tesla's Hydranets</a></li>
+</ul>
 <h2 id="Our-Implementation">
 <a class="anchor" href="#Our-Implementation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Our Implementation<a class="anchor-link" href="#Our-Implementation"> </a>
 </h2>
-<h2 id="Final-Thoughts">
-<a class="anchor" href="#Final-Thoughts" aria-hidden="true"><span class="octicon octicon-link"></span></a>Final Thoughts<a class="anchor-link" href="#Final-Thoughts"> </a>
-</h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+<p>We will focus on Tesla's Hydranets in this blog post. We will recreate a modified version of the hydranets based on this <a href="https://arxiv.org/pdf/1809.04766.pdf">Real-Time Joint Semantic Segmentation and Depth Estimation Using
+Asymmetric Annotations</a></p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/mtl/ModifiedHydranets.png" alt="" title="Architecture"></p>
+<h3 id="Code-Walkthrough">
+<a class="anchor" href="#Code-Walkthrough" aria-hidden="true"><span class="octicon octicon-link"></span></a>Code Walkthrough<a class="anchor-link" href="#Code-Walkthrough"> </a>
+</h3>
+<p>Its a encoder - decoder network. We use <strong><a href="https://arxiv.org/abs/1801.04381">MobileNetv2</a></strong> as encoder and <strong><a href="https://arxiv.org/pdf/1810.03272.pdf">RefineNet</a></strong> as decoder.</p>
+<h4 id="Encoder">
+<a class="anchor" href="#Encoder" aria-hidden="true"><span class="octicon octicon-link"></span></a>Encoder<a class="anchor-link" href="#Encoder"> </a>
+</h4>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/mtl/mobilenet_v2.jpeg" alt="" title="MobileNetv2"></p>
+<p>There are 2 important concepts :-</p>
+<ul>
+<li>DepthWise Separable Convolutions</li>
+</ul>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/mtl/DepthWise.jpg" alt="" title="Depth Wise"></p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/mtl/NormalConv.jpg" alt="" title="Standard Convolutions"></p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/mtl/NormalConv.jpg" alt="" title="Standard Convolutions"></p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/mtl/ReducedParams.jpg" alt="" title="Reduction in parameters"></p>
+<ul>
+<li>Residual Networks &amp; Inverted Residual Networks</li>
+</ul>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/mtl/ResidualvsNonResidual.png" alt="" title="Residual vs NonResidual Block"></p>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/mtl/ResidualNetwork.jpg" alt="" title="Residual Block"></p>
+<h4 id="Decoder">
+<a class="anchor" href="#Decoder" aria-hidden="true"><span class="octicon octicon-link"></span></a>Decoder<a class="anchor-link" href="#Decoder"> </a>
+</h4>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/mtl/RefineNet.png" alt="" title="RefineNet"></p>
+<h5 id="Highlights-of-the-network">
+<a class="anchor" href="#Highlights-of-the-network" aria-hidden="true"><span class="octicon octicon-link"></span></a>Highlights of the network<a class="anchor-link" href="#Highlights-of-the-network"> </a>
+</h5>
+<ul>
+<li>
+<p>RCU - Residual Conv Unit</p>
+<ul>
+<li>Simplified version of the convolution unit in the original ResNet where the batch-normalization layers are removed</li>
+</ul>
+</li>
+<li>
+<p>Multi Resolution Fusion</p>
+<ul>
+<li>All path inputs are then fused into a high-resolution feature map by the multi-resolution fusion block.</li>
+</ul>
+</li>
+<li>
+<p>Chained Residual Pooling</p>
+<ul>
+<li>The proposed chained residual pooling aims to capture background context from a large
+image region. It is able to efficiently pool features with multiple window sizes and fuse     them together using learnable weights. In particular, this component is built as a
+chain of multiple pooling blocks, each consisting of one max-pooling layer and one   convolution layer. One pooling block takes the output of the previous pooling block as input. Therefore, the current pooling block is able to re-use the result from the previous pooling operation and thus access the features from a large region without using a large pooling window.</li>
+</ul>
+</li>
+</ul>
+<p>Here is the <a href="https://colab.research.google.com/drive/1Q8Oi37D-Qf2d5Oemo5aXuq1kPC5vePCZ?usp=sharing">code</a></p>
+<h5 id="Output">
+<a class="anchor" href="#Output" aria-hidden="true"><span class="octicon octicon-link"></span></a>Output<a class="anchor-link" href="#Output"> </a>
+</h5>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/mtl/HydranetOutput.png" alt="" title="Output">
 
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+</p>
+<center>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/iXpnkIxrbq0" frameborder="0" allowfullscreen=""></iframe>
+</center>
 
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="References">
 <a class="anchor" href="#References" aria-hidden="true"><span class="octicon octicon-link"></span></a>References<a class="anchor-link" href="#References"> </a>
 </h1>
+<p><a href="https://github.com/DrSleep/multi-task-refinenet/blob/master/src/notebooks/ExpNYUDKITTI_joint.ipynb/">Implementation Notebook</a></p>
+<p><a href="https://arxiv.org/pdf/1801.04381.pdf">Architecture Images From This Paper</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
 </div>
 </div>
 </div>
