@@ -14,7 +14,7 @@
     
         ,"post1": {
             "title": "Actor Critic",
-            "content": "Actor Critic Reinforcement Model . Explanation coming soon... . Meanwhile code here .",
+            "content": "Actor Critic Reinforcement Model . There are 2 networks . Actor - policy network - gives action | Critic - uses action to go to next state - evaluates state - critizes the action to give the best state possible based on the (reward setup + discount factor) good actions lead to good qvalues - so critism goes down - then actor starts producing good action and qnetworks critizes keeps going down | . | . Explanation coming soon... . Meanwhile code here .",
             "url": "https://ablearn.io/reinforcement%20learning/2022/01/10/ActorCritic.html",
             "relUrl": "/reinforcement%20learning/2022/01/10/ActorCritic.html",
             "date": " • Jan 10, 2022"

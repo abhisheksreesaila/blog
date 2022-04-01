@@ -156,6 +156,14 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>There are 2 networks</p>
+<ul>
+<li>Actor - policy network - gives action </li>
+<li>Critic - uses action to go to next state - evaluates state - critizes the action to give the best state possible based on the (reward setup + discount factor)<ul>
+<li>good actions lead to good qvalues - so critism goes down - then actor starts producing good action and qnetworks critizes keeps going down  </li>
+</ul>
+</li>
+</ul>
 
 </div>
 </div>
