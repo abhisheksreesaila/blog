@@ -3,12 +3,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Stereo Vision - PART 2 | ABLearn</title>
+<title>Calibrating Stereo &amp; Epipolar Geometry | ABLearn</title>
 <meta name="generator" content="Jekyll v4.0.0" />
-<meta property="og:title" content="Stereo Vision - PART 2" />
+<meta property="og:title" content="Calibrating Stereo &amp; Epipolar Geometry" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Calibration and Summary" />
-<meta property="og:description" content="Calibration and Summary" />
+<meta name="description" content="Calibrating stereo cameras and understanding epipolar geometry" />
+<meta property="og:description" content="Calibrating stereo cameras and understanding epipolar geometry" />
 <link rel="canonical" href="https://ablearn.io/computer%20vision/2021/12/08/StereoVision-2.html" />
 <meta property="og:url" content="https://ablearn.io/computer%20vision/2021/12/08/StereoVision-2.html" />
 <meta property="og:site_name" content="ABLearn" />
@@ -16,15 +16,15 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-12-08T00:00:00-06:00" />
 <script type="application/ld+json">
-{"image":"https://ablearn.io/images/post-thumbnails/sv2.png","description":"Calibration and Summary","@type":"BlogPosting","url":"https://ablearn.io/computer%20vision/2021/12/08/StereoVision-2.html","headline":"Stereo Vision - PART 2","dateModified":"2021-12-08T00:00:00-06:00","datePublished":"2021-12-08T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://ablearn.io/computer%20vision/2021/12/08/StereoVision-2.html"},"@context":"https://schema.org"}</script>
+{"description":"Calibrating stereo cameras and understanding epipolar geometry","@type":"BlogPosting","headline":"Calibrating Stereo &amp; Epipolar Geometry","url":"https://ablearn.io/computer%20vision/2021/12/08/StereoVision-2.html","datePublished":"2021-12-08T00:00:00-06:00","dateModified":"2021-12-08T00:00:00-06:00","image":"https://ablearn.io/images/post-thumbnails/sv2.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://ablearn.io/computer%20vision/2021/12/08/StereoVision-2.html"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://ablearn.io/feed.xml" title="ABLearn" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Stereo Vision - PART 2 | ABLearn</title>
+<title>Calibrating Stereo &amp; Epipolar Geometry | ABLearn</title>
 <meta name="generator" content="Jekyll v4.0.0" />
-<meta property="og:title" content="Stereo Vision - PART 2" />
+<meta property="og:title" content="Calibrating Stereo &amp; Epipolar Geometry" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Calibration and Summary" />
-<meta property="og:description" content="Calibration and Summary" />
+<meta name="description" content="Calibrating stereo cameras and understanding epipolar geometry" />
+<meta property="og:description" content="Calibrating stereo cameras and understanding epipolar geometry" />
 <link rel="canonical" href="https://ablearn.io/computer%20vision/2021/12/08/StereoVision-2.html" />
 <meta property="og:url" content="https://ablearn.io/computer%20vision/2021/12/08/StereoVision-2.html" />
 <meta property="og:site_name" content="ABLearn" />
@@ -32,7 +32,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-12-08T00:00:00-06:00" />
 <script type="application/ld+json">
-{"image":"https://ablearn.io/images/post-thumbnails/sv2.png","description":"Calibration and Summary","@type":"BlogPosting","url":"https://ablearn.io/computer%20vision/2021/12/08/StereoVision-2.html","headline":"Stereo Vision - PART 2","dateModified":"2021-12-08T00:00:00-06:00","datePublished":"2021-12-08T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://ablearn.io/computer%20vision/2021/12/08/StereoVision-2.html"},"@context":"https://schema.org"}</script>
+{"description":"Calibrating stereo cameras and understanding epipolar geometry","@type":"BlogPosting","headline":"Calibrating Stereo &amp; Epipolar Geometry","url":"https://ablearn.io/computer%20vision/2021/12/08/StereoVision-2.html","datePublished":"2021-12-08T00:00:00-06:00","dateModified":"2021-12-08T00:00:00-06:00","image":"https://ablearn.io/images/post-thumbnails/sv2.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://ablearn.io/computer%20vision/2021/12/08/StereoVision-2.html"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
@@ -103,7 +103,7 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Stereo Vision - PART 2</h1><p class="page-description">Calibration and Summary</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-12-08T00:00:00-06:00" itemprop="datePublished">
+    <h1 class="post-title p-name" itemprop="name headline">Calibrating Stereo &amp; Epipolar Geometry</h1><p class="page-description">Calibrating stereo cameras and understanding epipolar geometry</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-12-08T00:00:00-06:00" itemprop="datePublished">
         Dec 8, 2021
       </time>
        • <span class="read-time" title="Estimated read time">
