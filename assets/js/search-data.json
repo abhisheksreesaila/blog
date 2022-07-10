@@ -14,7 +14,7 @@
     
         ,"post1": {
             "title": "Object Tracking",
-            "content": "Definition . SORT - simple online tracking tool . SORT is a method used to track object at real time. the output could look like below . Tracking by detection . making use of object detection in consecutive frames | use kalman filter for estimating the motion | associate bounding boxes between frames using hungarian algo use IOU as cost | but can use linear cost or exponential cost as well | . | . Code here . DeepSort . Improve SORT by including &quot;visual appearance&quot; along with state estimation with kalman filter for better predicability . **Other improvements for SORT . References .",
+            "content": "Definition . SORT - simple online tracking tool . SORT is a method used to track object at real time. the output could look like below . Tracking by detection . making use of object detection in the first frame | use kalman filter for estimating the motion in the next frame | associate bounding boxes between frames using hungarian algorithm (optimal matching/association algorithm) use IOU as cost | but can use linear cost or exponential cost as well | . | . Code here . DeepSort . Improve SORT by including &quot;visual appearance&quot; along with kalman filter for better predicability | . References .",
             "url": "https://ablearn.io/computer%20vision/2022/06/25/ObjectTracking.html",
             "relUrl": "/computer%20vision/2022/06/25/ObjectTracking.html",
             "date": " • Jun 25, 2022"

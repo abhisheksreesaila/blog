@@ -12,11 +12,11 @@
 <link rel="canonical" href="https://ablearn.io/computer%20vision/2022/06/25/ObjectTracking.html" />
 <meta property="og:url" content="https://ablearn.io/computer%20vision/2022/06/25/ObjectTracking.html" />
 <meta property="og:site_name" content="ABLearn" />
-<meta property="og:image" content="https://ablearn.io/images/post-thumbnails/mtl.png" />
+<meta property="og:image" content="https://ablearn.io/images/post-thumbnails/ObjectTracking.jpeg" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2022-06-25T00:00:00-05:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"https://ablearn.io/computer%20vision/2022/06/25/ObjectTracking.html"},"description":"Track objects in a video","@type":"BlogPosting","url":"https://ablearn.io/computer%20vision/2022/06/25/ObjectTracking.html","headline":"Object Tracking","dateModified":"2022-06-25T00:00:00-05:00","datePublished":"2022-06-25T00:00:00-05:00","image":"https://ablearn.io/images/post-thumbnails/mtl.png","@context":"https://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://ablearn.io/computer%20vision/2022/06/25/ObjectTracking.html"},"description":"Track objects in a video","@type":"BlogPosting","url":"https://ablearn.io/computer%20vision/2022/06/25/ObjectTracking.html","headline":"Object Tracking","dateModified":"2022-06-25T00:00:00-05:00","datePublished":"2022-06-25T00:00:00-05:00","image":"https://ablearn.io/images/post-thumbnails/ObjectTracking.jpeg","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://ablearn.io/feed.xml" title="ABLearn" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Object Tracking | ABLearn</title>
@@ -28,11 +28,11 @@
 <link rel="canonical" href="https://ablearn.io/computer%20vision/2022/06/25/ObjectTracking.html" />
 <meta property="og:url" content="https://ablearn.io/computer%20vision/2022/06/25/ObjectTracking.html" />
 <meta property="og:site_name" content="ABLearn" />
-<meta property="og:image" content="https://ablearn.io/images/post-thumbnails/mtl.png" />
+<meta property="og:image" content="https://ablearn.io/images/post-thumbnails/ObjectTracking.jpeg" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2022-06-25T00:00:00-05:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"https://ablearn.io/computer%20vision/2022/06/25/ObjectTracking.html"},"description":"Track objects in a video","@type":"BlogPosting","url":"https://ablearn.io/computer%20vision/2022/06/25/ObjectTracking.html","headline":"Object Tracking","dateModified":"2022-06-25T00:00:00-05:00","datePublished":"2022-06-25T00:00:00-05:00","image":"https://ablearn.io/images/post-thumbnails/mtl.png","@context":"https://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://ablearn.io/computer%20vision/2022/06/25/ObjectTracking.html"},"description":"Track objects in a video","@type":"BlogPosting","url":"https://ablearn.io/computer%20vision/2022/06/25/ObjectTracking.html","headline":"Object Tracking","dateModified":"2022-06-25T00:00:00-05:00","datePublished":"2022-06-25T00:00:00-05:00","image":"https://ablearn.io/images/post-thumbnails/ObjectTracking.jpeg","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
@@ -155,9 +155,9 @@ window.onload = wrap_img;
 <p>SORT is a method used to track object at real time. the output could look like below</p>
 <p><strong>Tracking by detection</strong></p>
 <ul>
-<li>making use of object detection in consecutive frames</li>
-<li>use kalman filter for estimating the motion</li>
-<li>associate bounding boxes between frames using hungarian algo<ul>
+<li>making use of object detection in the first frame</li>
+<li>use kalman filter for estimating the motion in the next frame</li>
+<li>associate bounding boxes between frames using hungarian algorithm (optimal matching/association algorithm)<ul>
 <li>use IOU as cost</li>
 <li>but can use linear cost or exponential cost as well</li>
 </ul>
@@ -165,8 +165,9 @@ window.onload = wrap_img;
 </ul>
 <p>Code <em>here</em></p>
 <p><strong>DeepSort</strong></p>
-<p>Improve SORT by including "visual appearance" along with state estimation with kalman filter for better predicability</p>
-<p>**Other improvements for SORT</p>
+<ul>
+<li>Improve SORT by including "visual appearance" along with kalman filter for better predicability</li>
+</ul>
 <h1 id="References">
 <a class="anchor" href="#References" aria-hidden="true"><span class="octicon octicon-link"></span></a>References<a class="anchor-link" href="#References"> </a>
 </h1>
