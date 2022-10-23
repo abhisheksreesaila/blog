@@ -195,32 +195,39 @@ window.onload = wrap_img;
 <h1 id="3-Main-Calculations">
 <a class="anchor" href="#3-Main-Calculations" aria-hidden="true"><span class="octicon octicon-link"></span></a>3 Main Calculations<a class="anchor-link" href="#3-Main-Calculations"> </a>
 </h1>
+<ul>
+<li>$EST_{t-1}$ = Previous Estimate</li>
+<li>$EST_{t}$ = Current Estimate</li>
+<li>MEA = Measurement</li>
+<li>$E_{mea}$ = Error in measurement</li>
+<li>$E_{est}$ = Error in estimate</li>
+<li>KG = Kalman Gain</li>
+</ul>
 <h2 id="Calculate-the-kalman-gain">
 <a class="anchor" href="#Calculate-the-kalman-gain" aria-hidden="true"><span class="octicon octicon-link"></span></a>Calculate the kalman gain<a class="anchor-link" href="#Calculate-the-kalman-gain"> </a>
 </h2>
-<p>KG = $\frac {Eest} {Eest + Emea} $ ...(1)  0 &lt;= KG &lt;= 1</p>
-<p>meaurements are more accurate if KG is close to 1
-estimate are more correct if KG is close to 0</p>
+<p>KG = $ \frac {E_{est}} {(E_{est} + E_{mea})} $</p>
+<ul>
+<li>Meaurements are more accurate if KG is close to 1</li>
+<li>Estimates are more correct if KG is close to 0</li>
+</ul>
 <h2 id="Calculate-the-current-estimate">
 <a class="anchor" href="#Calculate-the-current-estimate" aria-hidden="true"><span class="octicon octicon-link"></span></a>Calculate the current estimate<a class="anchor-link" href="#Calculate-the-current-estimate"> </a>
 </h2>
-<p>EST(t) = EST(t-1) + KG [MEA - EST(t-1)]  ....(2)</p>
-<p>ESTt-1 = Previous Estimate
-ESTt = Current Estimate
-MEA = MEasurement
-Emea = Error in measurement</p>
+<p>$EST_{t}$ = $EST_{t-1}$ + KG * $[MEA - EST_{t-1}]$</p>
 <h2 id="Calculate-the-error-in-estimate">
 <a class="anchor" href="#Calculate-the-error-in-estimate" aria-hidden="true"><span class="octicon octicon-link"></span></a>Calculate the error in estimate<a class="anchor-link" href="#Calculate-the-error-in-estimate"> </a>
 </h2>
-<pre><code> Eest(t) = Emea * Eest(t-1) / Emea + Eest(t-1) ....(3)
-</code></pre>
-<p>===&gt; Eest(t) = [1-KG] Eest(t-1)</p>
+<p>$E_{est_{t}}$ =</p>
+<p>$\frac {E_{mea} * E_{est_{t-1}}}{E_{mea} + E_{est_{t-1}}}$</p>
+<ul>
+<li>$E_{est_{t}}$ = $[1-KG] E_{est_{t-1}}$</li>
+</ul>
 <p>What does this mean?</p>
 <p>If measurement comes with a very little error, then we are closing in on the true value.  Emea is low, then KG is high (close to 1).
 Then (1-KG) is very low. that means its drops the value of Eest(t-1) significantly, hence moving towards the "true" value.  Intuitively it makes sense, measurements are good, the system should converge to a good estimate.  Note that, in the real world, no matter how good the measurement is there is always noise, it will never be perfect.</p>
 <p>The opposite is also true. Measurements are unstable, then Emeais large, KG is low, 1-KG is high (or close to 1). Then we can trust the measurements coming, so we do not move the needle as much and try to keep the value close to the current error in estimate value as much as possible.</p>
-<p>Here is a fantastic explaination
-<a href="https://www.youtube.com/watch?v=X9cC0o9viTo&amp;list=PLX2gX-ftPVXU3oUFNATxGXY90AULiqnWT&amp;index=4">https://www.youtube.com/watch?v=X9cC0o9viTo&amp;list=PLX2gX-ftPVXU3oUFNATxGXY90AULiqnWT&amp;index=4</a></p>
+<p>Here is a fantastic explaination <a href="https://www.youtube.com/watch?v=X9cC0o9viTo&amp;list=PLX2gX-ftPVXU3oUFNATxGXY90AULiqnWT&amp;index=4">here</a></p>
 <p>Time for some code to explain and see how kalman filter can find the "true" value" with an example</p>
 <h1 id="Code">
 <a class="anchor" href="#Code" aria-hidden="true"><span class="octicon octicon-link"></span></a>Code<a class="anchor-link" href="#Code"> </a>
@@ -228,14 +235,11 @@ Then (1-KG) is very low. that means its drops the value of Eest(t-1) significant
 </div>
 </div>
 </div>
-    
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
+<div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You can run the code in colab <a href="https://colab.research.google.com/drive/1kk37gmZ38ZNIUcHMjDRFbFvw5gk7Gg9w?usp=sharing">here</a></p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="c1"># TRUE VALUE. We will see how quickly and how close kalman filter can get</span>
 <span class="n">true_temp</span> <span class="o">=</span> <span class="mi">72</span>
@@ -269,7 +273,7 @@ Then (1-KG) is very low. that means its drops the value of Eest(t-1) significant
     <span class="n">error_in_estimate</span> <span class="o">=</span> <span class="n">intitial_error_in_estimate</span>
     <span class="n">previous_estimate</span> <span class="o">=</span> <span class="n">initial_estimate</span>
     <span class="n">measurement</span> <span class="o">=</span> <span class="n">initial_measurement</span>
-    
+
   <span class="k">else</span><span class="p">:</span>
    <span class="c1"># use calculated values from the prev iteration</span>
     <span class="n">error_in_estimate</span> <span class="o">=</span> <span class="n">new_error_in_estimate</span>
@@ -286,13 +290,9 @@ Then (1-KG) is very low. that means its drops the value of Eest(t-1) significant
   <span class="n">time_elapsed</span><span class="o">+=</span><span class="mi">1</span>
 </pre></div>
 
-    </div>
 </div>
 </div>
-
 </div>
-    
-
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -300,7 +300,20 @@ Then (1-KG) is very low. that means its drops the value of Eest(t-1) significant
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">![](</span>https://abhisheksreesaila.github.io/blog/images/kalmanfilter/op1.png <span class="s2">"Kalman Filter Estimates"</span><span class="o">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="n">x</span> <span class="o">=</span> <span class="n">total_time</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">store_estimates_for_graph</span>
@@ -309,16 +322,29 @@ Then (1-KG) is very low. that means its drops the value of Eest(t-1) significant
 
 <span class="n">x1</span> <span class="o">=</span> <span class="n">total_time</span> 
 <span class="n">y1</span> <span class="o">=</span> <span class="p">[</span><span class="n">true_temp</span><span class="p">]</span> <span class="o">*</span> <span class="n">duration</span>
-  
+
 <span class="c1"># second plot with x1 and y1 data</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="s1">'--'</span><span class="p">)</span>
- 
+
 
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"time elapsed"</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"temperature"</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'kalman filter'</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>  <span class="c1"># display</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">![](</span>https://abhisheksreesaila.github.io/blog/images/kalmanfilter/op2.png <span class="s2">"Kalman Filter Plots"</span><span class="o">)</span>
 </pre></div>
 
     </div>
@@ -334,8 +360,7 @@ Then (1-KG) is very low. that means its drops the value of Eest(t-1) significant
 <h1 id="References">
 <a class="anchor" href="#References" aria-hidden="true"><span class="octicon octicon-link"></span></a>References<a class="anchor-link" href="#References"> </a>
 </h1>
-<p>The only and only Michel Van Biezen Explanation example for Kalman Filter
-<a href="https://www.youtube.com/watch?v=PZrFFg5_Sd0&amp;list=PLX2gX-ftPVXU3oUFNATxGXY90AULiqnWT&amp;index=5">https://www.youtube.com/watch?v=PZrFFg5_Sd0&amp;list=PLX2gX-ftPVXU3oUFNATxGXY90AULiqnWT&amp;index=5</a></p>
+<p><a href="https://www.youtube.com/watch?v=PZrFFg5_Sd0&amp;list=PLX2gX-ftPVXU3oUFNATxGXY90AULiqnWT&amp;index=5">Michel Van Biezen Explanation for Kalman Filter</a></p>
 
 </div>
 </div>
