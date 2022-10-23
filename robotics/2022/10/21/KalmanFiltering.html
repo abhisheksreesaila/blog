@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Kalman Filtering | ABLearn</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Kalman Filtering" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Intution and high level concepts with code" />
+<meta property="og:description" content="Intution and high level concepts with code" />
+<link rel="canonical" href="https://ablearn.io/robotics/2022/10/21/KalmanFiltering.html" />
+<meta property="og:url" content="https://ablearn.io/robotics/2022/10/21/KalmanFiltering.html" />
+<meta property="og:site_name" content="ABLearn" />
+<meta property="og:image" content="https://ablearn.io/images/post-thumbnails/robotics.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-10-21T00:00:00-05:00" />
+<script type="application/ld+json">
+{"headline":"Kalman Filtering","description":"Intution and high level concepts with code","datePublished":"2022-10-21T00:00:00-05:00","dateModified":"2022-10-21T00:00:00-05:00","image":"https://ablearn.io/images/post-thumbnails/robotics.jpg","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://ablearn.io/robotics/2022/10/21/KalmanFiltering.html"},"url":"https://ablearn.io/robotics/2022/10/21/KalmanFiltering.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://ablearn.io/feed.xml" title="ABLearn" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Kalman Filtering | ABLearn</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Kalman Filtering" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Intution and high level concepts with code" />
+<meta property="og:description" content="Intution and high level concepts with code" />
+<link rel="canonical" href="https://ablearn.io/robotics/2022/10/21/KalmanFiltering.html" />
+<meta property="og:url" content="https://ablearn.io/robotics/2022/10/21/KalmanFiltering.html" />
+<meta property="og:site_name" content="ABLearn" />
+<meta property="og:image" content="https://ablearn.io/images/post-thumbnails/robotics.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-10-21T00:00:00-05:00" />
+<script type="application/ld+json">
+{"headline":"Kalman Filtering","description":"Intution and high level concepts with code","datePublished":"2022-10-21T00:00:00-05:00","dateModified":"2022-10-21T00:00:00-05:00","image":"https://ablearn.io/images/post-thumbnails/robotics.jpg","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://ablearn.io/robotics/2022/10/21/KalmanFiltering.html"},"url":"https://ablearn.io/robotics/2022/10/21/KalmanFiltering.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://ablearn.io/feed.xml" title="ABLearn" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">ABLearn</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Categories</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Kalman Filtering</h1><p class="page-description">Intution and high level concepts with code</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-10-21T00:00:00-05:00" itemprop="datePublished">
+        Oct 21, 2022
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      3 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#Robotics">Robotics</a>
+        
+      
+      </p>
+    
+
+    
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#Kalman-Filter-Intuition">Kalman Filter Intuition </a></li>
+<li class="toc-entry toc-h1"><a href="#Intuition">Intuition </a></li>
+<li class="toc-entry toc-h1"><a href="#3-Calculations">3 Calculations </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Calculate-the-kalman-gain">Calculate the kalman gain </a></li>
+<li class="toc-entry toc-h2"><a href="#Calculate-the-current-estimate">Calculate the current estimate </a></li>
+<li class="toc-entry toc-h2"><a href="#Calculate-the-error-in-estimate">Calculate the error in estimate </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#References">References </a></li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2022-10-21-KalmanFiltering.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Kalman-Filter-Intuition">
+<a class="anchor" href="#Kalman-Filter-Intuition" aria-hidden="true"><span class="octicon octicon-link"></span></a>Kalman Filter Intuition<a class="anchor-link" href="#Kalman-Filter-Intuition"> </a>
+</h1>
+<p><strong>PURPOSE</strong></p>
+<p>Kalman Filter are useful tools to measure something that cannot be measured directly! You gather all the attributes to measure it indirectly. Example : you cannot measure the moving vehicle position w.r.t to its surroundings, so use LIDAR to throw light at them and measure the reflections back to create a map of the objects around it.  Its not going to be perfect, but its a good approx. Another example is SONAR - Measure the speed of sound reflection to measure ocean's depth.</p>
+<p>Kalman filter has the these high level components:-</p>
+<ul>
+<li>
+<strong>PREDICTION</strong> - Predict the next state of the object. </li>
+<li>
+<strong>MEASUREMENT</strong> - Measure the current state of the object.</li>
+<li>
+<strong>CONFIDENCE</strong> - How good (or bad) the PREDICTED or MEASUREMENT values are</li>
+</ul>
+<h1 id="Intuition">
+<a class="anchor" href="#Intuition" aria-hidden="true"><span class="octicon octicon-link"></span></a>Intuition<a class="anchor-link" href="#Intuition"> </a>
+</h1>
+<p>Kalman filter (or variants) have the following intuition.</p>
+<p><strong>CURRENT STATE</strong></p>
+<ul>
+<li>Suppose current time is 3:00pm</li>
+</ul>
+<p><strong>PREDICTION over MEASUREMENT</strong></p>
+<ul>
+<li>After few mins, we look at the watch again and we PREDICT its 3:04pm, but its shows 3:55pm!! </li>
+<li>We know the MEASUREMENT is wrong and  have every reason to believe the PREDICTION is more acccurate and set the watch to be 3:04pm. Our CONFIDENCE in the MEASUREMENT is shaken, we believe it is so noisy to show 3:55pm </li>
+</ul>
+<p><strong>MEASUREMENT over PREDICTION</strong></p>
+<ul>
+<li>On the other hand, if the measurement shows 3:05 pm, we have greater confidence that MEASUREMENT is correct, since its more or less in line with our expectations and since its actually measured, thats should be more accurate. Here we trust or more CONFIDENCE in the MEASUREMENT. </li>
+</ul>
+<h1 id="3-Calculations">
+<a class="anchor" href="#3-Calculations" aria-hidden="true"><span class="octicon octicon-link"></span></a>3 Calculations<a class="anchor-link" href="#3-Calculations"> </a>
+</h1>
+<h2 id="Calculate-the-kalman-gain">
+<a class="anchor" href="#Calculate-the-kalman-gain" aria-hidden="true"><span class="octicon octicon-link"></span></a>Calculate the kalman gain<a class="anchor-link" href="#Calculate-the-kalman-gain"> </a>
+</h2>
+<p>KG = $\frac {Eest} {Eest + Emea} $ ...(1)  0 &lt;= KG &lt;= 1</p>
+<p>meaurements are more accurate if KG is close to 1
+estimate are more correct if KG is close to 0</p>
+<h2 id="Calculate-the-current-estimate">
+<a class="anchor" href="#Calculate-the-current-estimate" aria-hidden="true"><span class="octicon octicon-link"></span></a>Calculate the current estimate<a class="anchor-link" href="#Calculate-the-current-estimate"> </a>
+</h2>
+<p>EST(t) = EST(t-1) + KG [MEA - EST(t-1)]  ....(2)</p>
+<p>ESTt-1 = Previous Estimate
+ESTt = Current Estimate
+MEA = MEasurement
+Emea = Error in measurement</p>
+<h2 id="Calculate-the-error-in-estimate">
+<a class="anchor" href="#Calculate-the-error-in-estimate" aria-hidden="true"><span class="octicon octicon-link"></span></a>Calculate the error in estimate<a class="anchor-link" href="#Calculate-the-error-in-estimate"> </a>
+</h2>
+<pre><code> Eest(t) = Emea * Eest(t-1) / Emea + Eest(t-1) ....(3)
+</code></pre>
+<p>===&gt; Eest(t) = [1-KG] Eest(t-1)</p>
+<p>What does this mean?</p>
+<p>If measurement comes with a very little error, then we are closing in on the true value.  Emea is low, then KG is high (close to 1).
+Then (1-KG) is very low. that means its drops the value of Eest(t-1) significantly, hence moving towards the "true" value.  Intuitively it makes sense, measurements are good, the system should converge to a good estimate.  Note that, in the real world, no matter how good the measurement is there is always noise, it will never be perfect.</p>
+<p>The opposite is also true. Measurements are unstable, then Emeais large, KG is low, 1-KG is high (or close to 1). Then we can trust the measurements coming, so we do not move the needle as much and try to keep the value close to the current error in estimate value as much as possible.</p>
+<p>Here is a fantastic explaination
+<a href="https://www.youtube.com/watch?v=X9cC0o9viTo&amp;list=PLX2gX-ftPVXU3oUFNATxGXY90AULiqnWT&amp;index=4">https://www.youtube.com/watch?v=X9cC0o9viTo&amp;list=PLX2gX-ftPVXU3oUFNATxGXY90AULiqnWT&amp;index=4</a></p>
+<p>Time for some code to explain and see how kalman filter can find the "true" value" with an example</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># TRUE VALUE. We will see how quickly and how close kalman filter can get</span>
+<span class="n">true_temp</span> <span class="o">=</span> <span class="mi">72</span>
+
+<span class="c1">#=======================================================</span>
+
+<span class="c1">#measurement read from the sensor</span>
+<span class="k">def</span> <span class="nf">readSensor</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">68</span><span class="p">,</span><span class="mi">76</span><span class="p">)</span>
+
+<span class="c1">#Initial Setting</span>
+<span class="n">initial_estimate</span> <span class="o">=</span> <span class="mi">68</span>
+<span class="n">intitial_error_in_estimate</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">initial_measurement</span> <span class="o">=</span> <span class="mi">75</span>
+<span class="n">error_in_measurement</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="c1">#declare variable to be used later </span>
+<span class="n">new_error_in_estimate</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">current_estimate</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">store_estimates_for_graph</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1">#kalman filter iterations</span>
+<span class="n">duration</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">time_elapsed</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">while</span> <span class="n">time_elapsed</span> <span class="o">&lt;</span> <span class="n">duration</span><span class="p">:</span>
+
+  <span class="c1"># if its first time, use these initial values else,</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">time_elapsed</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="n">error_in_estimate</span> <span class="o">=</span> <span class="n">intitial_error_in_estimate</span>
+    <span class="n">previous_estimate</span> <span class="o">=</span> <span class="n">initial_estimate</span>
+    <span class="n">measurement</span> <span class="o">=</span> <span class="n">initial_measurement</span>
+    
+  <span class="k">else</span><span class="p">:</span>
+   <span class="c1"># use calculated values from the prev iteration</span>
+    <span class="n">error_in_estimate</span> <span class="o">=</span> <span class="n">new_error_in_estimate</span>
+    <span class="n">previous_estimate</span> <span class="o">=</span> <span class="n">current_estimate</span>
+    <span class="n">measurement</span> <span class="o">=</span> <span class="n">readSensor</span><span class="p">()</span>
+
+ <span class="c1"># 3 calculations from above </span>
+  <span class="n">kalman_gain</span> <span class="o">=</span>  <span class="n">error_in_estimate</span><span class="o">/</span><span class="p">(</span><span class="n">error_in_estimate</span> <span class="o">+</span> <span class="n">error_in_measurement</span><span class="p">)</span>
+  <span class="n">current_estimate</span> <span class="o">=</span> <span class="n">previous_estimate</span> <span class="o">+</span> <span class="p">(</span><span class="n">kalman_gain</span> <span class="o">*</span> <span class="p">(</span><span class="n">measurement</span> <span class="o">-</span> <span class="n">previous_estimate</span><span class="p">))</span>
+  <span class="n">new_error_in_estimate</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">kalman_gain</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">error_in_estimate</span><span class="p">)</span>
+
+  <span class="nb">print</span><span class="p">(</span><span class="s2">"New Estimate -&gt;"</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">current_estimate</span><span class="p">))</span>
+  <span class="n">store_estimates_for_graph</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_estimate</span><span class="p">)</span>
+  <span class="n">time_elapsed</span><span class="o">+=</span><span class="mi">1</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">total_time</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">store_estimates_for_graph</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>  <span class="c1"># Plot the chart</span>
+
+<span class="n">x1</span> <span class="o">=</span> <span class="n">total_time</span> 
+<span class="n">y1</span> <span class="o">=</span> <span class="p">[</span><span class="n">true_temp</span><span class="p">]</span> <span class="o">*</span> <span class="n">duration</span>
+  
+<span class="c1"># second plot with x1 and y1 data</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="s1">'--'</span><span class="p">)</span>
+ 
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"time elapsed"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"temperature"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'kalman filter'</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>  <span class="c1"># display</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="References">
+<a class="anchor" href="#References" aria-hidden="true"><span class="octicon octicon-link"></span></a>References<a class="anchor-link" href="#References"> </a>
+</h1>
+<p>The only and only Michel Van Biezen Explanation example for Kalman Filter
+<a href="https://www.youtube.com/watch?v=PZrFFg5_Sd0&amp;list=PLX2gX-ftPVXU3oUFNATxGXY90AULiqnWT&amp;index=5">https://www.youtube.com/watch?v=PZrFFg5_Sd0&amp;list=PLX2gX-ftPVXU3oUFNATxGXY90AULiqnWT&amp;index=5</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="abhisheksreesaila/blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/robotics/2022/10/21/KalmanFiltering.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Always Learning</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/abhisheksreesaila" target="_blank" title="abhisheksreesaila"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/asreesaila" target="_blank" title="asreesaila"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
