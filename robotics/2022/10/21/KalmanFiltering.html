@@ -127,15 +127,17 @@ window.onload = wrap_img;
 
   <div class="post-content e-content" itemprop="articleBody">
     <ul class="section-nav">
-<li class="toc-entry toc-h1"><a href="#Kalman-Filter-Intuition">Kalman Filter Intuition </a></li>
+<li class="toc-entry toc-h1"><a href="#Kalman-Filter">Kalman Filter </a></li>
 <li class="toc-entry toc-h1"><a href="#Intuition">Intuition </a></li>
-<li class="toc-entry toc-h1"><a href="#3-Calculations">3 Calculations </a>
+<li class="toc-entry toc-h1"><a href="#Visual">Visual </a></li>
+<li class="toc-entry toc-h1"><a href="#3-Main-Calculations">3 Main Calculations </a>
 <ul>
 <li class="toc-entry toc-h2"><a href="#Calculate-the-kalman-gain">Calculate the kalman gain </a></li>
 <li class="toc-entry toc-h2"><a href="#Calculate-the-current-estimate">Calculate the current estimate </a></li>
 <li class="toc-entry toc-h2"><a href="#Calculate-the-error-in-estimate">Calculate the error in estimate </a></li>
 </ul>
 </li>
+<li class="toc-entry toc-h1"><a href="#Code">Code </a></li>
 <li class="toc-entry toc-h1"><a href="#References">References </a></li>
 </ul><!--
 #################################################
@@ -156,11 +158,10 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Kalman-Filter-Intuition">
-<a class="anchor" href="#Kalman-Filter-Intuition" aria-hidden="true"><span class="octicon octicon-link"></span></a>Kalman Filter Intuition<a class="anchor-link" href="#Kalman-Filter-Intuition"> </a>
+<h1 id="Kalman-Filter">
+<a class="anchor" href="#Kalman-Filter" aria-hidden="true"><span class="octicon octicon-link"></span></a>Kalman Filter<a class="anchor-link" href="#Kalman-Filter"> </a>
 </h1>
-<p><strong>PURPOSE</strong></p>
-<p>Kalman Filter are useful tools to measure something that cannot be measured directly! You gather all the attributes to measure it indirectly. Example : you cannot measure the moving vehicle position w.r.t to its surroundings, so use LIDAR to throw light at them and measure the reflections back to create a map of the objects around it.  Its not going to be perfect, but its a good approx. Another example is SONAR - Measure the speed of sound reflection to measure ocean's depth.</p>
+<p>Its an iterative algorithm to reduce noise (or uncertainity) and arrive to a really good approximate value efficiently.</p>
 <p>Kalman filter has the these high level components:-</p>
 <ul>
 <li>
@@ -168,7 +169,7 @@ window.onload = wrap_img;
 <li>
 <strong>MEASUREMENT</strong> - Measure the current state of the object.</li>
 <li>
-<strong>CONFIDENCE</strong> - How good (or bad) the PREDICTED or MEASUREMENT values are</li>
+<strong>CONFIDENCE</strong> - How good (or bad) the PREDICTED or MEASUREMENT values</li>
 </ul>
 <h1 id="Intuition">
 <a class="anchor" href="#Intuition" aria-hidden="true"><span class="octicon octicon-link"></span></a>Intuition<a class="anchor-link" href="#Intuition"> </a>
@@ -187,8 +188,12 @@ window.onload = wrap_img;
 <ul>
 <li>On the other hand, if the measurement shows 3:05 pm, we have greater confidence that MEASUREMENT is correct, since its more or less in line with our expectations and since its actually measured, thats should be more accurate. Here we trust or more CONFIDENCE in the MEASUREMENT. </li>
 </ul>
-<h1 id="3-Calculations">
-<a class="anchor" href="#3-Calculations" aria-hidden="true"><span class="octicon octicon-link"></span></a>3 Calculations<a class="anchor-link" href="#3-Calculations"> </a>
+<h1 id="Visual">
+<a class="anchor" href="#Visual" aria-hidden="true"><span class="octicon octicon-link"></span></a>Visual<a class="anchor-link" href="#Visual"> </a>
+</h1>
+<p><img src="https://abhisheksreesaila.github.io/blog/images/general/KF1.png" alt="" title="Kalman Filter"></p>
+<h1 id="3-Main-Calculations">
+<a class="anchor" href="#3-Main-Calculations" aria-hidden="true"><span class="octicon octicon-link"></span></a>3 Main Calculations<a class="anchor-link" href="#3-Main-Calculations"> </a>
 </h1>
 <h2 id="Calculate-the-kalman-gain">
 <a class="anchor" href="#Calculate-the-kalman-gain" aria-hidden="true"><span class="octicon octicon-link"></span></a>Calculate the kalman gain<a class="anchor-link" href="#Calculate-the-kalman-gain"> </a>
@@ -217,7 +222,9 @@ Then (1-KG) is very low. that means its drops the value of Eest(t-1) significant
 <p>Here is a fantastic explaination
 <a href="https://www.youtube.com/watch?v=X9cC0o9viTo&amp;list=PLX2gX-ftPVXU3oUFNATxGXY90AULiqnWT&amp;index=4">https://www.youtube.com/watch?v=X9cC0o9viTo&amp;list=PLX2gX-ftPVXU3oUFNATxGXY90AULiqnWT&amp;index=4</a></p>
 <p>Time for some code to explain and see how kalman filter can find the "true" value" with an example</p>
-
+<h1 id="Code">
+<a class="anchor" href="#Code" aria-hidden="true"><span class="octicon octicon-link"></span></a>Code<a class="anchor-link" href="#Code"> </a>
+</h1>
 </div>
 </div>
 </div>
